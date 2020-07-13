@@ -6,9 +6,9 @@ import java.time.LocalDate;
  * @author Петр Вершинин
  */
 public class ClassBook {
-    //private User teacherName;
-    //private User teacherSpecialty;
-    //private List<User> listStudent;
+    /*private User teacherName;
+    private User teacherSpecialty;
+   private List<User> listStudent;*/
 
     private long id;
     private String nameLesson;
@@ -53,4 +53,28 @@ public class ClassBook {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
+/*    public User getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(User teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public User getTeacherSpecialty() {
+        return teacherSpecialty;
+    }
+
+    public void setTeacherSpecialty(User teacherSpecialty) {
+        this.teacherSpecialty = teacherSpecialty;
+    }
+
+    public List<User> getListStudent() {
+        return listStudent;
+    }
+
+    public void setListStudent(List<User> listStudent) {
+        this.listStudent = listStudent;
+    }*/
 }
