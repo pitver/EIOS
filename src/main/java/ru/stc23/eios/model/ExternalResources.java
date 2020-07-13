@@ -48,4 +48,12 @@ public class ExternalResources {
     public void setPreview(String preview) {
         this.preview = preview;
     }
+
+    /*public User getUsername() {
+        return username;
+    }
+
+    public void setUsername(User username) {
+        this.username = username;
+    }*/
 }
