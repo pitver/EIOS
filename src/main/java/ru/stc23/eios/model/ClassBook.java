@@ -9,6 +9,7 @@ public class ClassBook {
     /*private User teacherName;
     private User teacherSpecialty;
    private List<User> listStudent;*/
+    
 
     private long id;
     private String nameLesson;
