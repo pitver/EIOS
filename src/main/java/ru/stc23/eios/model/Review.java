@@ -9,7 +9,7 @@ import java.util.Date;
 public class Review {
 
     private Long id;
-    private int work;
+    private Work work;
     private String state_id;
     private int user;
     private String text;
@@ -26,11 +26,11 @@ public class Review {
         this.id = id;
     }
 
-    public int getWork() {
+    public Work getWork() {
         return work;
     }
 
-    public void setWork(int work) {
+    public void setWork(Work work) {
         this.work = work;
     }
 

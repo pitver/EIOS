@@ -14,7 +14,7 @@ public class Work {
     private Date create_date;
     private Clob work;
     private int teacher;
-    private int review;
+    private Review review;
     private String state_id;
 
     public Work() {
@@ -45,7 +45,7 @@ public class Work {
         return teacher;
     }
 
-    public int getReview() {
+    public Review getReview() {
         return review;
     }
 
@@ -77,7 +77,7 @@ public class Work {
         this.teacher = teacher;
     }
 
-    public void setReview(int review) {
+    public void setReview(Review review) {
         this.review = review;
     }
 
