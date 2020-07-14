@@ -1,12 +1,12 @@
 package ru.stc23.eios.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ClassRole {
     private int roleId;
     private String roleName;
-    private Date dateBeginRole;
-    private Date dateEndRole;
+    private LocalDate dateBeginRole;
+    private LocalDate dateEndRole;
 
     public ClassRole() {
     }
@@ -27,19 +27,19 @@ public class ClassRole {
         this.roleName = roleName;
     }
 
-    public Date getDateBeginRole() {
+    public LocalDate getDateBeginRole() {
         return dateBeginRole;
     }
 
-    public void setDateBeginRole(Date dateBeginRole) {
+    public void setDateBeginRole(LocalDate dateBeginRole) {
         this.dateBeginRole = dateBeginRole;
     }
 
-    public Date getDateEndRole() {
+    public LocalDate getDateEndRole() {
         return dateEndRole;
     }
 
-    public void setDateEndRole(Date dateEndRole) {
+    public void setDateEndRole(LocalDate dateEndRole) {
         this.dateEndRole = dateEndRole;
     }
 }
