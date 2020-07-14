@@ -1,8 +1,7 @@
 package ru.stc23.eios.model;
 
 import java.sql.Clob;
-import java.util.Date;
-
+import java.time.LocalDate;
 /**
  * @author Даянова Фаягуль
  */
@@ -11,7 +10,7 @@ public class Work {
     private long id;
     private String title;
     private int user;
-    private Date create_date;
+    private LocalDate create_date;
     private Clob work;
     private int teacher;
     private Review review;
@@ -33,7 +32,7 @@ public class Work {
         return user;
     }
 
-    public Date getCreate_date() {
+    public LocalDate getCreate_date() {
         return create_date;
     }
 
@@ -65,7 +64,7 @@ public class Work {
         this.user = user;
     }
 
-    public void setCreate_date(Date create_date) {
+    public void setCreate_date(LocalDate create_date) {
         this.create_date = create_date;
     }
 
