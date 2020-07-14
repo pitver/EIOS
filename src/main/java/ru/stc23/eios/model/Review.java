@@ -1,7 +1,7 @@
 package ru.stc23.eios.model;
 
 import java.util.Date;
-
+import java.time.LocalDate;
 /**
  * @author Даянова Фаягуль
  */
@@ -13,7 +13,7 @@ public class Review {
     private String state_id;
     private int user;
     private String text;
-    private Date create_date;
+    private LocalDate create_date;
 
     public Review() {
     }
@@ -58,11 +58,11 @@ public class Review {
         this.text = text;
     }
 
-    public Date getCreate_date() {
+    public LocalDate getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(Date create_date) {
+    public void setCreate_date(LocalDate create_date) {
         this.create_date = create_date;
     }
 }
