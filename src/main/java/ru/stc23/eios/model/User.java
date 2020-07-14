@@ -1,14 +1,15 @@
 package ru.stc23.eios.model;
 
-public class Users {
+public class User {
     private long userId;
     private String login;
     private String password;
     private String email;
-    private String FullName;
-    private String UserSpec; // студент, преподаватель (преподаватель чего...)
+    private String firstName;
+    private String lastName;
+    private String patronymic;
 
-    public Users(){}
+    public User(){}
 
     public long getUserId() {
         return userId;
@@ -42,19 +43,27 @@ public class Users {
         this.email = email;
     }
 
-    public String getFullName() {
-        return FullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        FullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUserSpec() {
-        return UserSpec;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserSpec(String userSpec) {
-        UserSpec = userSpec;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 }

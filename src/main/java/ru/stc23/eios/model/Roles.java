@@ -3,7 +3,7 @@ package ru.stc23.eios.model;
 import java.time.LocalDate;
 
 public class Roles {
-    private int roleId;
+    private long roleId;
     private String roleName;
     private LocalDate dateBeginRole;
     private LocalDate dateEndRole;
@@ -11,7 +11,7 @@ public class Roles {
     public Roles() {
     }
 
-    public int getRoleId() {
+    public long getRoleId() {
         return roleId;
     }
 
