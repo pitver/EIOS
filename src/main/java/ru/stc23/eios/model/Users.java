@@ -1,6 +1,6 @@
 package ru.stc23.eios.model;
 
-public class ClassUser {
+public class Users {
     private long userId;
     private String login;
     private String password;
@@ -8,7 +8,7 @@ public class ClassUser {
     private String FullName;
     private String UserSpec; // студент, преподаватель (преподаватель чего...)
 
-    public ClassUser(){}
+    public Users(){}
 
     public long getUserId() {
         return userId;

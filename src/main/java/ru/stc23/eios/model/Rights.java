@@ -1,10 +1,10 @@
 package ru.stc23.eios.model;
 
-public class ClassRight {
+public class Rights {
     private int rightId;
     private String rightName;
 
-    public ClassRight() {
+    public Rights() {
 
     }
 
