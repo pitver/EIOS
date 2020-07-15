@@ -11,7 +11,7 @@ public class ExternalResources {
     private String linkToRecourse;
     private String descriptions;
     private String preview;
-    //private User username;
+    private User username;
 
 
     public ExternalResources() {
@@ -49,11 +49,12 @@ public class ExternalResources {
         this.preview = preview;
     }
 
-    /*public User getUsername() {
+    public User getUsername() {
         return username;
     }
 
     public void setUsername(User username) {
         this.username = username;
-    }*/
+    }
 }
+class User{}
