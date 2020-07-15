@@ -5,21 +5,18 @@ import java.time.LocalDate;
 /**
  * @author Петр Вершинин
  */
-public class ClassBook {
-    /*private User teacherName;
-    private User teacherSpecialty;
-   private List<User> listStudent;*/
-    
+public class Mark {
+
 
     private long id;
+    private User teacherName;
+    private User studentName;
     private String nameLesson;
+    private String grade;
     private LocalDate localDate;
 
-    private String grade;// возможно тут тип byte, завист от того будет ли отмечатся болен или отсутсвует
-
-    public ClassBook() {
+    public Mark() {
     }
-
 
 
     public long getId() {
@@ -55,7 +52,7 @@ public class ClassBook {
         this.grade = grade;
     }
 
-/*    public User getTeacherName() {
+    public User getTeacherName() {
         return teacherName;
     }
 
@@ -63,19 +60,12 @@ public class ClassBook {
         this.teacherName = teacherName;
     }
 
-    public User getTeacherSpecialty() {
-        return teacherSpecialty;
+    public User getStudentName() {
+        return studentName;
     }
 
-    public void setTeacherSpecialty(User teacherSpecialty) {
-        this.teacherSpecialty = teacherSpecialty;
+    public void setStudentName(User studentName) {
+        this.studentName = studentName;
     }
-
-    public List<User> getListStudent() {
-        return listStudent;
-    }
-
-    public void setListStudent(List<User> listStudent) {
-        this.listStudent = listStudent;
-    }*/
 }
+class User{}
