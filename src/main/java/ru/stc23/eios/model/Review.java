@@ -1,19 +1,19 @@
 package ru.stc23.eios.model;
+import java.time.LocalDateTime;
 
-import java.util.Date;
-import java.time.LocalDate;
 /**
  * @author Даянова Фаягуль
  */
 
 public class Review {
 
-    private Long id;
-    private Work work;
-    private String state_id;
-    private int user;
+    private long id;
     private String text;
-    private LocalDate create_date;
+    private LocalDateTime localDateTime;
+    private Work work;
+    private Users users;
+    private State state_id;
+    private enum State {NEW, PUBLISH};
 
     public Review() {
     }
@@ -34,20 +34,20 @@ public class Review {
         this.work = work;
     }
 
-    public String getState_id() {
+    public State getState_id() {
         return state_id;
     }
 
-    public void setState_id(String state_id) {
+    public void setState_id(State state_id) {
         this.state_id = state_id;
     }
 
-    public int getUser() {
-        return user;
+    public Users getUser() {
+        return users;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUser(Users user) {
+        this.users = user;
     }
 
     public String getText() {
@@ -58,11 +58,12 @@ public class Review {
         this.text = text;
     }
 
-    public LocalDate getCreate_date() {
-        return create_date;
+    public LocalDateTime getCreate_date() {
+        return localDateTime;
     }
 
-    public void setCreate_date(LocalDate create_date) {
-        this.create_date = create_date;
+    public void setCreate_date(LocalDateTime create_date) {
+        this.localDateTime = create_date;
     }
+
 }
