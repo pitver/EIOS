@@ -1,7 +1,8 @@
 package ru.stc23.eios.model;
 
-import java.sql.Clob;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * @author Даянова Фаягуль
  */
@@ -9,12 +10,13 @@ public class Work {
 
     private long id;
     private String title;
-    private int user;
-    private LocalDate create_date;
-    private Clob work;
-    private int teacher;
-    private Review review;
-    private String state_id;
+    private String work;
+    private enum State {NEW, PUBLISH};
+    private State state_id;
+    private LocalDateTime localDateTime;
+    private Users user;
+    private Users teacher;
+    private List<Review> review;
 
     public Work() {
 
@@ -28,27 +30,27 @@ public class Work {
         return title;
     }
 
-    public int getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public LocalDate getCreate_date() {
-        return create_date;
+    public LocalDateTime getCreate_date() {
+        return localDateTime;
     }
 
-    public Clob getWork() {
+    public String getWork() {
         return work;
     }
 
-    public int getTeacher() {
+    public Users getTeacher() {
         return teacher;
     }
 
-    public Review getReview() {
+    public List<Review> getReview() {
         return review;
     }
 
-    public String getState_id() {
+    public State getState_id() {
         return state_id;
     }
 
@@ -60,27 +62,27 @@ public class Work {
         this.title = title;
     }
 
-    public void setUser(int user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
-    public void setCreate_date(LocalDate create_date) {
-        this.create_date = create_date;
+    public void setCreate_date(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
-    public void setWork(Clob work) {
+    public void setWork(String work) {
         this.work = work;
     }
 
-    public void setTeacher(int teacher) {
+    public void setTeacher(Users teacher) {
         this.teacher = teacher;
     }
 
-    public void setReview(Review review) {
+    public void setReview(List<Review> review) {
         this.review = review;
     }
 
-    public void setState_id(String state_id) {
+    public void setState_id(State state_id) {
         this.state_id = state_id;
     }
 }
