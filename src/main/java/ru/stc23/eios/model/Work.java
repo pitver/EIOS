@@ -14,8 +14,8 @@ public class Work {
     private enum State {NEW, PUBLISH};
     private State state_id;
     private LocalDateTime localDateTime;
-    private Users user;
-    private Users teacher;
+    private User user;
+    private User teacher;
     private List<Review> review;
 
     public Work() {
@@ -30,7 +30,7 @@ public class Work {
         return title;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -42,7 +42,7 @@ public class Work {
         return work;
     }
 
-    public Users getTeacher() {
+    public User getTeacher() {
         return teacher;
     }
 
@@ -62,7 +62,7 @@ public class Work {
         this.title = title;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -74,7 +74,7 @@ public class Work {
         this.work = work;
     }
 
-    public void setTeacher(Users teacher) {
+    public void setTeacher(User teacher) {
         this.teacher = teacher;
     }
 
