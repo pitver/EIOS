@@ -11,7 +11,7 @@ public class Review {
     private String text;
     private LocalDateTime localDateTime;
     private Work work;
-    private Users users;
+    private User user;
     private State state_id;
     private enum State {NEW, PUBLISH};
 
@@ -42,12 +42,12 @@ public class Review {
         this.state_id = state_id;
     }
 
-    public Users getUser() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser(Users user) {
-        this.users = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getText() {
