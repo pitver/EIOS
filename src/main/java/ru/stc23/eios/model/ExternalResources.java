@@ -57,4 +57,4 @@ public class ExternalResources {
         this.username = username;
     }
 }
-class User{}
+
