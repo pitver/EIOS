@@ -35,6 +35,12 @@ public class MainController {
         return "/admin";
     }
 
+    @GetMapping("/mark")
+    public String mark() {
+        
+        return "/mark";
+    }
+
     @GetMapping("/user")
     public String user() {
         return "/user";
