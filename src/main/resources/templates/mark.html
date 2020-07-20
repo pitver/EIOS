@@ -9,9 +9,9 @@
 
 <table class="table table-bordered" mx-auto>
     <thead>
-    <tr>
-        <th class="text-center"  colspan="32">дата</th>
-    </tr>
+        <tr>
+            <th class="text-center"  colspan="32">дата</th>
+        </tr>
     </thead>
     <tr>
         <th scope="col">name</th>
@@ -47,6 +47,7 @@
         <th  scope="col">30</th>
         <th  scope="col">31</th>
     </tr>
+
     <tbody>
 
     <tr th:each="user: ${usr}">
@@ -56,7 +57,10 @@
            <span th:each="mark: ${mrk}">
 
                <td id="1" scope="col"></td>  <td id="2" scope="col"></td>  <td id="3" scope="col"></td>  <td id="4" scope="col"></td>
-               <td id="5" scope="col" th:utext="${mark.grade}" >5</td>  <td id="6" scope="col"></td>  <td id="7" scope="col"></td>  <td id="8" scope="col"></td>
+
+               <td style='cursor: pointer;' onclick="tdclick(event);"  id="5" scope="col" th:utext="${mark.grade}" >5</td>
+
+               <td id="6" scope="col"></td>  <td id="7" scope="col"></td>  <td id="8" scope="col"></td>
                <td id="9" scope="col">4</td> <td id="10" scope="col">5</td> <td id="11" scope="col"></td>  <td id="12" scope="col"></td>
                <td id="13" scope="col"></td>  <td id="14" scope="col"></td>  <td id="15" scope="col"></td>  <td id="16" scope="col"></td>
                <td id="17" scope="col"></td>  <td id="18" scope="col"></td>  <td id="19" scope="col"></td>  <td id="20" scope="col"></td>
@@ -70,6 +74,11 @@
     </tbody>
 
 </table>
+<script>
+    function tdclick(e){
+        alert("привет")
+    };
+</script>
 
 
 
