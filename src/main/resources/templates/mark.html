@@ -14,8 +14,8 @@
     </tr>
     </thead>
     <tr>
-        <th scope="col">Список студентов</th>
-        <th scope="col my-auto">1</th>
+        <th scope="col">name</th>
+        <th scope="col">1</th>
         <th scope="col">2</th>
         <th scope="col">3</th>
         <th scope="col">4</th>
@@ -24,70 +24,54 @@
         <th scope="col">7</th>
         <th scope="col">8</th>
         <th scope="col">9</th>
-        <th scope="col">10</th>
-        <th scope="col">11</th>
-        <th scope="col">12</th>
-        <th scope="col">13</th>
-        <th scope="col">14</th>
-        <th scope="col">15</th>
-        <th scope="col">16</th>
-        <th scope="col">17</th>
-        <th scope="col">18</th>
-        <th scope="col">19</th>
-        <th scope="col">20</th>
-        <th scope="col">21</th>
-        <th scope="col">22</th>
-        <th scope="col">23</th>
-        <th scope="col">24</th>
-        <th scope="col">25</th>
-        <th scope="col">26</th>
-        <th scope="col">27</th>
-        <th scope="col">28</th>
-        <th scope="col">29</th>
-        <th scope="col">30</th>
-        <th scope="col">31</th>
+        <th  scope="col">10</th>
+        <th  scope="col">11</th>
+        <th  scope="col">12</th>
+        <th  scope="col">13</th>
+        <th  scope="col">14</th>
+        <th  scope="col">15</th>
+        <th  scope="col">16</th>
+        <th  scope="col">17</th>
+        <th  scope="col">18</th>
+        <th  scope="col">19</th>
+        <th  scope="col">20</th>
+        <th  scope="col">21</th>
+        <th  scope="col">22</th>
+        <th  scope="col">23</th>
+        <th  scope="col">24</th>
+        <th  scope="col">25</th>
+        <th  scope="col">26</th>
+        <th  scope="col">27</th>
+        <th  scope="col">28</th>
+        <th  scope="col">29</th>
+        <th  scope="col">30</th>
+        <th  scope="col">31</th>
     </tr>
     <tbody>
-    <td scope="col">Иванов иван</td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col">5</td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col">4</td>
-    <td scope="col">5</td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    <td scope="col"></td>
-    </tbody>
 
+    <tr th:each="user: ${usr}">
+
+       <td  scope="col" th:utext="${user.firstName}">Name</td>
+
+           <span th:each="mark: ${mrk}">
+
+               <td id="1" scope="col"></td>  <td id="2" scope="col"></td>  <td id="3" scope="col"></td>  <td id="4" scope="col"></td>
+               <td id="5" scope="col" th:utext="${mark.grade}" >5</td>  <td id="6" scope="col"></td>  <td id="7" scope="col"></td>  <td id="8" scope="col"></td>
+               <td id="9" scope="col">4</td> <td id="10" scope="col">5</td> <td id="11" scope="col"></td>  <td id="12" scope="col"></td>
+               <td id="13" scope="col"></td>  <td id="14" scope="col"></td>  <td id="15" scope="col"></td>  <td id="16" scope="col"></td>
+               <td id="17" scope="col"></td>  <td id="18" scope="col"></td>  <td id="19" scope="col"></td>  <td id="20" scope="col"></td>
+               <td id="21" scope="col"></td>  <td id="22" scope="col"></td>  <td id="23" scope="col"></td>  <td id="24" scope="col"></td>
+               <td id="25" scope="col"></td>  <td id="26" scope="col"></td>  <td id="27" scope="col"></td>  <td id="28" scope="col"></td>
+               <td id="29" scope="col"></td>  <td id="30" scope="col"></td>  <td id="31" scope="col"></td>
+
+           </span>
+    </tr>
+
+    </tbody>
 
 </table>
 
 
-
-<!-- /.container -->
 
 <div th:replace="fragments/footer :: footer"/>
 

@@ -1,5 +1,9 @@
 package ru.stc23.eios.model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private long userId;
     private String login;
@@ -10,6 +14,17 @@ public class User {
     private String patronymic;
 
     public User(){}
+
+
+    public User(long userId, String login, String password, String email, String firstName, String lastName, String patronymic) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+    }
 
     public long getUserId() {
         return userId;
