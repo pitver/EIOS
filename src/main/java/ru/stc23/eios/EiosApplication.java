@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EiosApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(EiosApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(EiosApplication.class, args);
+    }
 
 }
