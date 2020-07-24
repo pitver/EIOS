@@ -10,25 +10,28 @@
 <div class="container">
 
     <div class="starter-template">
-        <h3>List of users</h3>
+        <h3 class="text-center">List of users</h3>
     </div>
 
-    <table border="1">
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>password</th>
-            <th>role/th>
-            <th>edit/th>
+    <table class="table table-bordered">
+        <tr class="d-flex" >
+            <th class="col-sm" scope="col">id</th>
+            <th class="col-sm" scope="col">name</th>
+            <th class="col-sm" scope="col">password</th>
+            <th class="col-sm" scope="col">role</th>
+            <th class="col-sm" scope="col">edit</th>
         </tr>
 
 
-        <tr th:each=" user : ${users}">
-             <td th:utext="${user.id}"></td>
-             <td th:utext="${user.username}"></td>
-             <td th:utext="${user.password}"></td>
-             <td th:utext="${user.roles}"></td>
-             <td><a th:href="@{/edit/{id}(id=${user.id})}">edit</a></td>
+        <tr class="d-flex"  th:each=" user : ${users}">
+             <td class="col-sm" scope="col" th:utext="${user.id}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.username}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.password}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.roles}"></td>
+             <td class="col-sm" scope="col">
+                 <a class="btn btn-outline-success"th:href="@{/edit/{id}(id=${user.id})}">edit</a>
+                 <a class="btn btn-outline-success"th:href="@{/delete/{id}(id=${user.id})}">delete</a>
+             </td>
         </tr>
     </table>
 

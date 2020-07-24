@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * использууем 3-ех звенную модель, обращения к репозиторию
  * происходет через сервис
- *
+ * <p>
  * UserSevise
  *
  * @author Вершинин Пётр
@@ -29,21 +29,26 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findByUsername(username);
     }
-    public User getUserById(Long id) throws RecordNotFoundException
-    {
+
+    public User getUserById(Long id) throws RecordNotFoundException {
         Optional<User> employee = userRepo.findById(id);
 
-        if(employee.isPresent()) {
+        if (employee.isPresent()) {
             return employee.get();
         } else {
             throw new RecordNotFoundException("No employee record exist for given id");
         }
     }
 
-    public User addUser(User user){
+    public User addUser(User user) {
         return userRepo.save(user);
     }
-    public List<User> findUserAll(){
+
+    public void deleteUser(User user) {
+        userRepo.delete(user);
+    }
+
+    public List<User> findUserAll() {
         return userRepo.findAll();
     }
 

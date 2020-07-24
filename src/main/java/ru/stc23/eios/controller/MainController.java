@@ -19,5 +19,10 @@ public class MainController {
 
         return "/mark";
     }
+    @GetMapping("/")
+    public String start(Model model) {
+
+        return "/index";
+    }
 
 }
