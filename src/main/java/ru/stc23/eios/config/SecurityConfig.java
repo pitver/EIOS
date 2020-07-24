@@ -1,17 +1,13 @@
 package ru.stc23.eios.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.access.AccessDeniedHandler;
-
-import java.util.Properties;
+import ru.stc23.eios.service.UserService;
 
 
 /**
@@ -24,19 +20,13 @@ import java.util.Properties;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
+    private UserService userService;
 
-    // роль admin всегда есть доступ к /admin/**
-    // роль user всегда есть доступ к /user/**
-    // Наш кастомный "403 access denied" обработчик
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.csrf().disable().httpBasic().disable()
+        http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/about","/register").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/", "/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -44,30 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                .permitAll();
     }
 
-    // создаем пользоватлелей, admin и user
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(inMemoryUserDetailsManager());
-
-    }
-    @SuppressWarnings("deprecation")
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-        final Properties users = new Properties();
-        users.put("user","1,ROLE_USER,enabled");
-        users.put("admin","1,ROLE_ADMIN,enabled");
-        return new InMemoryUserDetailsManager(users);
-    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService)
+    .passwordEncoder(NoOpPasswordEncoder.getInstance());}
 }
-
 

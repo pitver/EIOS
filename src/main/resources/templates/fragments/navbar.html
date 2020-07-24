@@ -14,35 +14,36 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <div sec:authorize="hasRole('ADMIN')">
+                  <!--  <div sec:authorize="hasAuthority('ADMIN')">
                         <li class="nav-item">
                             <a class="nav-link" href="/admin">admin <span class="sr-only">(current)</span></a>
                         </li>
-                    </div>
-                    <div sec:authorize="hasRole('ADMIN')">
+                    </div>-->
+                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/mark">mark <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
-                    <div th:if="(${#authorization.expr('hasRole(''ADMIN'')')})OR
-                                (${#authorization.expr('hasRole(''USER'')')})">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
                         <li class="nav-item">
-                            <a class="nav-link" href="/user">user<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/user">userlist <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
+
                 </ul>
             </div>
+
             <div class="navbar-text mr-3">
-
+                <form class="form" th:action="@{/logout}" method="post">
                     <span sec:authorize="isAuthenticated()">
-                    <span sec:authentication="name"></span>
-                        <a class="pl-3" th:href="@{/logout}">Logout</a>
-
-                    </span>
-                <li sec:authorize="!isAuthenticated()" class="nav-item">
-                    <a class="btn btn-outline-light" th:href="@{/login}">Login</a>
-                </li>
-
+                        <span sec:authentication="name"></span>
+                            <button sec:authorize="isAuthenticated()"
+                                    class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+                        </span>
+                </form>
+                    <li sec:authorize="!isAuthenticated()" class="nav-item">
+                        <a class="btn btn-outline-success" th:href="@{/login}">Login</a>
+                    </li>
             </div>
       </nav>
  </div>
