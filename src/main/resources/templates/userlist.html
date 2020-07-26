@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h3 class="text-center">List of users</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <tr class="d-flex" >
+            <th class="col-sm" scope="col">id</th>
+            <th class="col-sm" scope="col">name</th>
+            <th class="col-sm" scope="col">password</th>
+            <th class="col-sm" scope="col">role</th>
+            <th class="col-sm" scope="col">edit</th>
+        </tr>
+
+
+        <tr class="d-flex"  th:each=" user : ${users}">
+             <td class="col-sm" scope="col" th:utext="${user.id}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.username}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.password}"></td>
+             <td class="col-sm" scope="col" th:utext="${user.roles}"></td>
+             <td class="col-sm" scope="col">
+                 <a class="btn btn-outline-success"th:href="@{/edit/{id}(id=${user.id})}">edit</a>
+                 <a class="btn btn-outline-success"th:href="@{/delete/{id}(id=${user.id})}">delete</a>
+             </td>
+        </tr>
+    </table>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

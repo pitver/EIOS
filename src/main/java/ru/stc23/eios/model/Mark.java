@@ -18,6 +18,14 @@ public class Mark {
     public Mark() {
     }
 
+    public Mark(long id, User teacherName, User studentName, String nameLesson, String grade, LocalDate localDate) {
+        this.id = id;
+        this.teacherName = teacherName;
+        this.studentName = studentName;
+        this.nameLesson = nameLesson;
+        this.grade = grade;
+        this.localDate = localDate;
+    }
 
     public long getId() {
         return id;
