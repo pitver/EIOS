@@ -11,8 +11,8 @@ public class Work {
     private long id;
     private String title;
     private String work;
-    private enum State {NEW, PUBLISH};
-    private State state_id;
+    public enum Work_state {NEW, PUBLISH};
+    private Work_state state_id;
     private LocalDateTime localDateTime;
     private User user;
     private User teacher;
@@ -50,7 +50,7 @@ public class Work {
         return review;
     }
 
-    public State getState_id() {
+    public Work_state getState_id() {
         return state_id;
     }
 
@@ -82,7 +82,7 @@ public class Work {
         this.review = review;
     }
 
-    public void setState_id(State state_id) {
+    public void setState_id(Work_state state_id) {
         this.state_id = state_id;
     }
 }

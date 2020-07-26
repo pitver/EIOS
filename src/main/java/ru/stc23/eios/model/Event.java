@@ -10,9 +10,8 @@ public class Event {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String description;
-    private User Author;
-    private enum Status {PLANNED, INWORK, CHECKED, CANCELLED};
-    private Status status;
+    private User author;
+    private Event_status status;
 
     public Event() {
     }
@@ -42,10 +41,10 @@ public class Event {
     }
 
     public void setAuthor(User author) {
-        Author = author;
+        author = author;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Event_status status) {
         this.status = status;
     }
 
@@ -74,10 +73,10 @@ public class Event {
     }
 
     public User getAuthor() {
-        return Author;
+        return author;
     }
 
-    public Status getStatus() {
+    public Event_status getStatus() {
         return status;
     }
 }

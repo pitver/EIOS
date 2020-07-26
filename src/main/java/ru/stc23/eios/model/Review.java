@@ -12,8 +12,8 @@ public class Review {
     private LocalDateTime localDateTime;
     private Work work;
     private User user;
-    private State state_id;
-    private enum State {NEW, PUBLISH};
+    private Work_state state_id;
+
 
     public Review() {
     }
@@ -34,11 +34,11 @@ public class Review {
         this.work = work;
     }
 
-    public State getState_id() {
+    public Work_state getState_id() {
         return state_id;
     }
 
-    public void setState_id(State state_id) {
+    public void setState_id(Work_state state_id) {
         this.state_id = state_id;
     }
 
