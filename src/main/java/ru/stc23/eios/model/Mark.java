@@ -1,16 +1,28 @@
 package ru.stc23.eios.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * @author Петр Вершинин
  */
+@Entity
+@Table(name = "mark")
 public class Mark {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private User teacherName;
-    private User studentName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacherName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id")
+    private Student studentName;
+
+
     private String nameLesson;
     private String grade;
     private LocalDate localDate;
@@ -18,7 +30,7 @@ public class Mark {
     public Mark() {
     }
 
-    public Mark(long id, User teacherName, User studentName, String nameLesson, String grade, LocalDate localDate) {
+    public Mark(long id, Teacher teacherName, Student studentName, String nameLesson, String grade, LocalDate localDate) {
         this.id = id;
         this.teacherName = teacherName;
         this.studentName = studentName;
@@ -64,7 +76,7 @@ public class Mark {
         return teacherName;
     }
 
-    public void setTeacherName(User teacherName) {
+    public void setTeacherName(Teacher teacherName) {
         this.teacherName = teacherName;
     }
 
@@ -72,7 +84,7 @@ public class Mark {
         return studentName;
     }
 
-    public void setStudentName(User studentName) {
+    public void setStudentName(Student studentName) {
         this.studentName = studentName;
     }
 }
