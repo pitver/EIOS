@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author Вершинин Пётр
  */
-@Component
+/*@Component
 public class AccessDeniedHandler implements AccessDeniedHandler {
 
     private static Logger logger = LoggerFactory.getLogger(AccessDeniedHandler.class);
@@ -32,4 +32,4 @@ public class AccessDeniedHandler implements AccessDeniedHandler {
         }
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");
     }
-}
+}*/
