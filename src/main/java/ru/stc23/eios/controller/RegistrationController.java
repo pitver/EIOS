@@ -41,39 +41,32 @@ public class RegistrationController {
                           Map<String, Object> model
     ) {
         User userFromDb = (User) userService.loadUserByUsername(user.getUsername());
-
         if (userFromDb != null) {
             model.put("message", "User exists");
             return "register";
         }
 
+
         if (usertype.equals("student")) {
-            user = new Student();
+            Student student =new Student();
+            student.setUsername(username);
+            student.setPassword(password);
+            student.setActive(true);
+            student.setRoles(Collections.singleton(Role.USER));
+            userService.addUser(student);
+
         } else {
-            user=new Teacher();
+            Teacher teacher=new Teacher();
+            teacher.setUsername(username);
+            teacher.setPassword(password);
+            teacher.setActive(true);
+            teacher.setRoles(Collections.singleton(Role.USER));
+            teacher.setSpecification(Collections.singleton(spec));
+            userService.addUser(teacher);
 
         }
 
-      /*  if (usertype.equals("student")) {
-            Student user = (Student) userWithForm;
-            user.setActive(true);
-            user.setRoles(Collections.singleton(Role.USER));
-            userService.addUser(user);
-        } else {
-            Teacher user= (Teacher) userWithForm;
-            user.setSpecification(spec);
-            user.setActive(true);
-            user.setRoles(Collections.singleton(Role.USER));
-            userService.addUser(user);
-        }*/
 
-
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userService.addUser(user);
         return "redirect:/login";
     }
 }
