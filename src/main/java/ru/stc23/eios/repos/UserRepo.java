@@ -1,6 +1,7 @@
 package ru.stc23.eios.repos;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import ru.stc23.eios.model.User;
 
 /**
@@ -8,7 +9,7 @@ import ru.stc23.eios.model.User;
  *
  * @author Вершинин Пётр
  */
-public interface UserRepo extends JpaRepository<User,Long> {
-
-    User findByUsername(String username);
+@NoRepositoryBean
+ interface UserRepo<T extends User> extends PagingAndSortingRepository<T,Long> {
+    T findByUsername(String username);
 }

@@ -1,17 +1,25 @@
 package ru.stc23.eios.model;
 
+import javax.persistence.*;
+
 /**
  * ExternalResources
  *
  * @author Вершинин Пётр
  */
+@Entity
+@Table(name = "external_resourse")
 public class ExternalResources {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String linkToRecourse;
     private String descriptions;
     private String preview;
-    private User username;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private Teacher username;
 
 
     public ExternalResources() {
@@ -53,7 +61,7 @@ public class ExternalResources {
         return username;
     }
 
-    public void setUsername(User username) {
+    public void setUsername(Teacher username) {
         this.username = username;
     }
 }

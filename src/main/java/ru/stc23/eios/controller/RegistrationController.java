@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.stc23.eios.model.*;
-import ru.stc23.eios.repos.UserRepo;
 import ru.stc23.eios.service.UserService;
 
 import java.util.Collections;
@@ -46,26 +45,25 @@ public class RegistrationController {
             return "register";
         }
 
-
         if (usertype.equals("student")) {
-            Student student =new Student();
+            Student student = new Student();
             student.setUsername(username);
             student.setPassword(password);
+            student.setEmail(email);
             student.setActive(true);
             student.setRoles(Collections.singleton(Role.USER));
             userService.addUser(student);
 
         } else {
-            Teacher teacher=new Teacher();
+            Teacher teacher = new Teacher();
             teacher.setUsername(username);
             teacher.setPassword(password);
+            teacher.setEmail(email);
             teacher.setActive(true);
             teacher.setRoles(Collections.singleton(Role.USER));
             teacher.setSpecification(Collections.singleton(spec));
             userService.addUser(teacher);
-
         }
-
 
         return "redirect:/login";
     }

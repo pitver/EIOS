@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h3 class="text-center">List of teachers</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <tr class="d-flex">
+            <th class="col-sm-1" scope="col">id</th>
+            <th class="col-sm-1" scope="col">login</th>
+            <th class="col-sm-2" scope="col">email</th>
+            <th class="col-sm" scope="col">firstname</th>
+            <th class="col-sm" scope="col">lastname</th>
+            <th class="col-sm" scope="col">patronymic</th>
+            <th class="col-sm" scope="col">spec</th>
+            <th class="col-sm" scope="col">role</th>
+
+
+        </tr>
+
+        <tr class="d-flex" th:each=" teacher: ${teachers}">
+            <td class="col-sm-1" scope="col" th:utext="${teacher.id}"></td>
+            <td class="col-sm-1" scope="col" th:utext="${teacher.username}"></td>
+            <td class="col-sm-2" scope="col" th:utext="${teacher.email}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.firstName}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.patronymic}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.specification}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.roles}"></td>
+        </tr>
+    </table>
+    <div class="pagination-div">
+        <ul class="pagination justify-content-center">
+        <span th:if="${teachers.hasPrevious()}">
+            <a th:href="@{/teacher(page=${teachers.number-1},size=${teachers.size})}">Previous</a>
+        </span>
+            <th:block th:each="i: ${#numbers.sequence(0, teachers.totalPages - 1)}">
+                <span th:if="${teachers.number == i}" class="selected">[[${i}+1]]</span>
+                <span th:unless="${teachers.number == i}">
+                 <a th:href="@{/teacher(page=${i},size=${teachers.size})}">[[${i}+1]]</a>
+            </span>
+            </th:block>
+            <span th:if="${teachers.hasNext()}">
+            <a th:href="@{/teacher(page=${teachers.number+1},size=${teachers.size})}">Next</a>
+        </span>
+        </ul>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
