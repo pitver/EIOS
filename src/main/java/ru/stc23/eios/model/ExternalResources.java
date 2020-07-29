@@ -18,7 +18,7 @@ public class ExternalResources {
     private String preview;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "id")
     private Teacher username;
 
 

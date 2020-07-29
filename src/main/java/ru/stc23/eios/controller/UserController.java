@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @PreAuthorize("hasAnyAuthority('ADMIN')")
-@RequestMapping
+
 public class UserController {
 
     @Autowired

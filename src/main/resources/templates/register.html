@@ -44,16 +44,18 @@
                         <script>
                             function Selected(a) {
                                 var label = a.value;
-                                if (label=='teacher') {
+                                if (label==='teacher') {
                                     document.getElementById("spec").style.display='block';
+                                    document.getElementById("spec").setAttribute(required="true");
                                 }
                             else{
                                     document.getElementById("spec").style.display='none';
+                                    document.getElementById("spec").setAttribute(required="false");
                                 }}
                         </script>
                         <div>
                             <input type="spec" style='display: none;' name="spec" id="spec" class="form-control input-lg "
-                                   placeholder="специальность" required="true" th:value="none"/>
+                                   placeholder="специальность"  />
                         </div>
                     </div>
 
