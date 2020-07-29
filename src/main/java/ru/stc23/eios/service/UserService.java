@@ -11,11 +11,8 @@ import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.Student;
 import ru.stc23.eios.model.Teacher;
 import ru.stc23.eios.model.User;
-import ru.stc23.eios.repos.StudentRepository;
-import ru.stc23.eios.repos.TeacherRepository;
-import ru.stc23.eios.repos.UserRepository;
+import ru.stc23.eios.repos.UserRepo;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,11 +27,11 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo<User> userRepository;
     @Autowired
-    private StudentRepository studentRepository;
+    private UserRepo<Student> studentRepository;
     @Autowired
-    private TeacherRepository teacherRepository;
+    private UserRepo<Teacher> teacherRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -64,11 +61,11 @@ public class UserService implements UserDetailsService {
     }
 
     public Page<Student> findStudentAll(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+        return studentRepository.findAllByStudent(pageable);
     }
 
     public Page<Teacher> findTeacherAll(Pageable pageable) {
-        return teacherRepository.findAll(pageable);
+        return teacherRepository.findAllByTeacher(pageable);
     }
 
 

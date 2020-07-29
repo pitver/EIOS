@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<div th:fragment="page">
+
+    <!--/*@thymesVar id="result" type="templates"*/-->
+    <div class="pagination-div" th:object="${result}">
+        <ul class="pagination justify-content-center">
+            <span th:if="${result.hasPrevious()}">
+                <a  th:href="@{/__${url}__(page=${result.number-1},size=${result.size})}">Previous</a>
+            </span>
+            <th:block th:each="i: ${#numbers.sequence(0, result.totalPages - 1)}">
+                <span th:if="${result.number == i}" class="selected">[[${i}+1]]</span>
+                <span th:unless="${result.number == i}">
+                     <a  th:href="@{/__${url}__(page=${i},size=${result.size})}">[[${i}+1]]</a>
+                </span>
+            </th:block>
+            <span th:if="${result.hasNext()}">
+                <a  th:href="@{/__${url}__(page=${result.number+1},size=${result.size})}">Next</a>
+            </span>
+        </ul>
+    </div>
+</div>

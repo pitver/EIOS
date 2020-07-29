@@ -31,27 +31,31 @@ import java.util.stream.Collectors;
 @RequestMapping
 public class UserController {
 
+
     @Autowired
     UserService userService;
 
     @GetMapping("/user")
     public String userList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<User> page = userService.findUserAll(pageable);
-        model.addAttribute("users", page);
+        model.addAttribute("result", page);
+        model.addAttribute("url", "user");
         return "userlist";
     }
 
     @GetMapping("/student")
     public String studentList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Student> page = userService.findStudentAll(pageable);
-        model.addAttribute("students", page);
+        model.addAttribute("result", page);
+        model.addAttribute("url", "student");
         return "studentList";
     }
 
     @GetMapping("/teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Teacher> page = userService.findTeacherAll(pageable);
-        model.addAttribute("teachers", page);
+        model.addAttribute("result", page);
+        model.addAttribute("url", "teacher");
         return "teacherList";
     }
 
@@ -87,6 +91,33 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/user";
     }
+
+    /*@PutMapping("/user/{id}")
+    public String replaseUser(@RequestParam String username,
+                              @RequestParam Map<String, String> form,
+                              @RequestParam("userId") Long userId
+    ) throws RecordNotFoundException {
+        User user = userService.getUserById(userId);
+        user.setUsername(username);
+        Set<String> roles = Arrays.stream(Role.values())
+                .map(Role::name)
+                .collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
+        userService.addUser(user);
+        return "redirect:/user";
+    }*/
+
+    /*@DeleteMapping("/user/{id}")
+    public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
+        User userById = userService.getUserById(id);
+        userService.deleteUser(userById);
+        return "redirect:/user";
+    }*/
 
     @GetMapping(value = {"delete", "/delete/{id}"})
     public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {

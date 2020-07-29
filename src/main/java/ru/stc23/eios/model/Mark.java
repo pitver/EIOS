@@ -15,11 +15,9 @@ public class Mark {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
     private Teacher teacherName;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "student_id")
     private Student studentName;
 
 

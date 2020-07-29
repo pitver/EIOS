@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("student")
 public class Student extends User {
 
+
     public Student() {
     }
 }

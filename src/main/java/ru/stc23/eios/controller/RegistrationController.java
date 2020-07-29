@@ -36,34 +36,29 @@ public class RegistrationController {
                           @RequestParam String username,
                           @RequestParam String email,
                           @RequestParam String password,
-                          User user,
+
                           Map<String, Object> model
     ) {
-        User userFromDb = (User) userService.loadUserByUsername(user.getUsername());
+        User userFromDb = (User) userService.loadUserByUsername(username);
         if (userFromDb != null) {
             model.put("message", "User exists");
             return "register";
         }
 
-        if (usertype.equals("student")) {
-            Student student = new Student();
-            student.setUsername(username);
-            student.setPassword(password);
-            student.setEmail(email);
-            student.setActive(true);
-            student.setRoles(Collections.singleton(Role.USER));
-            userService.addUser(student);
-
-        } else {
-            Teacher teacher = new Teacher();
-            teacher.setUsername(username);
-            teacher.setPassword(password);
-            teacher.setEmail(email);
-            teacher.setActive(true);
-            teacher.setRoles(Collections.singleton(Role.USER));
+        Teacher teacher= new Teacher();
+        if(usertype.equals("teacher")){
             teacher.setSpecification(Collections.singleton(spec));
-            userService.addUser(teacher);
         }
+        userFromDb=teacher;
+
+
+        userFromDb.setUsername(username);
+        userFromDb.setPassword(password);
+        userFromDb.setEmail(email);
+        userFromDb.setActive(true);
+        userFromDb.setRoles(Collections.singleton(Role.USER));
+        userService.addUser(userFromDb);
+  
 
         return "redirect:/login";
     }
