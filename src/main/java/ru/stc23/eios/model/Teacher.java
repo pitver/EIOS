@@ -9,7 +9,7 @@ import java.lang.annotation.ElementType;
 import java.util.Set;
 
 @Entity
-@DiscriminatorValue("Teacher")
+@DiscriminatorValue("teacher")
 public class Teacher extends User {
 
     @ElementCollection

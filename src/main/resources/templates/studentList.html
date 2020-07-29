@@ -26,7 +26,7 @@
 
         </tr>
 
-        <tr class="d-flex" th:each=" student : ${students}">
+        <tr class="d-flex" th:each=" student : ${result}">
             <td class="col-sm-1" scope="col" th:utext="${student.id}"></td>
             <td class="col-sm-1" scope="col" th:utext="${student.username}"></td>
             <td class="col-sm-2" scope="col" th:utext="${student.email}"></td>
@@ -36,22 +36,8 @@
             <td class="col-sm" scope="col" th:utext="${student.roles}"></td>
         </tr>
     </table>
-    <div class="pagination-div">
-        <ul class="pagination justify-content-center">
-        <span th:if="${students.hasPrevious()}">
-            <a th:href="@{/student(page=${students.number-1},size=${students.size})}">Previous</a>
-        </span>
-            <th:block th:each="i: ${#numbers.sequence(0, students.totalPages - 1)}">
-                <span th:if="${students.number == i}" class="selected">[[${i}+1]]</span>
-                <span th:unless="${students.number == i}">
-                 <a th:href="@{/student(page=${i},size=${students.size})}">[[${i}+1]]</a>
-            </span>
-            </th:block>
-            <span th:if="${students.hasNext()}">
-            <a th:href="@{/student(page=${students.number+1},size=${students.size})}">Next</a>
-        </span>
-        </ul>
-    </div>
+
+    <div th:replace="fragments/paginable :: page"/>
 
 
 </div>
