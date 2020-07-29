@@ -16,8 +16,9 @@ import ru.stc23.eios.model.User;
 @Repository
 public interface UserRepo<T extends User> extends PagingAndSortingRepository<T,Long> {
     T findByUsername(String username);
-    @Query(value="select * from usr u JOIN teacher_specification t where usr_type='teacher'",nativeQuery = true)
+    @Query(value="select * from usr u LEFT JOIN teacher_specification t " +
+            "on u.id=t.teacher_id where usr_type='teacher'",nativeQuery = true)
     Page<T> findAllByTeacher(Pageable pageable);
-    @Query(value="select * from usr u JOIN teacher_specification t where usr_type='student'",nativeQuery = true)
+    @Query(value="select * from usr u  where usr_type='student'",nativeQuery = true)
     Page<T> findAllByStudent(Pageable pageable);
 }

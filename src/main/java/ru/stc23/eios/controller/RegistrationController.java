@@ -58,7 +58,7 @@ public class RegistrationController {
         userFromDb.setActive(true);
         userFromDb.setRoles(Collections.singleton(Role.USER));
         userService.addUser(userFromDb);
-  
+
 
         return "redirect:/login";
     }
