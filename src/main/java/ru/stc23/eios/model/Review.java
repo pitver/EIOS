@@ -17,11 +17,11 @@ public class Review {
     private LocalDateTime localDateTime;
 
     @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="id")
+    @JoinColumn (name ="work_id")
     private Work work;
 
     @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="id")
+    @JoinColumn (name ="user_id")
     private User user;
 
     private WorkState state_id;

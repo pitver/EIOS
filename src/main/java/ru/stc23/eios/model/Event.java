@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private long id;
     private String eventName;
     private EventStatus eventType;
@@ -20,7 +19,7 @@ public class Event {
     private String description;
 
     @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="id")
+    @JoinColumn (name ="user_id")
     private User author;
 
     private EventStatus status;

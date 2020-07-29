@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface  EventJpaRepository extends JpaRepository<Event, Long> {
 
-    public List<Event> findByStartGreaterThanEqualAndFinishLessThanEqual(LocalDateTime start, LocalDateTime end);
-
-    @Query("select b from Event b where b.startDateTime >= ?1 and b.endDateTime <= ?2")
-    public List<Event> findByDateBetween(LocalDateTime start, LocalDateTime end);
+   @Query("select b from Event b where b.startDateTime >= ?1 and b.endDateTime <= ?2")
+  public List<Event> findByDateBetween(LocalDateTime start, LocalDateTime end);
 }

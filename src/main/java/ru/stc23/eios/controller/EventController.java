@@ -23,7 +23,7 @@ public class EventController {
         this.eventRepository = eventRepository;
     }
 
-    @RequestMapping("/events")
+    @RequestMapping("/allevents")
     public List<Event> allEvents() {
         return eventRepository.findAll();
     }
@@ -44,7 +44,7 @@ public class EventController {
         eventRepository.delete(event);
     }
 */
-   /* @RequestMapping(value="/events", method=RequestMethod.GET)
+    @RequestMapping(value="/events")
     public List<Event> getEventsInRange(@RequestParam(value = "start", required = true) String start,
                                         @RequestParam(value = "end", required = true) String end) {
         Date startDate = null;
@@ -70,7 +70,7 @@ public class EventController {
                 ZoneId.systemDefault());
 
         return eventRepository.findByDateBetween(startDateTime, endDateTime);
-    }*/
+    }
 }
 
 
