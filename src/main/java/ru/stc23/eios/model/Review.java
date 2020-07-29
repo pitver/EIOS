@@ -1,18 +1,30 @@
 package ru.stc23.eios.model;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
 /**
  * @author Даянова Фаягуль
  */
-
+@Entity
+@Table(name="review")
 public class Review {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String text;
     private LocalDateTime localDateTime;
+
+    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @JoinColumn (name ="id")
     private Work work;
+
+    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @JoinColumn (name ="id")
     private User user;
-    private Work_state state_id;
+
+    private WorkState state_id;
 
 
     public Review() {
@@ -34,11 +46,11 @@ public class Review {
         this.work = work;
     }
 
-    public Work_state getState_id() {
+    public WorkState getState_id() {
         return state_id;
     }
 
-    public void setState_id(Work_state state_id) {
+    public void setState_id(WorkState state_id) {
         this.state_id = state_id;
     }
 

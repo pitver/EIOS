@@ -1,5 +1,5 @@
 package ru.stc23.eios.model;
 
-public enum Work_state {
+public enum WorkState {
     NEW, PUBLISH
 }

@@ -1,5 +1,5 @@
 package ru.stc23.eios.model;
 
-public enum Event_status {
+public enum EventStatus {
     PLANNED, IN_WORK, CHECKED, CANCELLED
 }

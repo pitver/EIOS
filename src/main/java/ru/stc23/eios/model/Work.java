@@ -1,21 +1,35 @@
 package ru.stc23.eios.model;
 
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * @author Даянова Фаягуль
  */
-public class Work {
 
+@Entity
+@Table(name= "Work")
+public class Work {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
     private String work;
-    public enum Work_state {NEW, PUBLISH};
-    private Work_state state_id;
+    private WorkState state;
     private LocalDateTime localDateTime;
-    private User user;
-    private User teacher;
+
+    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @JoinColumn (name ="student_id")
+    private Student student;
+
+
+    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @JoinColumn (name ="teacher_id")
+    private Teacher teacher;
+
+    @OneToMany
     private List<Review> review;
 
     public Work() {
@@ -30,8 +44,8 @@ public class Work {
         return title;
     }
 
-    public User getUser() {
-        return user;
+    public Student getStudent() {
+        return student;
     }
 
     public LocalDateTime getCreate_date() {
@@ -42,7 +56,7 @@ public class Work {
         return work;
     }
 
-    public User getTeacher() {
+    public Teacher getTeacher() {
         return teacher;
     }
 
@@ -50,8 +64,8 @@ public class Work {
         return review;
     }
 
-    public Work_state getState_id() {
-        return state_id;
+    public WorkState getState() {
+        return state;
     }
 
     public void setId(long id) {
@@ -62,8 +76,8 @@ public class Work {
         this.title = title;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStudent (Student user) {
+        this.student = user;
     }
 
     public void setCreate_date(LocalDateTime localDateTime) {
@@ -74,7 +88,7 @@ public class Work {
         this.work = work;
     }
 
-    public void setTeacher(User teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
@@ -82,7 +96,7 @@ public class Work {
         this.review = review;
     }
 
-    public void setState_id(Work_state state_id) {
-        this.state_id = state_id;
+    public void setState(WorkState state_id) {
+        this.state = state_id;
     }
 }

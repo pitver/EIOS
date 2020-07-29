@@ -1,17 +1,29 @@
 package ru.stc23.eios.model;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "event")
+
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long id;
     private String eventName;
-    private enum EventType {LESSON, EXAMINATION, HOMEWORK};
-    private EventType eventType;
+    private EventStatus eventType;
+    @Column(name="start")
     private LocalDateTime startDateTime;
+    @Column(name="end")
     private LocalDateTime endDateTime;
     private String description;
+
+    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @JoinColumn (name ="id")
     private User author;
-    private Event_status status;
+
+    private EventStatus status;
 
     public Event() {
     }
@@ -24,7 +36,7 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public void setEventType(EventType eventType) {
+    public void setEventType(EventStatus eventType) {
         this.eventType = eventType;
     }
 
@@ -44,7 +56,7 @@ public class Event {
         author = author;
     }
 
-    public void setStatus(Event_status status) {
+    public void setStatus(EventStatus status) {
         this.status = status;
     }
 
@@ -56,7 +68,7 @@ public class Event {
         return eventName;
     }
 
-    public EventType getEventType() {
+    public EventStatus getEventType() {
         return eventType;
     }
 
@@ -76,7 +88,7 @@ public class Event {
         return author;
     }
 
-    public Event_status getStatus() {
+    public EventStatus getStatus() {
         return status;
     }
 }
