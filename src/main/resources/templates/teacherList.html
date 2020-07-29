@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h3 class="text-center">List of teachers</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <tr class="d-flex">
+            <th class="col-sm-1" scope="col">id</th>
+            <th class="col-sm-1" scope="col">login</th>
+            <th class="col-sm-2" scope="col">email</th>
+            <th class="col-sm" scope="col">firstname</th>
+            <th class="col-sm" scope="col">lastname</th>
+            <th class="col-sm" scope="col">patronymic</th>
+            <th class="col-sm" scope="col">spec</th>
+            <th class="col-sm" scope="col">role</th>
+
+
+        </tr>
+
+        <tr class="d-flex" th:each=" teacher: ${result}">
+            <td class="col-sm-1" scope="col" th:utext="${teacher.id}"></td>
+            <td class="col-sm-1" scope="col" th:utext="${teacher.username}"></td>
+            <td class="col-sm-2" scope="col" th:utext="${teacher.email}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.firstName}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.patronymic}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.specification}"></td>
+            <td class="col-sm" scope="col" th:utext="${teacher.roles}"></td>
+        </tr>
+    </table>
+
+    <div th:replace="fragments/paginable :: page"/>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

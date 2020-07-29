@@ -12,28 +12,46 @@
     <div class="starter-template">
         <h3 class="text-center">List of users</h3>
     </div>
+    <div class="text">
+        <a class="px-3" th:href="@{/student}">list of student</a>
+    </div>
+    <div class="text">
+        <a class="px-3" th:href="@{/teacher}">list of teacher</a>
+    </div>
 
     <table class="table table-bordered">
-        <tr class="d-flex" >
-            <th class="col-sm" scope="col">id</th>
-            <th class="col-sm" scope="col">name</th>
-            <th class="col-sm" scope="col">password</th>
+        <tr class="d-flex">
+            <th class="col-sm-1" scope="col">id</th>
+            <th class="col-sm-1" scope="col">login</th>
+            <th class="col-sm-2" scope="col">email</th>
+            <th class="col-sm" scope="col">firstname</th>
+            <th class="col-sm" scope="col">lastname</th>
+            <th class="col-sm" scope="col">patronymic</th>
             <th class="col-sm" scope="col">role</th>
-            <th class="col-sm" scope="col">edit</th>
+            <!-- <th class="col-sm" scope="col">spec</th>-->
+            <th class="col-sm-2" scope="col">edit</th>
         </tr>
 
 
-        <tr class="d-flex"  th:each=" user : ${users}">
-             <td class="col-sm" scope="col" th:utext="${user.id}"></td>
-             <td class="col-sm" scope="col" th:utext="${user.username}"></td>
-             <td class="col-sm" scope="col" th:utext="${user.password}"></td>
-             <td class="col-sm" scope="col" th:utext="${user.roles}"></td>
-             <td class="col-sm" scope="col">
-                 <a class="btn btn-outline-success"th:href="@{/edit/{id}(id=${user.id})}">edit</a>
-                 <a class="btn btn-outline-success"th:href="@{/delete/{id}(id=${user.id})}">delete</a>
-             </td>
+        <tr class="d-flex" th:each=" user : ${result}">
+            <td class="col-sm-1" scope="col" th:utext="${user.id}"></td>
+            <td class="col-sm-1" scope="col" th:utext="${user.username}"></td>
+            <td class="col-sm-2" scope="col" th:utext="${user.email}"></td>
+            <td class="col-sm" scope="col" th:utext="${user.firstName}"></td>
+            <td class="col-sm" scope="col" th:utext="${user.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${user.patronymic}"></td>
+            <td class="col-sm" scope="col" th:utext="${user.roles}"></td>
+            <td class="col-sm-2" scope="col">
+                <a class="btn btn-outline-success" th:href="@{/edit/{id}(id=${user.id})}">edit</a>
+                <a class="btn btn-outline-success" th:href="@{/delete/{id}(id=${user.id})}">delete</a>
+            </td>
         </tr>
     </table>
+
+
+
+    <div th:replace="fragments/paginable :: page"/>
+
 
 </div>
 <!-- /.container -->
