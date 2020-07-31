@@ -1,6 +1,5 @@
 package ru.stc23.eios.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,7 +15,6 @@ import ru.stc23.eios.model.User;
 import ru.stc23.eios.service.UserService;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,8 +30,11 @@ import java.util.stream.Collectors;
 public class UserController {
 
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/user")
     public String userList(Model model, @PageableDefault(size = 10) Pageable pageable) {
@@ -44,12 +45,38 @@ public class UserController {
     }
 
     @GetMapping("/student")
-    public String studentList(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Student> page = userService.findStudentAll(pageable);
+    public String studentList(
+            Model model,
+            @PageableDefault(size = 10) Pageable pageable,
+            @RequestParam (required = false,defaultValue = "")String filterGroup) {
+
+        Page<Student> page;
+        Page<Student> groupList=userService.findStudentGroup(pageable);
+        model.addAttribute("groups",groupList);
+
+        if(filterGroup !=null&& !filterGroup.isEmpty()){
+             page=userService.findStudentByFilter(filterGroup,pageable);
+
+        }else{
+            page = userService.findStudentAll(pageable);
+        }
+
         model.addAttribute("result", page);
         model.addAttribute("url", "student");
         return "studentList";
     }
+
+    /*@PostMapping("/student")
+    public String studentGroup(Model model,
+                               @PageableDefault(size = 10) Pageable pageable,
+                               @RequestParam (required = false,defaultValue = "")String filterGroup){
+        Page<Student> groupList=userService.findStudentGroup(pageable);
+        model.addAttribute("groups",groupList);
+        Page<Student>page=userService.findStudentByFilter(filterGroup,pageable);
+        model.addAttribute("result", page);
+        model.addAttribute("url", "student");
+        return "studentlist";
+    }*/
 
     @GetMapping("/teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {

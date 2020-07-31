@@ -1,6 +1,5 @@
 package ru.stc23.eios.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +25,15 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepo<User> userRepository;
-    @Autowired
-    private UserRepo<Student> studentRepository;
-    @Autowired
-    private UserRepo<Teacher> teacherRepository;
+    private final UserRepo<User> userRepository;
+    private final UserRepo<Student> studentRepository;
+    private final UserRepo<Teacher> teacherRepository;
+
+    public UserService(UserRepo<User> userRepository, UserRepo<Student> studentRepository, UserRepo<Teacher> teacherRepository) {
+        this.userRepository = userRepository;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -68,5 +70,11 @@ public class UserService implements UserDetailsService {
         return teacherRepository.findAllByTeacher(pageable);
     }
 
+    public Page<Student> findStudentByFilter(String name,Pageable pageable){
+        return studentRepository.findByStudentGroup(name,pageable);
+    }
+    public Page<Student> findStudentGroup(Pageable pageable){
+        return studentRepository.findStudentGroup(pageable);
+    }
 
 }
