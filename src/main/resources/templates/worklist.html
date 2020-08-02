@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <a class="btn btn-primary mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Добавить работу
+    </a>
+    <div class="collapse <#if message??>show</#if>" id="collapseExample">
+        <div class="form-group mt-3">
+
+            <form th:action="@{/work}" method="post">
+                <div class="m-3">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control input-lg" placeholder="название работы">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="work"></textarea>
+                    </div>
+                    <input align="center" type="submit" class="btn btn-outline-success" value="send"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="starter-template text-center">
+        <h3>Выполненные работы</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <tr class="d-flex">
+            <th class="col-sm-2" scope="col">название</th>
+            <th class="col-sm-7" scope="col">Работа</th>
+            <th class="col-sm-3" scope="col">автор</th>
+        </tr>
+
+        <tr class="d-flex" th:each="work: ${works}">
+            <td class="col-sm-2" scope="col" th:utext="${work.title}"></td>
+            <td class="col-sm-7" scope="col" th:utext="${work.work}"></td>
+            <td class="col-sm-3" scope="col" th:utext="${work.authorOfWork}"></td>
+        </tr>
+    </table>
+
+
+    <!-- <div th:replace="fragments/paginable :: page"/>-->
+
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

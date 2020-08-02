@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name= "Work")
+@Table(name = "Work")
 public class Work {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,17 +20,24 @@ public class Work {
     private WorkState state;
     private LocalDateTime localDateTime;
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="student_id")
-    private Student student;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student author;
 
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="teacher_id")
+    /*@ManyToOne(optional = false, cascade =CascadeType.ALL)*/
+    @Transient
     private Teacher teacher;
 
-    @OneToMany
+    /*@OneToMany*/
+    @Transient
     private List<Review> review;
+
+    public String getAuthorOfWork(){
+        //после внедрения заменит на
+        //author.getFirstName()+" "+author.getLastName()+" "+author.getPatronymic()
+        return author !=null? author.getUsername():"<none>";
+    }
 
     public Work() {
 
@@ -44,8 +51,8 @@ public class Work {
         return title;
     }
 
-    public Student getStudent() {
-        return student;
+    public Student getAuthor() {
+        return author;
     }
 
     public LocalDateTime getCreate_date() {
@@ -76,8 +83,8 @@ public class Work {
         this.title = title;
     }
 
-    public void setStudent (Student user) {
-        this.student = user;
+    public void setAuthor(Student user) {
+        this.author = user;
     }
 
     public void setCreate_date(LocalDateTime localDateTime) {
