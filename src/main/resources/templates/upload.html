@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>File Upload PAGE!</title>
+    <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
-
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
 <form method="POST" enctype="multipart/form-data"
       action="/upload">
     File to upload: <input type="file" name="file"><br /> Name: <input
         type="text" name="name"><br /> <br /> <input type="submit"
                                                      value="Upload"> Press here to upload the file!
 </form>
-
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
