@@ -1,9 +1,12 @@
 package ru.stc23.eios.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Даянова Фаягуль
@@ -17,16 +20,22 @@ public class Work {
     private long id;
     private String title;
     private String work;
-    private WorkState state;
-    private LocalDateTime localDateTime;
+
+    @ElementCollection(targetClass = WorkState.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "work_state", joinColumns = @JoinColumn(name = "work_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<WorkState> state;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate createDate;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student author;
 
 
-    /*@ManyToOne(optional = false, cascade =CascadeType.ALL)*/
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     /*@OneToMany*/
@@ -34,7 +43,7 @@ public class Work {
     private List<Review> review;
 
     public String getAuthorOfWork(){
-        //после внедрения заменит на
+        //после внедрения заменить на
         //author.getFirstName()+" "+author.getLastName()+" "+author.getPatronymic()
         return author !=null? author.getUsername():"<none>";
     }
@@ -55,10 +64,6 @@ public class Work {
         return author;
     }
 
-    public LocalDateTime getCreate_date() {
-        return localDateTime;
-    }
-
     public String getWork() {
         return work;
     }
@@ -71,7 +76,7 @@ public class Work {
         return review;
     }
 
-    public WorkState getState() {
+    public Set<WorkState> getState() {
         return state;
     }
 
@@ -87,10 +92,6 @@ public class Work {
         this.author = user;
     }
 
-    public void setCreate_date(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
-    }
-
     public void setWork(String work) {
         this.work = work;
     }
@@ -103,7 +104,15 @@ public class Work {
         this.review = review;
     }
 
-    public void setState(WorkState state_id) {
-        this.state = state_id;
+    public void setState(Set<WorkState> state) {
+        this.state = state;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 }

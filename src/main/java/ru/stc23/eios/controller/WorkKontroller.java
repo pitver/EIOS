@@ -3,15 +3,14 @@ package ru.stc23.eios.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.stc23.eios.model.Role;
-import ru.stc23.eios.model.Student;
-import ru.stc23.eios.model.User;
-import ru.stc23.eios.model.Work;
+import org.springframework.web.bind.annotation.*;
+import ru.stc23.eios.exception.RecordNotFoundException;
+import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.WorkService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -33,15 +32,12 @@ public class WorkKontroller {
             Model model
     ) {
         List<Work> works;
-        Set<Role> userRole=currentUser.getRoles();
-        if(userRole.toString().contains("TEACHER")){
-           works  = workService.workList();
-        }else if (userRole.toString().contains("STUDENT")){
+        Set<Role> userRole = currentUser.getRoles();
+        if (userRole.toString().contains("STUDENT")) {
             works = workService.workListById(currentUser);
-        }else {
-            return "/worklist";
+        } else {
+            works = workService.workList();
         }
-
         model.addAttribute("works", works);
         return "/worklist";
     }
@@ -50,15 +46,54 @@ public class WorkKontroller {
     public String addWork(
             @AuthenticationPrincipal Student user,
             Model model,
-            @RequestParam String title,
-            @RequestParam String work,
+            @RequestParam("title") String title,
+            @RequestParam("work") String studentWork,
+            @RequestParam("createDate") String createDate,
             Work wrk
     ) {
+        wrk.setState(Collections.singleton(WorkState.NEW));
+        wrk.setCreateDate(LocalDate.parse(createDate));
         wrk.setAuthor(user);
         wrk.setTitle(title);
-        wrk.setWork(work);
+        wrk.setWork(studentWork);
         workService.addWork(wrk);
         return "redirect:/work";
     }
 
+
+    @GetMapping(value = {"workdelete", "/workdelete/{id}"})
+    public String workDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
+        Work workById = workService.findById(id);
+        workService.deleteWork(workById);
+        return "redirect:/work";
+
+    }
+
+    @GetMapping(value = {"workedit", "/workedit/{id}"})
+    public String editWork(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
+        if (id != null) {
+            Work works = workService.findById(id);
+            model.addAttribute("works", works);
+            return "workedit";
+        }
+        return "worklist";
+
+    }
+
+    @PostMapping("/workedit")
+    public String workEditSave(
+            Model model,
+            @RequestParam("title") String title,
+            @RequestParam("work") String studentWork,
+            @RequestParam("createDate") String createDate,
+            @RequestParam("workId") Long workId
+
+    ) throws RecordNotFoundException {
+        Work wrk = workService.findById(workId);
+        wrk.setCreateDate(LocalDate.parse(createDate));
+        wrk.setTitle(title);
+        wrk.setWork(studentWork);
+        workService.addWork(wrk);
+        return "redirect:/work";
+    }
 }
