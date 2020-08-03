@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+        <div class="form-group mt-3">
+            <div class="starter-template">
+                <h2 class="display-5 ml-3"> Редактирование работы </h2>
+            </div>
+            <form   th:action="@{/workedit}"  th:object="${works}" method="post">
+                <div class="m-3">
+                    <input type="hidden" class="form-control" name="workId" th:value="${works.id}">
+                   <!--<div th:if="${#authorization.expr('hasAnyAuthority(''USER'',''TEACHER'')')}">-->
+                   <!--<div th:if="${#authorization.expr('hasRole(''USER'')')}">>-->
+
+
+                        <div class="form-group">
+                            <label class="input-group-text" >название работы</label>
+                            <input disabled="false" type="text" th:value="${works.title}"name="title"
+                                   id="title" class="form-control input-lg mt-1" placeholder="название работы">
+                        </div>
+                        <div class="form-group">
+                            <label class="input-group-text " >текст работы</label>
+                            <textarea disabled="false" class="form-control mt-1" th:field="${works.work}"
+                                      id="exampleFormControlTextarea1" rows="3" name="work"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="date" disabled="false" id="inputGroupSelect01" th:value="${works.createDate}"
+                                   class="form-control" name="createDate" placeholder="Допуск с">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
+                            </div>
+                        </div>
+
+                    <div sec:authorize="hasAnyAuthority('USER','TEACHER')">
+                        <script>
+                            alert("hjk")
+                            document.getElementById('title').disabled=true;
+                            document.getElementById('work').disabled=true;
+                            document.getElementById("createDate").disabled=true;
+                        </script>
+
+                    </div>
+
+                    <input align="center" type="submit" class="btn btn-outline-success" value="send"/>
+
+                </div>
+            </form>
+        </div>
+
+
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

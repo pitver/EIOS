@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="fragments/header :: header-css"/>
 </head>
@@ -12,7 +13,7 @@
        aria-controls="collapseExample">
         Добавить работу
     </a>
-    <div class="collapse <#if message??>show</#if>" id="collapseExample">
+    <div class="collapse " id="collapseExample">
         <div class="form-group mt-3">
 
             <form th:action="@{/work}" method="post">
@@ -23,7 +24,15 @@
                     <div class="form-group">
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="work"></textarea>
                     </div>
+                    <div class="input-group mb-3">
+
+                    <input type="date" id="inputGroupSelect01" class="form-control" name="createDate" placeholder="Допуск с">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
+                    </div>
+                </div>
                     <input align="center" type="submit" class="btn btn-outline-success" value="send"/>
+
                 </div>
             </form>
         </div>
@@ -35,14 +44,23 @@
     <table class="table table-bordered">
         <tr class="d-flex">
             <th class="col-sm-2" scope="col">название</th>
-            <th class="col-sm-7" scope="col">Работа</th>
+            <th class="col-sm-1" scope="col">статус</th>
             <th class="col-sm-3" scope="col">автор</th>
+            <th class="col-sm-2" scope="col">дата</th>
+            <th class="col-sm-4" scope="col">действия</th>
         </tr>
 
         <tr class="d-flex" th:each="work: ${works}">
             <td class="col-sm-2" scope="col" th:utext="${work.title}"></td>
-            <td class="col-sm-7" scope="col" th:utext="${work.work}"></td>
+            <td class="col-sm-1" scope="col" th:utext="${work.state}"></td>
             <td class="col-sm-3" scope="col" th:utext="${work.authorOfWork}"></td>
+            <td class="col-sm-2" scope="col" th:utext="${work.createDate}"></td>
+            <!--<div sec:authorize="hasAnyAuthority('ADMIN','STUDENT')">-->
+                <td class="col-sm-4" scope="col">
+                    <a class="btn btn-outline-success" th:href="@{/workedit/{id}(id=${work.id})}">edit</a>
+                    <a class="btn btn-outline-success" th:href="@{/workdelete/{id}(id=${work.id})}">delete</a>
+             <!--   </td>
+            </div>-->
         </tr>
     </table>
 
