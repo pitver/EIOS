@@ -1,7 +1,10 @@
 package ru.stc23.eios.model;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -14,17 +17,17 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String text;
-    private LocalDateTime localDateTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate localDate;
+
 
     @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="work_id")
     private Work work;
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="user_id")
+    @ManyToOne
     private User user;
 
-    private WorkState state_id;
+   /* private WorkState state_id;*/
 
 
     public Review() {
@@ -46,13 +49,13 @@ public class Review {
         this.work = work;
     }
 
-    public WorkState getState_id() {
+   /* public WorkState getState_id() {
         return state_id;
     }
 
     public void setState_id(WorkState state_id) {
         this.state_id = state_id;
-    }
+    }*/
 
     public User getUser() {
         return user;
@@ -70,12 +73,17 @@ public class Review {
         this.text = text;
     }
 
-    public LocalDateTime getCreate_date() {
-        return localDateTime;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
-    public void setCreate_date(LocalDateTime create_date) {
-        this.localDateTime = create_date;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
+
+    public void setCreate_date(LocalDate create_date) {
+        this.localDate = create_date;
+    }
+
 
 }

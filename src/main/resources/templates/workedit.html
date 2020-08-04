@@ -16,45 +16,56 @@
             <form   th:action="@{/workedit}"  th:object="${works}" method="post">
                 <div class="m-3">
                     <input type="hidden" class="form-control" name="workId" th:value="${works.id}">
-                   <!--<div th:if="${#authorization.expr('hasAnyAuthority(''USER'',''TEACHER'')')}">-->
-                   <!--<div th:if="${#authorization.expr('hasRole(''USER'')')}">>-->
-
-
-                        <div class="form-group">
-                            <label class="input-group-text" >название работы</label>
-                            <input disabled="false" type="text" th:value="${works.title}"name="title"
+                      <div class="form-group">
+                            <label class="input-group-text bg-success text-white" >название работы</label>
+                            <input  type="text" th:value="${works.title}"name="title" required="true"
                                    id="title" class="form-control input-lg mt-1" placeholder="название работы">
                         </div>
                         <div class="form-group">
-                            <label class="input-group-text " >текст работы</label>
-                            <textarea disabled="false" class="form-control mt-1" th:field="${works.work}"
-                                      id="exampleFormControlTextarea1" rows="3" name="work"></textarea>
+                            <label class="input-group-text bg-success text-white" >текст работы</label>
+                            <textarea  class="form-control mt-1" th:field="${works.work}" required="true"
+                                      id="work" rows="3" name="work"></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="date" disabled="false" id="inputGroupSelect01" th:value="${works.createDate}"
-                                   class="form-control" name="createDate" placeholder="Допуск с">
+                            <input type="date" id="createDate" th:value="${works.createDate}" required="true"
+                                   class="form-control" name="createDate" placeholder="дата создания">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
+                                <label class="input-group-text bg-success text-white" for="createDate">дата создания</label>
                             </div>
                         </div>
-
-                    <div sec:authorize="hasAnyAuthority('USER','TEACHER')">
+                    <div class="form-group">
+                        <label class="input-group-text bg-success text-white" >Коментарий учителя</label>
+                        <textarea  class="form-control mt-1" th:field="${works.review.work.work}"
+                                   id="comment" rows="3" name="review.work.work"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="date" id="commentDate" th:value="${works.review.localDate}"
+                               class="form-control" name="review.localDate" placeholder="дата создания">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text bg-success text-white" for="commentDate">дата комента</label>
+                        </div>
+                    </div>
+                    <!--<div sec:authorize="hasAnyAuthority('USER','TEACHER')">
                         <script>
-                            alert("hjk")
                             document.getElementById('title').disabled=true;
                             document.getElementById('work').disabled=true;
-                            document.getElementById("createDate").disabled=true;
+                            document.getElementById('createDate').disabled=true;
                         </script>
 
                     </div>
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT')">
+                        <script>
+                            document.getElementById('title').disabled=false;
+                            document.getElementById('work').disabled=false;
+                            document.getElementById("createDate").disabled=false;
+                        </script>
+                    </div>-->
 
                     <input align="center" type="submit" class="btn btn-outline-success" value="send"/>
 
                 </div>
             </form>
         </div>
-
-
 
 </div>
 <!-- /.container -->
