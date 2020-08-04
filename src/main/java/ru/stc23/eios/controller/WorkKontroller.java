@@ -3,13 +3,15 @@ package ru.stc23.eios.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.WorkService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +55,7 @@ public class WorkKontroller {
     ) {
         wrk.setState(Collections.singleton(WorkState.NEW));
         wrk.setCreateDate(LocalDate.parse(createDate));
+       /* wrk.setReview(new Review());*/
         wrk.setAuthor(user);
         wrk.setTitle(title);
         wrk.setWork(studentWork);
@@ -62,8 +65,10 @@ public class WorkKontroller {
 
 
     @GetMapping(value = {"workdelete", "/workdelete/{id}"})
-    public String workDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
+    public String workDeleteForm(@PathVariable("id") Long id) throws RecordNotFoundException {
         Work workById = workService.findById(id);
+        Review review=workService.findWorkByWorkId(workById);
+        workService.deleteReview(review);
         workService.deleteWork(workById);
         return "redirect:/work";
 
@@ -82,14 +87,26 @@ public class WorkKontroller {
 
     @PostMapping("/workedit")
     public String workEditSave(
-            Model model,
+            @AuthenticationPrincipal Teacher user,
             @RequestParam("title") String title,
             @RequestParam("work") String studentWork,
             @RequestParam("createDate") String createDate,
-            @RequestParam("workId") Long workId
+            @RequestParam("workId") Long workId,
+            @RequestParam("review.localDate") String createCommentDate,
+            @RequestParam("review.work.work")String comment
 
     ) throws RecordNotFoundException {
         Work wrk = workService.findById(workId);
+
+        Review review= workService.findWorkByWorkId(wrk);
+
+        review.setText(comment);
+        review.setCreate_date(LocalDate.parse(createCommentDate));
+        review.setUser(user);
+        review.setWork(wrk);
+
+        wrk.setReview(review);
+        wrk.setTeacher(user);
         wrk.setCreateDate(LocalDate.parse(createDate));
         wrk.setTitle(title);
         wrk.setWork(studentWork);

@@ -38,14 +38,19 @@ public class Work {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    /*@OneToMany*/
-    @Transient
-    private List<Review> review;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rewiew_id")
+    private Review review;
 
     public String getAuthorOfWork(){
-        //после внедрения заменить на
+        //после внедрения  author заменить на
         //author.getFirstName()+" "+author.getLastName()+" "+author.getPatronymic()
         return author !=null? author.getUsername():"<none>";
+    }
+    public String getAuthorComentOfWork(){
+        //после внедрения teacher заменить на
+        //teacher.getFirstName()+" "+teacher.getLastName()+" "+teacher.getPatronymic()
+        return teacher !=null? teacher.getUsername():"<none>";
     }
 
     public Work() {
@@ -72,7 +77,7 @@ public class Work {
         return teacher;
     }
 
-    public List<Review> getReview() {
+    public Review getReview() {
         return review;
     }
 
@@ -100,7 +105,7 @@ public class Work {
         this.teacher = teacher;
     }
 
-    public void setReview(List<Review> review) {
+    public void setReview(Review review) {
         this.review = review;
     }
 
@@ -115,4 +120,6 @@ public class Work {
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
+
+
 }
