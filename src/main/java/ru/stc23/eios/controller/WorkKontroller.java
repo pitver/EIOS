@@ -3,10 +3,7 @@ package ru.stc23.eios.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.WorkService;
@@ -40,7 +37,9 @@ public class WorkKontroller {
         } else {
             works = workService.workList();
         }
+        Work work = new Work();
         model.addAttribute("works", works);
+        model.addAttribute("work", work);
         return "/worklist";
     }
 
@@ -48,18 +47,16 @@ public class WorkKontroller {
     public String addWork(
             @AuthenticationPrincipal Student user,
             Model model,
-            @RequestParam("title") String title,
-            @RequestParam("work") String studentWork,
-            @RequestParam("createDate") String createDate,
-            Work wrk
+            @ModelAttribute("work") Work work
+
     ) {
-        wrk.setState(Collections.singleton(WorkState.NEW));
-        wrk.setCreateDate(LocalDate.parse(createDate));
-       /* wrk.setReview(new Review());*/
-        wrk.setAuthor(user);
-        wrk.setTitle(title);
-        wrk.setWork(studentWork);
-        workService.addWork(wrk);
+
+        work.setState(Collections.singleton(WorkState.NEW));
+        work.setCreateDate(work.getCreateDate());
+        work.setAuthor(user);
+        work.setTitle(work.getTitle());
+        work.setWork(work.getWork());
+        workService.addWork(work);
         return "redirect:/work";
     }
 
@@ -67,7 +64,7 @@ public class WorkKontroller {
     @GetMapping(value = {"workdelete", "/workdelete/{id}"})
     public String workDeleteForm(@PathVariable("id") Long id) throws RecordNotFoundException {
         Work workById = workService.findById(id);
-        Review review=workService.findWorkByWorkId(workById);
+        Review review = workService.findReviewByWorkId(workById);
         workService.deleteReview(review);
         workService.deleteWork(workById);
         return "redirect:/work";
@@ -77,8 +74,8 @@ public class WorkKontroller {
     @GetMapping(value = {"workedit", "/workedit/{id}"})
     public String editWork(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
         if (id != null) {
-            Work works = workService.findById(id);
-            model.addAttribute("works", works);
+            Work work = workService.findById(id);
+            model.addAttribute("work", work);
             return "workedit";
         }
         return "worklist";
@@ -87,30 +84,29 @@ public class WorkKontroller {
 
     @PostMapping("/workedit")
     public String workEditSave(
-            @AuthenticationPrincipal Teacher user,
-            @RequestParam("title") String title,
-            @RequestParam("work") String studentWork,
-            @RequestParam("createDate") String createDate,
-            @RequestParam("workId") Long workId,
-            @RequestParam("review.localDate") String createCommentDate,
-            @RequestParam("review.work.work")String comment
+            @ModelAttribute("works") Work work,
+            @AuthenticationPrincipal Teacher user
 
     ) throws RecordNotFoundException {
-        Work wrk = workService.findById(workId);
-
-        Review review= workService.findWorkByWorkId(wrk);
-
-        review.setText(comment);
-        review.setCreate_date(LocalDate.parse(createCommentDate));
+        Work wrk = workService.findById(work.getId());
+        Review review = workService.findReviewByWorkId(wrk);
+        review.setText(work.getReview().getText());
+        review.setCreate_date(work.getReview().getLocalDate());
         review.setUser(user);
-        review.setWork(wrk);
+        review.setComment(work);
+        work.setReview(review);
 
-        wrk.setReview(review);
-        wrk.setTeacher(user);
-        wrk.setCreateDate(LocalDate.parse(createDate));
-        wrk.setTitle(title);
-        wrk.setWork(studentWork);
-        workService.addWork(wrk);
+/*        work.getReview().setText(work.getReview().getText());
+        work.getReview().setUser(user);
+        work.getReview().setComment(work);
+        work.getReview().setCreate_date(work.getReview().getLocalDate());*/
+
+        work.setTeacher(user);
+        work.setState(Collections.singleton(WorkState.NEW));
+        work.setCreateDate(work.getCreateDate());
+        work.setTitle(work.getTitle());
+        work.setWork(work.getWork());
+        workService.addWork(work);
         return "redirect:/work";
     }
 }

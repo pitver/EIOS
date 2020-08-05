@@ -34,8 +34,8 @@ public class WorkService {
             throw new RecordNotFoundException("No employee record exist for given id");
         }
     }
-    public Review findWorkByWorkId(Work work) throws RecordNotFoundException {
-        List<Review> reviewById = reviewRepo.findByWork(work);
+    public Review findReviewByWorkId(Work work) throws RecordNotFoundException {
+        List<Review> reviewById = reviewRepo.findByComment(work);
         if (!reviewById.isEmpty()) {
             return reviewById.get(0);
         } else {

@@ -19,7 +19,4 @@ public interface WorkRepo extends JpaRepository<Work,Long> {
 
     List<Work> findByAuthor(User user);
 
-
-
-
 }
