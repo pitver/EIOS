@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h3 class="text-center">List of students</h3>
+    </div>
+
+
+
+    <div class="form-group col-md-4">
+        <form method="get" action="/student" th:object="${student}" class="form-inline">
+
+            <!--<select class="chosen-select" th:field="*{groups}" name="filterGroup">-->
+          <!--  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" th:field="${}" name="groups">
+                <option th:each="r : ${student}" th:value="${r.studentGroup}"
+                        th:text="${r.studentGroup}"></option>
+            </select>-->
+
+            <input type="text" name="studentGroup" class="form-control">
+            <button type="submit" class="btn btn-primary ml-2">Поиск</button>
+        </form>
+    </div>
+
+
+
+
+
+
+    <table class="table table-bordered">
+        <tr class="d-flex">
+            <th class="col-sm-1" scope="col">id</th>
+            <th class="col-sm-1" scope="col">login</th>
+            <th class="col-sm-2" scope="col">email</th>
+            <th class="col-sm" scope="col">firstname</th>
+            <th class="col-sm" scope="col">lastname</th>
+            <th class="col-sm" scope="col">patronymic</th>
+            <th class="col-sm" scope="col">group</th>
+        </tr>
+
+        <tr class="d-flex" th:each=" student : ${result}">
+            <td class="col-sm-1" scope="col" th:utext="${student.id}"></td>
+            <td class="col-sm-1" scope="col" th:utext="${student.username}"></td>
+            <td class="col-sm-2" scope="col" th:utext="${student.email}"></td>
+            <td class="col-sm" scope="col" th:utext="${student.firstName}"></td>
+            <td class="col-sm" scope="col" th:utext="${student.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${student.patronymic}"></td>
+            <td class="col-sm" scope="col" th:utext="${student.studentGroup}"></td>
+        </tr>
+    </table>
+
+    <div th:replace="fragments/paginable :: page"/>
+
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

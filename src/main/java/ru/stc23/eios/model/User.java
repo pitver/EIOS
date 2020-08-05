@@ -9,18 +9,22 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usr")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "usr_type",
+discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value="user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;//login
+    @Column(name = "login")
+    private String username;
     private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String patronymic;
-
 
     private boolean active;
 

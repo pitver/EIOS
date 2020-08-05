@@ -1,51 +1,80 @@
 package ru.stc23.eios.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.stc23.eios.exception.RecordNotFoundException;
+import ru.stc23.eios.model.Student;
+import ru.stc23.eios.model.Teacher;
 import ru.stc23.eios.model.User;
 import ru.stc23.eios.repos.UserRepo;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
  * использууем 3-ех звенную модель, обращения к репозиторию
  * происходет через сервис
- *
+ * <p>
  * UserSevise
  *
  * @author Вершинин Пётр
  */
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepo userRepo;
+
+    private final UserRepo<User> userRepository;
+    private final UserRepo<Student> studentRepository;
+    private final UserRepo<Teacher> teacherRepository;
+
+    public UserService(UserRepo<User> userRepository, UserRepo<Student> studentRepository, UserRepo<Teacher> teacherRepository) {
+        this.userRepository = userRepository;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
-    public User getUserById(Long id) throws RecordNotFoundException
-    {
-        Optional<User> employee = userRepo.findById(id);
 
-        if(employee.isPresent()) {
+    public User getUserById(Long id) throws RecordNotFoundException {
+        Optional<User> employee = userRepository.findById(id);
+
+        if (employee.isPresent()) {
             return employee.get();
         } else {
             throw new RecordNotFoundException("No employee record exist for given id");
         }
     }
 
-    public User addUser(User user){
-        return userRepo.save(user);
-    }
-    public List<User> findUserAll(){
-        return userRepo.findAll();
+    public User addUser(User user) {
+        return (User) userRepository.save(user);
     }
 
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    public Page<User> findUserAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    public Page<Student> findStudentAll(Pageable pageable) {
+        return studentRepository.findAllByStudent(pageable);
+    }
+
+    public Page<Teacher> findTeacherAll(Pageable pageable) {
+        return teacherRepository.findAllByTeacher(pageable);
+    }
+
+    public Page<Student> findStudentByFilter(String name,Pageable pageable){
+        return studentRepository.findByStudentGroup(name,pageable);
+    }
+    public Page<Student> findStudentGroup(Pageable pageable){
+        return studentRepository.findStudentGroup(pageable);
+    }
 
 }
