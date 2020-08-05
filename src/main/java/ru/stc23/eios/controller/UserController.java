@@ -48,14 +48,14 @@ public class UserController {
     public String studentList(
             Model model,
             @PageableDefault(size = 10) Pageable pageable,
-            @RequestParam (required = false,defaultValue = "")String filterGroup) {
+            @RequestParam (required = false,defaultValue = "")String studentGroup) {
 
         Page<Student> page;
         Page<Student> groupList=userService.findStudentGroup(pageable);
-        model.addAttribute("groups",groupList);
+        model.addAttribute("student",groupList);
 
-        if(filterGroup !=null&& !filterGroup.isEmpty()){
-             page=userService.findStudentByFilter(filterGroup,pageable);
+        if(studentGroup !=null&& !studentGroup.isEmpty()){
+             page=userService.findStudentByFilter(studentGroup,pageable);
 
         }else{
             page = userService.findStudentAll(pageable);

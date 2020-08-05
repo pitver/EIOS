@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -19,6 +20,7 @@ public class Work {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    @Column(columnDefinition = "text")
     private String work;
 
     @ElementCollection(targetClass = WorkState.class, fetch = FetchType.EAGER)
@@ -61,9 +63,7 @@ public class Work {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
+
 
     public Student getAuthor() {
         return author;
@@ -89,9 +89,7 @@ public class Work {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+
 
     public void setAuthor(Student user) {
         this.author = user;
@@ -121,5 +119,31 @@ public class Work {
         this.createDate = createDate;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Work work1 = (Work) o;
+        return id == work1.id &&
+                Objects.equals(title, work1.title) &&
+                Objects.equals(work, work1.work) &&
+                Objects.equals(state, work1.state) &&
+                Objects.equals(createDate, work1.createDate) &&
+                Objects.equals(author, work1.author) &&
+                Objects.equals(teacher, work1.teacher) &&
+                Objects.equals(review, work1.review);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, work, state, createDate, author, teacher, review);
+    }
 }

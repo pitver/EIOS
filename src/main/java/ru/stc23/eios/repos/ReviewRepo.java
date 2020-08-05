@@ -13,11 +13,7 @@ import java.util.List;
  */
 public interface ReviewRepo extends JpaRepository<Review,Long> {
 
-
-
-    List<Review>findByWork(Work work);
+    List<Review>findByComment(Work work);
     void deleteById(Long id);
-
-
 
 }
