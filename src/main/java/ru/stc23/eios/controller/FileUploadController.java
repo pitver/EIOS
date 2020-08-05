@@ -9,11 +9,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Base64;
 
+import jdk.internal.net.http.ResponseBodyHandlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.stc23.eios.model.FileBase64;
 
 
 @Controller
@@ -38,6 +40,9 @@ public class FileUploadController {
 //                stream.write(bytes);
 //                stream.close();
                 file.getName();
+                FileBase64 fileBase64 = null;
+                fileBase64.setFilecode(fileEncoder.encodeToString(bytes));
+                fileBase64.setFilename(file.getName());
 
 
 
