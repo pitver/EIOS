@@ -28,7 +28,6 @@
                 </div>
                 <div class="input-group mb-3">
 
-                    <!-- <label class="form-control" id="createDate"> <span th:field="*{createDate}"></span></label>-->
                     <input type="date" id="createDate" th:field="*{createDate}" required="true"
                            class="form-control" placeholder="дата создания">
                     <div class="input-group-prepend">
@@ -41,7 +40,6 @@
                               id="comment" rows="3"></textarea>
                 </div>
                 <div class="input-group mb-3">
-                   <!-- <label class="form-control" id="commentDate"> <span th:field="*{review.localDate}"></span></label>-->
 
                    <input type="date" id="commentDate" th:field="*{review.localDate}"
                            class="form-control" placeholder="дата создания">
@@ -55,7 +53,7 @@
                     <span th:text="${w}"></span>
                 </div>-->
                 <div class="input-group mb-3">
-                    <select id="workstate" class="form-control" th:field="*{state}">
+                    <select type="text" id="workstate" class="form-control" th:field="*{state}">
                         <option th:each="w: ${workstate}"
                                 th:value="${w.name()}"
                                 th:utext="${w.name()}"/>

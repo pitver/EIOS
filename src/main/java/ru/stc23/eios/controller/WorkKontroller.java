@@ -116,15 +116,9 @@ public class WorkKontroller {
             }
         }*/
 
-
-
-/*        work.getReview().setText(work.getReview().getText());
-        work.getReview().setUser(user);
-        work.getReview().setComment(work);
-        work.getReview().setCreate_date(work.getReview().getLocalDate());*/
-
         work.setTeacher(user);
         work.setState(work.getState());
+        work.setAuthor(wrk.getAuthor());
         work.setCreateDate(work.getCreateDate());
         work.setTitle(work.getTitle());
         work.setWork(work.getWork());
