@@ -3,14 +3,17 @@ package ru.stc23.eios.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.WorkService;
 
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Петр Вершинин
@@ -85,7 +88,7 @@ public class WorkKontroller {
     @PostMapping("/workedit")
     public String workEditSave(
             @ModelAttribute("works") Work work,
-            @RequestParam Map<String, String> form,
+            /*@RequestParam Map<String, String> form,*/
             @AuthenticationPrincipal Teacher user
 
     ) throws RecordNotFoundException {
@@ -97,22 +100,21 @@ public class WorkKontroller {
         review.setComment(work);
         work.setReview(review);
 
-        Set<String> state = Arrays.stream(WorkState.values())
+        /*Set<String> state = Arrays.stream(WorkState.values())
                 .map(WorkState::name)
                 .collect(Collectors.toSet());
         wrk.getState().clear();
         for (String key : form.keySet()) {
             if (state.contains(key)) {
-             /*   work.setState(wrk.getState().add(WorkState.valueOf(key)));*/
-                if(key.contains("NEW")){
+                wrk.getState().add(WorkState.valueOf(key));
+                work.setState(wrk.getState());
+                *//*if(key.contains("NEW")){
                     work.setState(Collections.singleton(WorkState.NEW));
                 }else {
                     work.setState(Collections.singleton(WorkState.PUBLISH));
-                }
-
-
+                }*//*
             }
-        }
+        }*/
 
 
 
@@ -122,7 +124,7 @@ public class WorkKontroller {
         work.getReview().setCreate_date(work.getReview().getLocalDate());*/
 
         work.setTeacher(user);
-        /*work.setState(Collections.singleton(WorkState.NEW));*/
+        work.setState(work.getState());
         work.setCreateDate(work.getCreateDate());
         work.setTitle(work.getTitle());
         work.setWork(work.getWork());

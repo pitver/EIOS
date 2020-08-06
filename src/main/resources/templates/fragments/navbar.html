@@ -9,7 +9,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -47,11 +47,11 @@
                     <span sec:authorize="isAuthenticated()">
                         <span sec:authentication="name"></span>
                             <button sec:authorize="isAuthenticated()"
-                                    class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+                                    class="btn btn-success text-white my-2 my-sm-0">Logout</button>
                         </span>
                 </form>
                     <li sec:authorize="!isAuthenticated()" class="nav-item">
-                        <a class="btn btn-outline-success" th:href="@{/login}">Login</a>
+                        <a class="btn btn-success text-white" th:href="@{/login}">Login</a>
                     </li>
             </div>
       </nav>

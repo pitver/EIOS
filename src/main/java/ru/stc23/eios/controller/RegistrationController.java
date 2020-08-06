@@ -68,6 +68,6 @@ public class RegistrationController {
         userService.addUser(userFromDb);
 
 
-        return "redirect:/login";
+        return "redirect:/user";
     }
 }
