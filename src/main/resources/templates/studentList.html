@@ -55,7 +55,8 @@
             <td class="col-sm" scope="col" th:utext="${student.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${student.lastName}"></td>
             <td class="col-sm" scope="col" th:utext="${student.patronymic}"></td>
-            <td class="col-sm" scope="col" th:utext="${student.studentGroup}"></td>
+            <td class="col-sm" scope="col">
+                <div th:each="r:${student.studentGroup}"><span th:utext="${r.toString()}"></span></td>
         </tr>
     </table>
 
