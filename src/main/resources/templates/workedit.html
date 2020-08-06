@@ -49,6 +49,13 @@
                         <label class="input-group-text bg-success text-white" for="commentDate">дата комента</label>
                     </div>
                 </div>
+
+                <div th:each="w:${workstate}">
+                    <input th:type="checkbox"  th:name="${w}" th:checked="${#lists.contains(work.state, w)}">
+                    <span th:text="${w}"></span>
+                </div>
+
+
                 <div sec:authorize="hasAnyAuthority('USER','TEACHER')">
                     <script>
                         document.getElementById('title').readOnly=true;
