@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+<head th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
@@ -23,14 +22,13 @@
     <table class="table table-bordered" m-2>
         <tr class="d-flex">
             <th class="col-sm-1" scope="col">id</th>
-            <th class="col-sm-1" scope="col">login</th>
+            <th class="col-sm-1" scope="col">Логин</th>
             <th class="col-sm-2" scope="col">email</th>
-            <th class="col-sm" scope="col">firstname</th>
-            <th class="col-sm" scope="col">lastname</th>
-            <th class="col-sm" scope="col">patronymic</th>
+            <th class="col-sm" scope="col">Имя</th>
+            <th class="col-sm" scope="col">Фамилия</th>
+            <th class="col-sm" scope="col">Отчество</th>
             <th class="col-sm" scope="col">role</th>
-            <!-- <th class="col-sm" scope="col">spec</th>-->
-            <th class="col-sm-2" scope="col">edit</th>
+            <th class="col-sm-2" scope="col">Редактирование</th>
         </tr>
 
 

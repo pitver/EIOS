@@ -14,11 +14,7 @@ import java.util.List;
  */
 @Controller
 public class MainController {
-    @GetMapping("/mark")
-    public String mark(Model model) {
 
-        return "/mark";
-    }
     @GetMapping("/")
     public String start(Model model) {
 

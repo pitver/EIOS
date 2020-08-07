@@ -25,6 +25,9 @@ public class Mark {
     private String grade;
     private LocalDate localDate;
 
+    @OneToOne
+    private Work work;
+
     public Mark() {
     }
 
@@ -84,6 +87,14 @@ public class Mark {
 
     public void setStudentName(Student studentName) {
         this.studentName = studentName;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
     }
 }
 

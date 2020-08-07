@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+<head th:replace="fragments/header :: header-css"/>
 
 </head>
 <body>
@@ -56,7 +55,7 @@
             <td class="col-sm" scope="col" th:utext="${student.lastName}"></td>
             <td class="col-sm" scope="col" th:utext="${student.patronymic}"></td>
             <td class="col-sm" scope="col">
-                <div th:each="r:${student.studentGroup}"><span th:utext="${r.toString()}"></span></td>
+                <div th:each="r:${student.studentGroup}"><span th:utext="${r.toString()}"></span></div></td>
         </tr>
     </table>
 

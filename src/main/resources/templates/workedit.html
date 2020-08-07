@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+
+<head th:replace="fragments/header :: header-css"/>
+
 </head>
 <body>
 
@@ -48,10 +49,6 @@
                     </div>
                 </div>
 
-               <!-- <div th:each="w:${workstate}">
-                    <input th:type="checkbox"  th:name="${w}" th:checked="${#lists.contains(work.state, w)}">
-                    <span th:text="${w}"></span>
-                </div>-->
                 <div class="input-group mb-3">
                     <select type="text" id="workstate" class="form-control" th:field="*{state}">
                         <option th:each="w: ${workstate}"

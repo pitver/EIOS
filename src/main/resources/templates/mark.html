@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+<head th:replace="fragments/header :: header-css"/>
+
+
+
 </head>
 <body>
 
@@ -14,46 +16,42 @@
     };
 </script>-->
 
+<div class="container">
+    <div class="text-left">
+        <a class="btn btn-success m-3 btn-sm" data-toggle="collapse" href="#collapseExample" role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            выбрать месяц
+        </a>
+        <div class="collapse " id="collapseExample">
+            <form th:action="@{/mark}" method="post">
+                <input type="date" id="markDate" name="markDate" required="true"
+                       class="form-control-sm" placeholder="дата создания">
+                <input align="center" type="submit" class="btn btn-success btn-sm" value="выбрать"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center" th:utext="__${month}__"></div>
+
+</div>
 <table class="table_id">
-    <thead>
 
-    <thead>
+
     <tr>
-        <th class="text-center"  colspan="32">дата</th>
-    </tr>
-    </thead>
-    <tr>
-        <th>Name</th>
-        <th>1</th> <th>2</th> <th>3</th> <th>4</th> <th>5</th>
-        <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>10</th>
-        <th>11</th> <th>12</th> <th>13</th> <th>14</th> <th>15</th>
-        <th>16</th> <th>17</th> <th>18</th> <th>19</th> <th>20</th>
-        <th>21</th> <th>22</th> <th>23</th> <th>24</th> <th>25</th>
-        <th>26</th> <th>27</th> <th>28</th> <th>29</th> <th>30</th><th>31</th>
-    </tr>
-    </thead>
-    <tr th:each="user: ${usr}">
-
-        <td  scope="col" th:utext="${user.firstName}">Name</td>
-
-        <span th:each="mark: ${mrk}">
-
-               <td id="1" scope="col"></td>  <td id="2" scope="col"></td>  <td id="3" scope="col"></td>  <td id="4" scope="col"></td>
-
-               <td style='cursor: pointer;' onclick="tdclick(event);"  id="5" scope="col" th:utext="${mark.grade}" >5</td>
-
-               <td id="6" scope="col"></td>  <td id="7" scope="col"></td>  <td id="8" scope="col"></td>
-               <td id="9" scope="col">4</td> <td id="10" scope="col">5</td> <td id="11" scope="col"></td>  <td id="12" scope="col"></td>
-               <td id="13" scope="col"></td>  <td id="14" scope="col"></td>  <td id="15" scope="col"></td>  <td id="16" scope="col"></td>
-               <td id="17" scope="col"></td>  <td id="18" scope="col"></td>  <td id="19" scope="col"></td>  <td id="20" scope="col"></td>
-               <td id="21" scope="col"></td>  <td id="22" scope="col"></td>  <td id="23" scope="col"></td>  <td id="24" scope="col"></td>
-               <td id="25" scope="col"></td>  <td id="26" scope="col"></td>  <td id="27" scope="col"></td>  <td id="28" scope="col"></td>
-               <td id="29" scope="col"></td>  <td id="30" scope="col"></td>  <td id="31" scope="col"></td>
-
-           </span>
+        <th>Student</th>
+        <th th:each="date: ${dateList}" th:id="${date}" th:text="${date}"></th>
     </tr>
 
-    </tbody>
+    <tr th:each="st: ${student}">
+        <td th:utext="${st.username}">Student</td>
+        <td th:each="date: ${dateList}">
+                <div th:each="m:${mark}"  th:utext="${m.localDate.dayOfMonth==date and m.localDate.month=='AUGUST'}? ${m.grade}:''" >
+                </div>
+
+        </td>
+    </tr>
+
 </table>
 
 
