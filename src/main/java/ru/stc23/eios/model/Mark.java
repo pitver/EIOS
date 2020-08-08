@@ -15,10 +15,10 @@ public class Mark {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Teacher teacherName;
+    private Teacher teacher;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Student studentName;
+    private Student student;
 
 
     private String nameLesson;
@@ -29,15 +29,6 @@ public class Mark {
     private Work work;
 
     public Mark() {
-    }
-
-    public Mark(long id, Teacher teacherName, Student studentName, String nameLesson, String grade, LocalDate localDate) {
-        this.id = id;
-        this.teacherName = teacherName;
-        this.studentName = studentName;
-        this.nameLesson = nameLesson;
-        this.grade = grade;
-        this.localDate = localDate;
     }
 
     public long getId() {
@@ -73,20 +64,20 @@ public class Mark {
         this.grade = grade;
     }
 
-    public User getTeacherName() {
-        return teacherName;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherName(Teacher teacherName) {
-        this.teacherName = teacherName;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public User getStudentName() {
-        return studentName;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentName(Student studentName) {
-        this.studentName = studentName;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Work getWork() {

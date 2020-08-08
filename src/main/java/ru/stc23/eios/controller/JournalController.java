@@ -1,6 +1,5 @@
 package ru.stc23.eios.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,8 +14,6 @@ import ru.stc23.eios.service.MarkService;
 import ru.stc23.eios.service.UserService;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +39,11 @@ public class JournalController {
 
         List<Integer> dateList = new ArrayList<>();
         LocalDate localDate = LocalDate.now();
-        String monthName = getNameMonthAndLenth(dateList, localDate);
+        String monthName = getNameMonthAndMonthLength(dateList, localDate);
+        int monthValue=localDate.getMonthValue();
 
          List<Mark> markAll=markService.findMarkAll();
-
+        model.addAttribute("monthValue",monthValue);
         model.addAttribute("mark",markAll);
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
@@ -64,26 +62,22 @@ public class JournalController {
 
         List<Integer> dateList = new ArrayList<>();
         LocalDate ld= LocalDate.parse(markDate);
+        int monthValue=ld.getMonthValue();
 
-        String monthName = getNameMonthAndLenth(dateList, ld);
+        String monthName = getNameMonthAndMonthLength(dateList, ld);
         List<Mark> markAll=markService.findMarkAll();
 
+        model.addAttribute("monthValue",monthValue);
         model.addAttribute("mark",markAll);
-
-
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
         return "mark";
     }
 
-    private String getNameMonthAndLenth(List<Integer> dateList, LocalDate localDate) {
+    private String getNameMonthAndMonthLength(List<Integer> dateList, LocalDate localDate) {
         Locale localeRu = new Locale("ru", "RU");
-        int year = localDate.getYear();
-        int month = localDate.getMonthValue();
-        YearMonth yearMonthObject = YearMonth.of(year, month);
-        int daysInMonth = yearMonthObject.lengthOfMonth();
-
+        int daysInMonth = localDate.lengthOfMonth();
         String monthName = localDate.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, localeRu);
         for (int i = 1; i <= daysInMonth; i++) {
             dateList.add(i);

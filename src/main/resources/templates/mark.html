@@ -46,7 +46,10 @@
     <tr th:each="st: ${student}">
         <td th:utext="${st.username}">Student</td>
         <td th:each="date: ${dateList}">
-                <div th:each="m:${mark}"  th:utext="${m.localDate.dayOfMonth==date and m.localDate.month=='AUGUST'}? ${m.grade}:''" >
+                <div th:each="m:${mark}"
+                     th:utext="${m.localDate.dayOfMonth==date and
+                                m.localDate.getMonthValue()==__${monthValue}__ and
+                                m.student.id==st.id}? ${m.grade}:''" >
                 </div>
 
         </td>
