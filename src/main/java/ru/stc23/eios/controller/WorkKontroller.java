@@ -115,6 +115,14 @@ public class WorkKontroller {
                 }*//*
             }
         }*/
+        work.getMark().setGrade(work.getMark().getGrade());
+        work.getMark().setLocalDate(work.getCreateDate());
+        work.getMark().setNameLesson(work.getTitle());
+        work.getMark().setStudent(wrk.getAuthor());
+        work.getMark().setTeacher(user);
+        work.getMark().setWork(work);
+
+
 
         work.setTeacher(user);
         work.setState(work.getState());
