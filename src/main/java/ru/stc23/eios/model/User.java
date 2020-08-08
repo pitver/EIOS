@@ -26,7 +26,6 @@ public class User implements UserDetails {
     private String lastName;
     private String patronymic;
 
-
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

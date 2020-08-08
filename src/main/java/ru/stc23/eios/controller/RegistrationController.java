@@ -21,8 +21,11 @@ import java.util.Map;
 public class RegistrationController {
 
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
+
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -46,11 +49,16 @@ public class RegistrationController {
         }
 
         Teacher teacher= new Teacher();
+        Student student= new Student();
+
         if(usertype.equals("teacher")){
             teacher.setSpecification(Collections.singleton(spec));
+            userFromDb=teacher;
         }
-        userFromDb=teacher;
-
+        if(usertype.equals("student")){
+            student.setStudentGroup(Collections.singleton(spec));
+            userFromDb=student;
+        }
 
         userFromDb.setUsername(username);
         userFromDb.setPassword(password);
@@ -60,6 +68,6 @@ public class RegistrationController {
         userService.addUser(userFromDb);
 
 
-        return "redirect:/login";
+        return "redirect:/user";
     }
 }

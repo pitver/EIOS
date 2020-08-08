@@ -1,6 +1,5 @@
 package ru.stc23.eios.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,7 +15,6 @@ import ru.stc23.eios.model.User;
 import ru.stc23.eios.service.UserService;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,12 +26,15 @@ import java.util.stream.Collectors;
  */
 @Controller
 @PreAuthorize("hasAnyAuthority('ADMIN')")
-@RequestMapping
+
 public class UserController {
 
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/user")
     public String userList(Model model, @PageableDefault(size = 10) Pageable pageable) {
@@ -44,12 +45,27 @@ public class UserController {
     }
 
     @GetMapping("/student")
-    public String studentList(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        Page<Student> page = userService.findStudentAll(pageable);
+    public String studentList(
+            Model model,
+            @PageableDefault(size = 10) Pageable pageable,
+            @RequestParam (required = false,defaultValue = "")String studentGroup) {
+
+        Page<Student> page;
+        Page<Student> groupList=userService.findStudentGroup(pageable);
+        model.addAttribute("student",groupList);
+
+        if(studentGroup !=null&& !studentGroup.isEmpty()){
+             page=userService.findStudentByFilter(studentGroup,pageable);
+
+        }else{
+            page = userService.findStudentAll(pageable);
+        }
+
         model.addAttribute("result", page);
         model.addAttribute("url", "student");
         return "studentList";
     }
+
 
     @GetMapping("/teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {
@@ -91,33 +107,6 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/user";
     }
-
-    /*@PutMapping("/user/{id}")
-    public String replaseUser(@RequestParam String username,
-                              @RequestParam Map<String, String> form,
-                              @RequestParam("userId") Long userId
-    ) throws RecordNotFoundException {
-        User user = userService.getUserById(userId);
-        user.setUsername(username);
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-        user.getRoles().clear();
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
-        userService.addUser(user);
-        return "redirect:/user";
-    }*/
-
-    /*@DeleteMapping("/user/{id}")
-    public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
-        User userById = userService.getUserById(id);
-        userService.deleteUser(userById);
-        return "redirect:/user";
-    }*/
 
     @GetMapping(value = {"delete", "/delete/{id}"})
     public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {

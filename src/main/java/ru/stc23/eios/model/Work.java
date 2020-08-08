@@ -1,36 +1,62 @@
 package ru.stc23.eios.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Даянова Фаягуль
  */
 
 @Entity
-@Table(name= "Work")
+@Table(name = "Work")
 public class Work {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    @Column(columnDefinition = "text")
     private String work;
-    private WorkState state;
-    private LocalDateTime localDateTime;
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="student_id")
-    private Student student;
+    @ElementCollection(targetClass = WorkState.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "work_state", joinColumns = @JoinColumn(name = "work_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<WorkState> state;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate createDate;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student author;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Mark mark;
 
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="teacher_id")
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany
-    private List<Review> review;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rewiew_id")
+    private Review review;
+
+    public String getAuthorOfWork(){
+        //после внедрения  author заменить на
+        //author.getFirstName()+" "+author.getLastName()+" "+author.getPatronymic()
+        return author !=null? author.getUsername():"<none>";
+    }
+    public String getAuthorComentOfWork(){
+        //после внедрения teacher заменить на
+        //teacher.getFirstName()+" "+teacher.getLastName()+" "+teacher.getPatronymic()
+        return teacher !=null? teacher.getUsername():"<none>";
+    }
 
     public Work() {
 
@@ -40,16 +66,10 @@ public class Work {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public Student getStudent() {
-        return student;
-    }
 
-    public LocalDateTime getCreate_date() {
-        return localDateTime;
+    public Student getAuthor() {
+        return author;
     }
 
     public String getWork() {
@@ -60,11 +80,11 @@ public class Work {
         return teacher;
     }
 
-    public List<Review> getReview() {
+    public Review getReview() {
         return review;
     }
 
-    public WorkState getState() {
+    public Set<WorkState> getState() {
         return state;
     }
 
@@ -72,16 +92,16 @@ public class Work {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Mark getMark() {
+        return mark;
     }
 
-    public void setStudent (Student user) {
-        this.student = user;
+    public void setMark(Mark mark) {
+        this.mark = mark;
     }
 
-    public void setCreate_date(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setAuthor(Student user) {
+        this.author = user;
     }
 
     public void setWork(String work) {
@@ -92,11 +112,47 @@ public class Work {
         this.teacher = teacher;
     }
 
-    public void setReview(List<Review> review) {
+    public void setReview(Review review) {
         this.review = review;
     }
 
-    public void setState(WorkState state_id) {
-        this.state = state_id;
+    public void setState(Set<WorkState> state) {
+        this.state = state;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Work work1 = (Work) o;
+        return id == work1.id &&
+                Objects.equals(title, work1.title) &&
+                Objects.equals(work, work1.work) &&
+                Objects.equals(state, work1.state) &&
+                Objects.equals(createDate, work1.createDate) &&
+                Objects.equals(author, work1.author) &&
+                Objects.equals(teacher, work1.teacher) &&
+                Objects.equals(review, work1.review);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, work, state, createDate, author, teacher, review);
     }
 }
