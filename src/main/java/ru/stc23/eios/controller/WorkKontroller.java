@@ -94,6 +94,7 @@ public class WorkKontroller {
     ) throws RecordNotFoundException {
         Work wrk = workService.findById(work.getId());
         Review review = workService.findReviewByWorkId(wrk);
+        Mark mark=workService.findMarkByWorkId(wrk);
         review.setText(work.getReview().getText());
         review.setCreate_date(work.getReview().getLocalDate());
         review.setUser(user);
@@ -115,14 +116,13 @@ public class WorkKontroller {
                 }*//*
             }
         }*/
-        work.getMark().setGrade(work.getMark().getGrade());
-        work.getMark().setLocalDate(work.getCreateDate());
-        work.getMark().setNameLesson(work.getTitle());
-        work.getMark().setStudent(wrk.getAuthor());
-        work.getMark().setTeacher(user);
-        work.getMark().setWork(work);
-
-
+        mark.setGrade(work.getMark().getGrade());
+        mark.setLocalDate(work.getCreateDate());
+        mark.setNameLesson(work.getTitle());
+        mark.setStudent(wrk.getAuthor());
+        mark.setTeacher(user);
+        mark.setWork(work);
+        work.setMark(mark);
 
         work.setTeacher(user);
         work.setState(work.getState());

@@ -67,6 +67,11 @@
             <version>8.0.20</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
 
  <!--       &lt;!&ndash; https://mvnrepository.com/artifact/org.webjars/bootstrap &ndash;&gt;
         <dependency>
