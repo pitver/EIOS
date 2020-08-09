@@ -10,11 +10,7 @@
 <div th:replace="fragments/header :: header"/>
 
 
-<!--<script>
-    function tdclick(e){
-        alert("привет")
-    };
-</script>-->
+
 
 <div class="container">
     <div class="text-left">
@@ -40,16 +36,18 @@
 
     <tr>
         <th>Student</th>
-        <th th:each="date: ${dateList}" th:id="${date}" th:text="${date}"></th>
+        <th th:each="date: ${dateList}"  th:text="${date}"></th>
     </tr>
 
-    <tr th:each="st: ${student}">
-        <td th:utext="${st.username}">Student</td>
-        <td th:each="date: ${dateList}">
+    <tr th:each="st,iter: ${student}">
+        <td th:utext="${st.username}"  th:text="${iter.index+1}" >Student</td>
+
+        <td th:each="date: ${dateList}" th:id="${date}"  th:name="${date}" onclick="tdclick(this.id)">
                 <div th:each="m:${mark}"
                      th:utext="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue}__ and
-                                m.student.id==st.id}? ${m.grade}:''" >
+                                m.student.id==st.id}? ${m.grade}:''"  >
+
                 </div>
 
         </td>

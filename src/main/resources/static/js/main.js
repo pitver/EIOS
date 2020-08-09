@@ -1,8 +1,23 @@
+var count = 0;
+
 function tdclick(e) {
-    alert("привет")
+   /* var f = document.getElementById(e).innerHTML
+    alert("hi" + "/" + e + "/ " + f)*/
+
+
+        /*alert($(this.cells[e]).text());*/
+
+    $('tr').click(function(){
+        alert(this.rowIndex+1);
+    });
+
 };
 
-    $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"});
+
+
+
+
+$(".chosen-select").chosen({no_results_text: "Oops, nothing found!"});
 
 
 /*function Selected(a) {
