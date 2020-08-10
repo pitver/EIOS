@@ -3,13 +3,10 @@
 <head th:replace="fragments/header :: header-css"/>
 
 
-
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
-
-
 
 
 <div class="container">
@@ -36,24 +33,44 @@
 
     <tr>
         <th>Student</th>
-        <th th:each="date: ${dateList}"  th:text="${date}"></th>
+        <th th:each="date: ${dateList}" th:text="${date}"></th>
     </tr>
 
-    <tr th:each="st,iter: ${student}">
-        <td th:utext="${st.username}"  th:text="${iter.index+1}" >Student</td>
+    <tr th:each="st: ${student}">
+        <td th:utext="${st.username}">Student</td>
 
-        <td th:each="date: ${dateList}" th:id="${date}"  th:name="${date}" onclick="tdclick(this.id)">
-                <div th:each="m:${mark}"
-                     th:utext="${m.localDate.dayOfMonth==date and
+       <!-- <td th:each="date: ${dateList}" th:id="tableGrade" th:name="${date}"th:data-thing="${m.nameLesson}" onclick="tdclick(event,this.getAttribute('data-thing'));">-->
+        <td th:each="date: ${dateList}" th:id="tableGrade" th:name="${date}">
+            <div class="gradeTd"  th:each="m:${mark}" th:data-thing="${m.nameLesson}" onclick="tdclick(event,this.getAttribute('data-thing'));"
+                 th:utext="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue}__ and
-                                m.student.id==st.id}? ${m.grade}:''"  >
-
-                </div>
+                                m.student?.id==st?.id}? ${m.grade}:''">
+            </div>
 
         </td>
     </tr>
 
 </table>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="grade" id="uname" name="grade" value="">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div th:replace="fragments/footer :: footer"/>

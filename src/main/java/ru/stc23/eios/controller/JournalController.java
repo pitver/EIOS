@@ -15,9 +15,7 @@ import ru.stc23.eios.service.UserService;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Controller
 public class JournalController {
@@ -66,6 +64,9 @@ public class JournalController {
 
         String monthName = getNameMonthAndMonthLength(dateList, ld);
         List<Mark> markAll=markService.findMarkAll();
+        Map<Page<Student>,List<Mark>> studentMarkMap=new HashMap<>();
+        studentMarkMap.put(page,markAll);
+        model.addAttribute("studentMarkMap",studentMarkMap);
 
         model.addAttribute("monthValue",monthValue);
         model.addAttribute("mark",markAll);

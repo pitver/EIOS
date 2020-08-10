@@ -1,20 +1,39 @@
-var count = 0;
+function tdclick(e,u) {
+    alert(u)
+    let cell = event.target;
+    if (cell.tagName.toLowerCase() != 'td')
+        return;
+    let i = cell.parentNode.rowIndex;
+    let j = cell.cellIndex;
+    var row = $("table tr").eq(i);
+    var cells = $("td", row).eq(j);
 
-function tdclick(e) {
-   /* var f = document.getElementById(e).innerHTML
-    alert("hi" + "/" + e + "/ " + f)*/
+    $(document).ready(function () {
 
+        $('#myModal').modal("show");
+        $('#myModal .grade').val(cells.text());
 
-        /*alert($(this.cells[e]).text());*/
-
-    $('tr').click(function(){
-        alert(this.rowIndex+1);
     });
+    /*if (cells.text().textContent===undefined) {
+        alert("add grade")
+
+    } else {
+        $(document).ready(function () {
+
+            $('#myModal').modal("show");
+            $('#myModal .grade').val(cells.text());
+
+        });
+
+
+    }*/
+
 
 };
+function tdload(e){
+    alert(e)
 
-
-
+}
 
 
 $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"});
