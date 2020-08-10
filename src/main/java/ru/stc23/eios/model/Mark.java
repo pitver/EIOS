@@ -25,7 +25,7 @@ public class Mark {
     private String grade;
     private LocalDate localDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Work work;
 
     public Mark() {
