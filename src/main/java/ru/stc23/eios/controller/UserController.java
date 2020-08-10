@@ -66,17 +66,6 @@ public class UserController {
         return "studentList";
     }
 
-    /*@PostMapping("/student")
-    public String studentGroup(Model model,
-                               @PageableDefault(size = 10) Pageable pageable,
-                               @RequestParam (required = false,defaultValue = "")String filterGroup){
-        Page<Student> groupList=userService.findStudentGroup(pageable);
-        model.addAttribute("groups",groupList);
-        Page<Student>page=userService.findStudentByFilter(filterGroup,pageable);
-        model.addAttribute("result", page);
-        model.addAttribute("url", "student");
-        return "studentlist";
-    }*/
 
     @GetMapping("/teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {
@@ -118,33 +107,6 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/user";
     }
-
-    /*@PutMapping("/user/{id}")
-    public String replaseUser(@RequestParam String username,
-                              @RequestParam Map<String, String> form,
-                              @RequestParam("userId") Long userId
-    ) throws RecordNotFoundException {
-        User user = userService.getUserById(userId);
-        user.setUsername(username);
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-        user.getRoles().clear();
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
-        userService.addUser(user);
-        return "redirect:/user";
-    }*/
-
-    /*@DeleteMapping("/user/{id}")
-    public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
-        User userById = userService.getUserById(id);
-        userService.deleteUser(userById);
-        return "redirect:/user";
-    }*/
 
     @GetMapping(value = {"delete", "/delete/{id}"})
     public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {

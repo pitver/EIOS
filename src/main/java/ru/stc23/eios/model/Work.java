@@ -35,6 +35,9 @@ public class Work {
     @JoinColumn(name = "student_id")
     private Student author;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Mark mark;
+
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
@@ -89,7 +92,13 @@ public class Work {
         this.id = id;
     }
 
+    public Mark getMark() {
+        return mark;
+    }
 
+    public void setMark(Mark mark) {
+        this.mark = mark;
+    }
 
     public void setAuthor(Student user) {
         this.author = user;
