@@ -6,6 +6,7 @@ package ru.stc23.eios.controller;
 
 import java.util.Base64;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,11 @@ public class FileUploadController {
 
     @GetMapping("/files")
     public String pf() {
+
+        Page<FileBase64> page = fileUploadRepo.getAllByUser();
+
         return "/files";
+
     }
 
     @PostMapping("/upload")

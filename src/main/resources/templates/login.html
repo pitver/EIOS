@@ -8,20 +8,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<table class="table table-bordered">
-    <tr class="d-flex">
-        <th class="col-sm-2" scope="col">id</th>
-        <th class="col-sm-1" scope="col">fileName</th>
-        <th class="col-sm-1" scope="col">FileCode</th>
 
-    </tr>
-
-    <tr class="d-flex" th:each="work: ${works}">
-        <td class="col-sm-2" scope="col" th:utext="${work.title}"></td>
-        <td class="col-sm-1" scope="col"><div th:each="w:${work.state}"><span th:utext="${w.name()}"></span></div></td>
-        <td class="col-sm-1" scope="col" th:utext="${work.authorOfWork}"></td>
-    </tr>
-</table>
 
 <div class="container">
 

@@ -21,9 +21,11 @@
 
     <table class="table table-bordered" m-2>
         <tr class="d-flex">
-            <th class="col-sm" scope="col">Имя</th>
-            <th class="col-sm" scope="col">Фамилия</th>
-            <th class="col-sm" scope="col">Отчество</th>
+            <th class="col-sm" scope="col">Id</th>
+            <th class="col-sm" scope="col">Имя файла</th>
+            <th class="col-sm" scope="col">Автор</th>
+            <th class="ui-button" scope="col">Скачать</th>>
+
         </tr>
 
 
@@ -31,8 +33,8 @@
 
             <td class="col-sm" scope="col" th:utext="${file.id}"></td>
             <td class="col-sm" scope="col" th:utext="${file.filename}"></td>
-            <td class="col-sm" scope="col" th:utext="${file.filecode}"></td>
-
+            <td class="col-sm" scope="col" th:utext="${file.author}"></td>
+            <td class="ui-button" scope="col" th:onclick="/home"></td>>
             </td>
         </tr>
     </table>
