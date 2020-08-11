@@ -9,8 +9,14 @@ public class FileBase64 {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "filename")
     private String filename;
+
+    @Column(name = "filecode")
     private String filecode;
+
+    public FileBase64(){
+    }
 
     public Long getId() {
         return id;
@@ -35,4 +41,17 @@ public class FileBase64 {
     public void setFilecode(String filecode) {
         this.filecode = filecode;
     }
+
+    @OneToOne(optional = false)
+    @JoinColumn(name="username", unique = false, nullable = false, updatable = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setBook(User user) {
+        this.user = user;
+    }
+
 }

@@ -15,6 +15,23 @@
         type="text" name="name"><br /> <br /> <input type="submit"
                                                      value="Upload"> Press here to upload the file!
 </form>
+
+    <table class="table table-bordered">
+        <tr class="d-flex">
+            <th class="col-sm-2" scope="col">id</th>
+            <th class="col-sm-1" scope="col">name</th>
+            <th class="col-sm-1" scope="col"></th>
+
+        </tr>
+
+        <tr class="d-flex" th:each="work: ${works}">
+            <td class="col-sm-2" scope="col" th:utext="${work.title}"></td>
+            <td class="col-sm-1" scope="col"><div th:each="w:${work.state}"><span th:utext="${w.name()}"></span></div></td>
+            <td class="col-sm-1" scope="col" th:utext="${work.authorOfWork}"></td>
+        </tr>
+    </table>
+
+
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

@@ -1,5 +1,6 @@
 package ru.stc23.eios.service;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 import org.springframework.stereotype.Service;
 import ru.stc23.eios.model.FileBase64;
 import ru.stc23.eios.model.User;
@@ -13,9 +14,8 @@ public class FileUploadService {
     public FileUploadService(FileUploadRepo fileUploadRepo) {
         this.fileUploadRepo = fileUploadRepo;
     }
-    public FileBase64 addFile(FileBase64 fileBase64) {
-        return (FileBase64) FileBase64.save(user);
-    }
+
+}
 
 
 //jdbcTemplate.execute("INSERT INTO File (name, type, data) VALUES (?, ?, ?)",
@@ -35,4 +35,4 @@ public class FileUploadService {
 //        }
 //
 //    });
-}
+

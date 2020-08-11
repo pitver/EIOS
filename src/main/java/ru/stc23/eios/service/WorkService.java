@@ -20,7 +20,6 @@ import java.util.Optional;
 public class WorkService {
 
     private final WorkRepo workRepo;
-
     private final ReviewRepo reviewRepo;
     private final MarkRepo markRepo;
 
