@@ -1,5 +1,5 @@
-function tdclick(e,u) {
-    alert(u)
+function tdclick(e, dataNewGrade,studentId) {
+    /*alert(u)*/
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
         return;
@@ -8,29 +8,36 @@ function tdclick(e,u) {
     var row = $("table tr").eq(i);
     var cells = $("td", row).eq(j);
 
-    $(document).ready(function () {
 
-        $('#myModal').modal("show");
-        $('#myModal .grade').val(cells.text());
+    var s = cells.text()
+    alert(s.length)
+    if (typeof s === "undefined" || s === null || s === "" || s.length === 40) {
+        $(document).ready(function () {
+            $('#myModal').modal("show");
+            $('#myModal .grade').hide();
+            $('#myModal .addmark').show();
+            $('#myModal .btnGrade').show();
+            $('#myModal .gradedata').val(dataNewGrade);
+            $('#myModal .studentid').val(studentId);
 
-    });
-    /*if (cells.text().textContent===undefined) {
-        alert("add grade")
+        });
 
     } else {
         $(document).ready(function () {
-
             $('#myModal').modal("show");
-            $('#myModal .grade').val(cells.text());
+            $('#myModal .grade').val(cells.text()).show();
+            $('#myModal .addmark').hide();
+            $('#myModal .btnGrade').hide();
 
         });
 
 
-    }*/
+    }
 
 
 };
-function tdload(e){
+
+function tdload(e) {
     alert(e)
 
 }
