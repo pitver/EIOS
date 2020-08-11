@@ -1,4 +1,4 @@
-function tdclick(e, dataNewGrade,studentId) {
+function tdclick(e, dataNewGrade, studentId) {
     /*alert(u)*/
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
@@ -7,18 +7,23 @@ function tdclick(e, dataNewGrade,studentId) {
     let j = cell.cellIndex;
     var row = $("table tr").eq(i);
     var cells = $("td", row).eq(j);
+    console.log(cells)
 
 
-    var s = cells.text()
+    var s = cells.
     alert(s.length)
     if (typeof s === "undefined" || s === null || s === "" || s.length === 40) {
         $(document).ready(function () {
-            $('#myModal').modal("show");
+            window.open("addmark");
+            /*$('#myModal').modal("show");
             $('#myModal .grade').hide();
             $('#myModal .addmark').show();
-            $('#myModal .btnGrade').show();
-            $('#myModal .gradedata').val(dataNewGrade);
-            $('#myModal .studentid').val(studentId);
+            $('#myModal .btnGrade').show();*/
+            $('#addmark .gradedata').val(dataNewGrade);
+            $('#addmark .studentid').val(studentId);
+
+            /*$('#myModal .gradedata').val(dataNewGrade);
+            $('#myModal .studentid').val(studentId);*/
 
         });
 

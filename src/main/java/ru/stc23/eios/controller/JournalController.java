@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.Mark;
 import ru.stc23.eios.model.Student;
 import ru.stc23.eios.model.Work;
@@ -47,7 +48,7 @@ public class JournalController {
 
         List<Mark> markAll = markService.findMarkAll();
         model.addAttribute("monthValue", monthValue);
-        model.addAttribute("mark", markAll);
+        model.addAttribute("marks", markAll);
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
@@ -75,7 +76,7 @@ public class JournalController {
         model.addAttribute("studentMarkMap",studentMarkMap);*/
 
         model.addAttribute("monthValue", monthValue);
-        model.addAttribute("mark", markAll);
+        model.addAttribute("marks", markAll);
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
@@ -84,19 +85,22 @@ public class JournalController {
 
     @GetMapping("/addmark")
     public String getNewMark(Model model) {
-        model.addAttribute(new Mark());
-        return "mark";
+        model.addAttribute("mark",new Mark());
+        return "addmark";
     }
 
     @PostMapping("/addmark")
-    public String add(
-            @ModelAttribute("mark") Mark mark) {
+    public String add(Model model,
+            @RequestParam("studentid")Long studentId,
+            @ModelAttribute("mark") Mark mark) throws RecordNotFoundException {
 
+        Student st= (Student) userService.getUserById(studentId);
         mark.setGrade(mark.getGrade());
         mark.setLocalDate(mark.getLocalDate());
-        mark.setStudent(mark.getStudent());
+        mark.setStudent(st);
+        markService.add(mark);
 
-        return "mark";
+        return "redirect:/mark";
     }
 
     private String getNameMonthAndMonthLength(List<Integer> dateList, LocalDate localDate) {

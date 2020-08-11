@@ -41,10 +41,10 @@
        <td th:each="date: ${dateList}"  th:id="decode" th:data-thing="${date}" th:data="${st.id}" onclick="tdclick(event,this.getAttribute('data-thing'),this.getAttribute('data'));">
 
 
-            <div class="gradeTd"  th:each="m:${mark}"
+            <div class="gradeTd"  th:each="m:${marks}"
                  th:utext="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue}__ and
-                                m.student?.id==st?.id}? ${m.grade}:''">
+                                m.student?.id==st?.id}? ${m.grade}">
             </div>
 
         </td>

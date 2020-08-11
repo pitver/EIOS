@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h3>Добавить оценку</h3>
+
+        <form th:action="@{/addmark}" class="addmark" th:object="${mark}" method="post">
+
+                   <input type="text" th:field="*{grade}" class="gradenew" id="gradenew"  >
+                   <input type="date" th:field="*{localDate}" class="gradedata" id="gradedata"  >
+                   <input type="text"  class="studentid" id="studentid" name="studentid" >
+                   <button type="submit" class="btn-success">add</button>
+               </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
