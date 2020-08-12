@@ -38,13 +38,13 @@
 
     <tr th:each="st: ${student}">
         <td th:utext="${st.username}">Student</td>
-       <td th:each="date: ${dateList}"  th:id="decode" th:data-thing="${date}" th:data="${st.id}" onclick="tdclick(event,this.getAttribute('data-thing'),this.getAttribute('data'));">
-
-
+       <td th:each="date: ${dateList}"  th:id="decode" th:data-thing="${date}" th:data="${st.id}"
+           onclick="tdclick(event,this.getAttribute('data-thing'),this.getAttribute('data'));">
             <div class="gradeTd"  th:each="m:${marks}"
-                 th:utext="${m.localDate.dayOfMonth==date and
+                 th:if="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue}__ and
-                                m.student?.id==st?.id}? ${m.grade}">
+                                m.student?.id==st?.id}">
+                <span  class="grade" th:utext=" ${m.grade}"></span>
             </div>
 
         </td>

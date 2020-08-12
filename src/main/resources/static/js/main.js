@@ -7,20 +7,23 @@ function tdclick(e, dataNewGrade, studentId) {
     let j = cell.cellIndex;
     var row = $("table tr").eq(i);
     var cells = $("td", row).eq(j);
-    console.log(cells)
 
 
-    var s = cells.
-    alert(s.length)
-    if (typeof s === "undefined" || s === null || s === "" || s.length === 40) {
+    if (cells[0].innerText === "") {
         $(document).ready(function () {
-            window.open("addmark");
-            /*$('#myModal').modal("show");
-            $('#myModal .grade').hide();
-            $('#myModal .addmark').show();
-            $('#myModal .btnGrade').show();*/
-            $('#addmark .gradedata').val(dataNewGrade);
-            $('#addmark .studentid').val(studentId);
+            var new_window =  window.open("addmark","width=500,height=500");
+            new_window.onload = function() {
+                /*new_window.document.getElementById('gradedata').innerHTML = "07.08.2020";*/
+                new_window.document.getElementById('studentid').innerHTML = studentId;
+            }
+
+
+                /*$('#myModal').modal("show");
+                $('#myModal .grade').hide();
+                $('#myModal .addmark').show();
+                $('#myModal .btnGrade').show();*/
+           /* $('#addmark .gradedata').val(dataNewGrade);
+            $('#addmark .studentid').val(studentId);*/
 
             /*$('#myModal .gradedata').val(dataNewGrade);
             $('#myModal .studentid').val(studentId);*/
@@ -30,7 +33,7 @@ function tdclick(e, dataNewGrade, studentId) {
     } else {
         $(document).ready(function () {
             $('#myModal').modal("show");
-            $('#myModal .grade').val(cells.text()).show();
+            $('#myModal .grade').val(cells[0].innerText).show();
             $('#myModal .addmark').hide();
             $('#myModal .btnGrade').hide();
 
@@ -40,7 +43,9 @@ function tdclick(e, dataNewGrade, studentId) {
     }
 
 
-};
+
+}
+;
 
 function tdload(e) {
     alert(e)

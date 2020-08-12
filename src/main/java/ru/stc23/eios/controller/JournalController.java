@@ -92,6 +92,7 @@ public class JournalController {
     @PostMapping("/addmark")
     public String add(Model model,
             @RequestParam("studentid")Long studentId,
+            /*@RequestParam("gradedata")String data,*/
             @ModelAttribute("mark") Mark mark) throws RecordNotFoundException {
 
         Student st= (Student) userService.getUserById(studentId);
