@@ -14,7 +14,7 @@ function tdclick(e, dataNewGrade, studentId) {
             var new_window =  window.open("addmark","width=500,height=500");
             new_window.onload = function() {
                 /*new_window.document.getElementById('gradedata').innerHTML = "07.08.2020";*/
-                new_window.document.getElementById('studentid').innerHTML = studentId;
+                new_window.document.getElementById('studentid').value = studentId;
             }
 
 
