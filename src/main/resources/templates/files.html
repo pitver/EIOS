@@ -8,41 +8,26 @@
 
 <div class="container">
 
-   <!-- <div class="starter-template">
-        <h3 class="text-center">Список пользователей</h3>
-    </div>
-    <div class="text">
-        <a class="px-3" th:href="@{/student}">Список студентов</a>
-    </div>
-    <div class="text">
-        <a class="px-3" th:href="@{/teacher}">Список преподователей</a>
-    </div>
-    <a class="px-3" th:href="@{/register}">Добавить нового пользователя</a>-->
-
     <table class="table table-bordered" m-2>
+        <thead>
         <tr class="d-flex">
             <th class="col-sm" scope="col">Id</th>
             <th class="col-sm" scope="col">Имя файла</th>
-            <th class="col-sm" scope="col">Автор</th>
-            <th class="ui-button" scope="col">Скачать</th>>
-
+<!--            <th class="col-sm" scope="col">Автор</th>-->
+            <th class="ui-button" scope="col">Скачать</th>
         </tr>
-
-
-        <tr class="d-flex" th:each=" file : ${result}">
-
+        </thead>
+        <tbody>
+        <tr class="d-flex" th:each=" file : ${files}">
             <td class="col-sm" scope="col" th:utext="${file.id}"></td>
             <td class="col-sm" scope="col" th:utext="${file.filename}"></td>
-            <td class="col-sm" scope="col" th:utext="${file.author}"></td>
-            <td class="ui-button" scope="col" th:onclick="/home"></td>>
-            </td>
+<!--            <td class="col-sm" scope="col" th:utext="${}"></td>-->
+            <td  scope="col">
+                <button type="button" th:data-filename="${file.filename}" onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')" > скачать </button>
+             </td>
         </tr>
+        </tbody>
     </table>
-
-
-
-    <div th:replace="fragments/paginable :: page"/>
-
 
 </div>
 <!-- /.container -->

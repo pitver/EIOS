@@ -9,13 +9,19 @@ public class FileBase64 {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "filename")
     private String filename;
 
-    @Column(name = "filecode")
+    private String filetype;
+
+    @Column(name = "filecode", columnDefinition = "LONGTEXT")
     private String filecode;
 
-    public FileBase64(){
+    public FileBase64(){    }
+
+    public FileBase64(String filename, String filetype, String filecode){
+        this.filename = filename;
+        this.filetype = filetype;
+        this.filecode = filecode;
     }
 
     public Long getId() {
@@ -42,16 +48,23 @@ public class FileBase64 {
         this.filecode = filecode;
     }
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="username", unique = false, nullable = false, updatable = false)
-    private User user;
+//    @OneToOne(optional = true)
+//    @JoinColumn(name="login", unique = false, nullable = false, updatable = false)
+//    private User user;
 
-    public User getUser() {
-        return user;
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
+    public String getFiletype() {
+        return filetype;
     }
 
-    public void setBook(User user) {
-        this.user = user;
+    public void setFiletype(String filetype) {
+        this.filetype = filetype;
     }
-
 }
