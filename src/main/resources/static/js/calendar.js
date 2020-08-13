@@ -1,5 +1,15 @@
-$(document).ready(function() {
-    $('#calendar').fullCalendar({
+
+    $(document).ready(function() {
+        var form = $('#exampleModal');
+
+        /* режимы открытия формы */
+      function formOpen(mode) {
+         if (mode == 'addevent') {
+             form.dialog({ modal: true, title: null, width:350});
+         }
+        }
+
+        $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -16,26 +26,48 @@ $(document).ready(function() {
             day: "День"
         },
         defaultDate: '2020-08-08',
-        editable: true,
+         editable: true,
         eventLimit: true,
-        events: {
-            url: '/allevents',
-            type: 'GET',
-            data: {
-                start: 'start',
-                id: 'id',
-                title: 'title,'
+        events: function (start, end, timezone, callback) {
+                $.ajax({
+                    type: "GET",
+                    url: "/events",
+                    dataType: "json",
+                    data: {
+                        start: start.toLocaleString("yyyy-mm-dd"),
+                        end: end.toLocaleString("yyyy-mm-dd")
+                    },
+                    error: function (xhr, type, exception) {
+                        alert("Error: " + exception);
+                    },
+                    success:  function(doc) {
+                        var events = [];
+                        $.each(doc, function (i, v) {
+                            events.push({
+                                title: v.eventName,
+                                start: moment(v.startDateTime)
+                            });
+                        });
+                        callback(events);
+                        console.log(doc);
+                    }
+                });
             },
-            error: function() {
-                alert('there was an error while fetching events!');
-            },
-        },
         selectable: true,
         selectHelper: true,
-        select: function(start, end) {
-            startdateandtime.value = moment(start).format("YYYY-MM-DDTHH:mm:ss");
-            enddateandtime.value = moment(end).format("YYYY-MM-DDTHH:mm:ss");
-            dialog.dialog( "open" );
+            select: function(start, end) {
+                // Display the modal.
+                // You could fill in the start and end fields based on the parameters
+                formOpen('addevent');
+
+            },
+            eventClick: function(event, element) {
+            // Display the modal and set the values to the event values.
+            $('.modal').modal('show');
+/*            $('.modal').find('#title').val(event.title);
+            $('.modal').find('#starts-at').val(event.start);
+            $('.modal').find('#ends-at').val(event.end);*/
         }
+
     });
 });

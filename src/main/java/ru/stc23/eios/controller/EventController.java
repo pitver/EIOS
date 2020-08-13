@@ -1,52 +1,63 @@
 package ru.stc23.eios.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.stc23.eios.exception.BadDateFormatException;
-import ru.stc23.eios.model.Event;
-import ru.stc23.eios.repos.EventJpaRepository;
+import ru.stc23.eios.model.*;
+import ru.stc23.eios.service.EventService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-@Controller
+@RestController
 public class EventController {
 
-    private final EventJpaRepository eventRepository;
+    private final EventService eventService;
 
-    public EventController(EventJpaRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
-    @RequestMapping("/allevents")
-    public List<Event> allEvents() {
-        return eventRepository.findAll();
+    @GetMapping("/events")
+    public List<Event> events() {
+        return eventService.eventList();
     }
 
-    /*@RequestMapping(value="/event", method=RequestMethod.POST)
-    public Event addEvent(@RequestBody Event event) {
-        Event created = eventRepository.save(event);
-        return created;
-    }
 
-    @RequestMapping(value="/event", method=RequestMethod.PATCH)
-    public Event updateEvent(@RequestBody Event event) {
-        return eventRepository.save(event);
-    }
+    @PostMapping("/event")
+    public String addEvent(
+            @AuthenticationPrincipal Student user,
+            Model model,
+            @ModelAttribute("event") Event event
 
-    @RequestMapping(value="/event", method=RequestMethod.DELETE)
-    public void removeEvent(@RequestBody Event event) {
-        eventRepository.delete(event);
+    ) {
+       event.setStatus(Collections.singleton(EventStatus.PLANNED));
+        event.setAuthor(user);
+        event.setEventName(event.getEventName());
+          event.setEventType(event.getEventType());
+        event.setDescription(event.getDescription());
+        event.setStartDateTime(event.getStartDateTime());
+        event.setEndDateTime(event.getEndDateTime());
+        eventService.addEvent(event);
+        return "/event";
     }
-*/
-    @RequestMapping(value="/events")
+/*
+
+    @GetMapping("/events")
     public List<Event> getEventsInRange(@RequestParam(value = "start", required = true) String start,
-                                        @RequestParam(value = "end", required = true) String end) {
+                                        @RequestParam(value = "end", required = true) String end,
+                                        @AuthenticationPrincipal Student currentUser)
+     {
         Date startDate = null;
         Date endDate = null;
         SimpleDateFormat inputDateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -69,8 +80,11 @@ public class EventController {
         LocalDateTime endDateTime = LocalDateTime.ofInstant(endDate.toInstant(),
                 ZoneId.systemDefault());
 
-        return eventRepository.findByDateBetween(startDateTime, endDateTime);
+        return eventService.eventListBetween(startDateTime, endDateTime, currentUser);
     }
+
+*/
+
 }
 
 
