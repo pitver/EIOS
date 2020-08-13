@@ -3,18 +3,11 @@
 <head th:replace="fragments/header :: header-css"/>
 
 
-
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-
-<!--<script>
-    function tdclick(e){
-        alert("привет")
-    };
-</script>-->
 
 <div class="container">
     <div class="text-left">
@@ -40,22 +33,56 @@
 
     <tr>
         <th>Student</th>
-        <th th:each="date: ${dateList}" th:id="${date}" th:text="${date}"></th>
+        <th th:each="date: ${dateList}" th:text="${date}"></th>
     </tr>
 
     <tr th:each="st: ${student}">
         <td th:utext="${st.username}">Student</td>
-        <td th:each="date: ${dateList}">
-                <div th:each="m:${mark}"
-                     th:utext="${m.localDate.dayOfMonth==date and
+       <td th:each="date: ${dateList}"  th:id="decode" th:data-thing="${date}" th:data="${st.id}"
+           onclick="tdclick(event,this.getAttribute('data-thing'),this.getAttribute('data'));">
+            <div class="gradeTd"  th:each="m:${marks}"
+                 th:if="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue}__ and
-                                m.student.id==st.id}? ${m.grade}:''" >
-                </div>
+                                m.student?.id==st?.id}">
+                <span  class="grade" th:utext=" ${m.grade}"></span>
+            </div>
 
         </td>
     </tr>
 
 </table>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLongTitle">Оценка</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <input type="text" class="grade" id="ugrade" name="grade" value="">
+
+                <input type="hidden" class="namest" id="uname" name="namest" value="">
+
+                <!--<form th:action="@{/addmark}" class="addmark" th:object="${mark}" method="post">
+
+                    <input type="text" th:field="*{grade}" class="gradenew" id="gradenew" name="gradenew" placeholder="grade" >
+                    <input type="hidden" th:field="*{localDate}" class="gradedata" id="gradedata" name="gradedata" >
+                    <input type="hidden" th:field="*{student}" class="studentid" id="studentid" name="studentid" >
+                    <button type="submit" class="btn-success">add</button>
+                </form>-->
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div th:replace="fragments/footer :: footer"/>

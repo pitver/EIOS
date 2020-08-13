@@ -147,12 +147,13 @@ public class Work {
                 Objects.equals(state, work1.state) &&
                 Objects.equals(createDate, work1.createDate) &&
                 Objects.equals(author, work1.author) &&
+                Objects.equals(mark, work1.mark) &&
                 Objects.equals(teacher, work1.teacher) &&
                 Objects.equals(review, work1.review);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, work, state, createDate, author, teacher, review);
+        return Objects.hash(id, title, work, state, createDate, author, mark, teacher, review);
     }
 }

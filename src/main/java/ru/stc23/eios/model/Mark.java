@@ -1,5 +1,7 @@
 package ru.stc23.eios.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -23,9 +25,10 @@ public class Mark {
 
     private String nameLesson;
     private String grade;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate localDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Work work;
 
     public Mark() {

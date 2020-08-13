@@ -22,4 +22,5 @@ public class MarkService {
 
     public List<Mark> findMarkAll(){return markRepo.findAll();}
     public Mark findMarkById(Long id){return  findMarkById(id);}
+    public Mark add(Mark mark){return markRepo.save(mark);}
 }
