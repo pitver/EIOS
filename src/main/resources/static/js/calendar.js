@@ -5,7 +5,7 @@
         /* режимы открытия формы */
       function formOpen(mode) {
          if (mode == 'addevent') {
-             form.dialog({ modal: true, title: null, width:350});
+             form.modal("show");
          }
         }
 
