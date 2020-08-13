@@ -2,6 +2,7 @@ package ru.stc23.eios.model;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -11,18 +12,26 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String eventName;
-    private EventStatus eventType;
+    private String description;
+    @ElementCollection(targetClass = EventType.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "event_type", joinColumns = @JoinColumn(name = "event_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<EventType> eventType;
+
     @Column(name="start")
     private LocalDateTime startDateTime;
     @Column(name="end")
     private LocalDateTime endDateTime;
-    private String description;
+
 
     @ManyToOne(optional = false, cascade =CascadeType.ALL)
     @JoinColumn (name ="user_id")
-    private User author;
+    private Student author;
 
-    private EventStatus status;
+    @ElementCollection(targetClass = EventStatus.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "event_state", joinColumns = @JoinColumn(name = "event_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<EventStatus> status;
 
     public Event() {
     }
@@ -35,7 +44,7 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public void setEventType(EventStatus eventType) {
+    public void setEventType(Set<EventType>  eventType) {
         this.eventType = eventType;
     }
 
@@ -51,11 +60,11 @@ public class Event {
         this.description = description;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Student  author) {
         author = author;
     }
 
-    public void setStatus(EventStatus status) {
+   public void setStatus(Set<EventStatus> status) {
         this.status = status;
     }
 
@@ -67,7 +76,7 @@ public class Event {
         return eventName;
     }
 
-    public EventStatus getEventType() {
+    public Set<EventType>  getEventType() {
         return eventType;
     }
 
@@ -83,11 +92,11 @@ public class Event {
         return description;
     }
 
-    public User getAuthor() {
+    public Student getAuthor() {
         return author;
     }
 
-    public EventStatus getStatus() {
+    public Set<EventStatus> getStatus() {
         return status;
     }
 }
