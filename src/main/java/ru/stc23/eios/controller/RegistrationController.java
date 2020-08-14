@@ -1,6 +1,7 @@
 package ru.stc23.eios.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,11 @@ public class RegistrationController {
 
 
     final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserService userService) {
+    public RegistrationController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -65,6 +68,7 @@ public class RegistrationController {
         userFromDb.setEmail(email);
         userFromDb.setActive(true);
         userFromDb.setRoles(Collections.singleton(Role.USER));
+        userFromDb.setPassword(passwordEncoder.encode(userFromDb.getPassword()));
         userService.addUser(userFromDb);
 
 

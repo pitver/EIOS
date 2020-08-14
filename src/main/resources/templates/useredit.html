@@ -8,22 +8,35 @@
 
 <div class="container">
 
-    <div class="starter-template">
-        <h3>User Editor</h3>
+    <form th:action="@{/edit}" th:object="${user}" method="post">
+        <div class="form-group mt-3">
+            <div class="starter-template">
+                <h2 class="display-5 ml-3"> Редактирование пользователя </h2>
+            </div>
 
+            <div class="m-3">
 
-    <form   th:action="@{/edit}"  th:object="${user}" method="post">
-        <input type="hidden" class="form-control" name="userId" th:value="${user.id}">
-        <input type="text" name="username" th:value="${user.username}">
+                <input type="hidden" class="form-control" name="userId" th:value="${user.id}">
+                <div class="form-group">
+                    <label class="input-group-text bg-success text-white">Login</label>
+                 <input type="text" name="username" th:value="${user.username}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="input-group-text bg-success text-white">email</label>
+                    <input type="email" name="email" th:value="${user.email}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div th:each="role:${roles}">
+                        <input th:type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}">
+                        <span th:text="${role}"></span>
+                    </div>
+                </div>
 
-        <div th:each="role:${roles}">
-            <input th:type="checkbox"  th:name="${role}" th:checked="${#lists.contains(user.roles, role)}">
-            <span th:text="${role}"></span>
+                <button type="submit"> Save</button>
+
+            </div>
         </div>
-
-        <button type="submit"> Save</button>
     </form>
-
 
 
 </div>

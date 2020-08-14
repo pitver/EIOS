@@ -11,24 +11,25 @@ function tdclick(e, dataNewGrade, studentId) {
 
     if (cells[0].innerText === "") {
         $(document).ready(function () {
-            var new_window =  window.open("addmark","width=500,height=500");
+         /*   var new_window =  window.open("addmark","width=500,height=500");
             new_window.onload = function() {
-                /*new_window.document.getElementById('gradedata').innerHTML = "07.08.2020";*/
+                /!*new_window.document.getElementById('gradedata').innerHTML = "07.08.2020";*!/
                 new_window.document.getElementById('studentid').value = studentId;
-            }
+            }*/
 
 
-                /*$('#myModal').modal("show");
+                $('#myModal').modal("show");
                 $('#myModal .grade').hide();
                 $('#myModal .addmark').show();
-                $('#myModal .btnGrade').show();*/
-           /* $('#addmark .gradedata').val(dataNewGrade);
-            $('#addmark .studentid').val(studentId);*/
+                $('#myModal .btnGrade').show();
+            /*$('#addmark .gradedata').val(dataNewGrade);
+            $('#addmark .studentid').val(studentId);
 
-            /*$('#myModal .gradedata').val(dataNewGrade);
-            $('#myModal .studentid').val(studentId);*/
+            $('#myModal .gradedata').val(dataNewGrade);*/
+            $('#myModal .studentid').val(studentId);
 
         });
+
 
     } else {
         $(document).ready(function () {

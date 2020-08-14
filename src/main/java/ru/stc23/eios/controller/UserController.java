@@ -89,12 +89,14 @@ public class UserController {
 
     @PostMapping("/edit")
     public String userSave(
-            @RequestParam String username,
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") Long userId
     ) throws RecordNotFoundException {
         User user = userService.getUserById(userId);
         user.setUsername(username);
+        user.setEmail(email);
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());
