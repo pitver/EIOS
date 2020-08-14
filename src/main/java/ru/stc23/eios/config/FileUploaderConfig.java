@@ -10,8 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.unit.DataSize;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
+
 
 @Configuration
 @ComponentScan
@@ -25,5 +28,9 @@ public class FileUploaderConfig {
         factory.setMaxRequestSize(DataSize.parse("5MB"));
         return factory.createMultipartConfig();
     }
+
+
+
+
 
 }
