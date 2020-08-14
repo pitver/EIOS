@@ -1,28 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header-css"/>
-<div th:replace="fragments/header :: header"/>
+
 </head>
 <body>
+<div th:replace="fragments/header :: header"/>
 
 
+<div class="container col-sm-8">
 
-<div class="container">
-
-    <table class="table table-bordered" m-2>
+    <table class="table table-bordered align-self-md-center" m-1>
         <thead>
-        <tr class="d-flex">
-            <th class="col" scope="col">Id</th>
-            <th class="col" scope="col">Имя файла</th>
+        <tr class="d-flex" align="center">
+            <th class="col-1" scope="col">Id</th>
+            <th class="col-5" scope="col">Имя файла</th>
             <th class="col" scope="col">Скачать</th>
         </tr>
         </thead>
         <tbody>
         <tr class="d-flex" th:each=" file : ${files}">
-            <td class="col" scope="col" th:utext="${file.id}"></td>
-            <td class="col" scope="col" th:utext="${file.filename}"></td>
-            <td scope="col">
-                <button type="button" th:data-filename="${file.filename}" onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')" > скачать </button>
+            <td class="col-1" scope="col" th:utext="${file.id}"></td>
+            <td class="col-5" scope="col" th:utext="${file.filename}"></td>
+            <td th:class="col" scope="col-3">
+                <button type="button"  th:data-filename="${file.filename}" onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')" > скачать </button>
              </td>
         </tr>
         </tbody>

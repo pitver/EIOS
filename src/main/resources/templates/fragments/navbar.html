@@ -36,7 +36,7 @@
                                 Работа с файлами
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/upload2}">Форма загрузки файла</a>
+                                <a class="dropdown-item" th:href="@{/upload}">Форма загрузки файла</a>
                                 <a class="dropdown-item" th:href="@{/download}">Список загруженных файлов</a>
                             </div>
                         </li>
@@ -68,10 +68,6 @@
                     </div>
                 </ul>
             </div>
-
-
-
-
 
             <div class="navbar-text mr-3">
                 <form class="form" th:action="@{/logout}" method="post">
