@@ -47,7 +47,7 @@ public class JournalController {
 
 
         List<Mark> markAll = markService.findMarkAll();
-        model.addAttribute("monthValue", monthValue);
+        model.addAttribute("monthValue", localDate);
         model.addAttribute("marks", markAll);
         /*model.addAttribute("mark",new Mark());*/
         model.addAttribute("month", monthName);
@@ -76,7 +76,7 @@ public class JournalController {
         studentMarkMap.put(page,markAll);
         model.addAttribute("studentMarkMap",studentMarkMap);*/
 
-        model.addAttribute("monthValue", monthValue);
+        model.addAttribute("monthValue", ld);
         model.addAttribute("marks", markAll);
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
@@ -89,6 +89,7 @@ public class JournalController {
     public String add(Model model,
             @RequestParam("studentid")Long studentId,
             @RequestParam("gradedata")String data,
+
             @RequestParam("gradenew")String gradenew,
             @ModelAttribute("mark") Mark mark) throws RecordNotFoundException {
 
