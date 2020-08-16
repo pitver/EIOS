@@ -27,18 +27,37 @@ public class EventController {
     public EventController(EventService eventService) {
         this.eventService = eventService;
     }
-
+/*
     @GetMapping("/events")
     public List<Event> events() {
         return eventService.eventList();
+    }*/
+
+    @GetMapping("/events")
+    public List<Event> events(@AuthenticationPrincipal User currentUser) {
+        List<Event> events;
+        events = eventService.eventListById(currentUser);
+        return events;
     }
 
-
     @PostMapping("/event")
-    public String addEvent(
+    public Event addEvent(@RequestBody Event event,
+                          @AuthenticationPrincipal Student user
+                          ) {
+        event.setStatus(Collections.singleton(EventStatus.PLANNED));
+        event.setAuthor(user);
+        event.setEventName(event.getEventName());
+        event.setEventType(event.getEventType());
+        event.setDescription(event.getDescription());
+        event.setStartDateTime(event.getStartDateTime());
+        event.setEndDateTime(event.getEndDateTime());
+        Event created =  eventService.addEvent(event);
+        return created;
+    }
+   /* public String addEvent(
             @AuthenticationPrincipal Student user,
             Model model,
-            @ModelAttribute("event") Event event
+            @ModelAttribute("events") Event event
 
     ) {
        event.setStatus(Collections.singleton(EventStatus.PLANNED));
@@ -49,8 +68,8 @@ public class EventController {
         event.setStartDateTime(event.getStartDateTime());
         event.setEndDateTime(event.getEndDateTime());
         eventService.addEvent(event);
-        return "/event";
-    }
+        return "/events";
+    }*/
 /*
 
     @GetMapping("/events")

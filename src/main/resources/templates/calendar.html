@@ -5,40 +5,76 @@
 <div th:replace="fragments/header :: header"/>
         <div class="container">
             <div id='calendar' th:id="calendar"></div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" >
+            <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <h5 class="modal-title" id="EventModalLabel">Добавить событие</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    <div class="modal-body">
-                        <form th:action="@{/event}" th:object="${events}" method="post">
-                                    <div class="form-group">
-                                        <input type="text" name="eventName" id="eventName" class="form-control input-lg" placeholder="Название события" required="true" autofocus="true"/></div>
-                                    <div class="form-group">
-                                        <select name="eventtype" id="eventtype" class="form-control mb-3" laceholder="Тип события" onChange="Selected(this)">
-                                            <option value="lecture">Лекция</option>
-                                            <option value="exam">Экзамен</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
+                        <div class="modal-body">
+                            <form th:action="@{/events}" method="post">
+                                <div class="form-group">
+                                    <input type="text" name="eventName" id="eventName" class="form-control input-lg" placeholder="Название события" required="true" autofocus="true"/></div>
+                                <div class="form-group">
+                                    <select name="eventtype" id="eventtype" class="form-control mb-3" laceholder="Тип события" onChange="Selected(this)">
+                                        <option value="lecture">Лекция</option>
+                                        <option value="exam">Экзамен</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" name="description" id="description" class="form-control input-lg" placeholder="Описание события" required="true" autofocus="true"/></div>
-                                    <div class="form-group">
-                                        <input type="datetime-local" name="name"  id="startdateandtime" class="form-control input-lg"  placeholder="Начало" required="true" />
-                                    </div>
-                                    <div class="form-group">
-                                         <input type="datetime-local" name="end" id="enddateandtime"  class="form-control input-lg"  placeholder="Конец" required="true" />
-                                    </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                       <input align="center" type="submit" class="btn btn-success" value="send"/>
+                                <div class="form-group">
+                                    <input type="datetime-local" name="name"  id="startdateandtime" class="form-control input-lg"  placeholder="Начало" required="true" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="datetime-local" name="end" id="enddateandtime"  class="form-control input-lg"  placeholder="Конец" required="true" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary" >Добавить</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        </div>
                     </div>
                 </div>
-               </div>
+            </div>
+<          <div class="modal fade" id="WorkModal" tabindex="-1" role="dialog" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="WorkModalLabel">Добавить работу</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/work}" th:object="${work}" method="post">
+                                <div class="m-3">
+                                    <div class="form-group">
+                                        <input type="text" th:field="*{title}" class="form-control input-lg" placeholder="название работы">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{work}"></textarea>
+                                    </div>
+                                    <div class="input-group mb-3">
+
+                                        <input type="date" id="inputGroupSelect01" class="form-control" th:field="*{createDate}" >
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Добавить</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 <!-- /.container -->
