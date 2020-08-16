@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.Mark;
 import ru.stc23.eios.model.Student;
-import ru.stc23.eios.model.Work;
 import ru.stc23.eios.service.MarkService;
 import ru.stc23.eios.service.UserService;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class JournalController {
@@ -39,17 +40,14 @@ public class JournalController {
         Page<Student> page = userService.findStudentAll(pageable);
 
         List<Integer> dateList = new ArrayList<>();
-        /*************получаем номер текущего месяца**********/
-        LocalDate localDate = LocalDate.now();
-        int monthValue = localDate.getMonthValue();
+
         /*************получаем название текущего месяца на русском языке+коллекцию заполненную днями месяца**********/
-        String monthName = getNameMonthAndMonthLength(dateList, localDate);
+        String monthName = getNameMonthAndMonthLength(dateList, LocalDate.now());
 
 
         List<Mark> markAll = markService.findMarkAll();
-        model.addAttribute("monthValue", localDate);
+        model.addAttribute("monthValue", LocalDate.now());
         model.addAttribute("marks", markAll);
-        /*model.addAttribute("mark",new Mark());*/
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
@@ -64,19 +62,13 @@ public class JournalController {
         Page<Student> page = userService.findStudentAll(pageable);
 
         List<Integer> dateList = new ArrayList<>();
-        /*************получаем номер выбранного месяца**********/
-        LocalDate ld = LocalDate.parse(markDate);
-        int monthValue = ld.getMonthValue();
 /*************получаем название выбранного месяца на русском языке**********/
-        String monthName = getNameMonthAndMonthLength(dateList, ld);
+        String monthName = getNameMonthAndMonthLength(dateList, LocalDate.parse(markDate));
 
         List<Mark> markAll = markService.findMarkAll();
 
-        /*Map<Page<Student>,List<Mark>> studentMarkMap=new HashMap<>();
-        studentMarkMap.put(page,markAll);
-        model.addAttribute("studentMarkMap",studentMarkMap);*/
 
-        model.addAttribute("monthValue", ld);
+        model.addAttribute("monthValue", LocalDate.parse(markDate));
         model.addAttribute("marks", markAll);
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
@@ -87,13 +79,13 @@ public class JournalController {
 
     @PostMapping("/addmark")
     public String add(Model model,
-            @RequestParam("studentid")Long studentId,
-            @RequestParam("gradedata")String data,
+                      @RequestParam("studentid") Long studentId,
+                      @RequestParam("gradedata") String data,
 
-            @RequestParam("gradenew")String gradenew,
-            @ModelAttribute("mark") Mark mark) throws RecordNotFoundException {
+                      @RequestParam("gradenew") String gradenew,
+                      @ModelAttribute("mark") Mark mark) throws RecordNotFoundException {
 
-        Student st= (Student) userService.getUserById(studentId);
+        Student st = (Student) userService.getUserById(studentId);
         mark.setGrade(gradenew);
         mark.setLocalDate(LocalDate.parse(data));
         mark.setStudent(st);
