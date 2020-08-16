@@ -48,16 +48,16 @@ public class UserController {
     public String studentList(
             Model model,
             @PageableDefault(size = 10) Pageable pageable,
-            @RequestParam (required = false,defaultValue = "")String studentGroup) {
+            @RequestParam(required = false, defaultValue = "") String studentGroup) {
 
         Page<Student> page;
-        Page<Student> groupList=userService.findStudentGroup(pageable);
-        model.addAttribute("student",groupList);
+        Page<Student> groupList = userService.findStudentGroup(pageable);
+        model.addAttribute("student", groupList);
 
-        if(studentGroup !=null&& !studentGroup.isEmpty()){
-             page=userService.findStudentByFilter(studentGroup,pageable);
+        if (studentGroup != null && !studentGroup.isEmpty()) {
+            page = userService.findStudentByFilter(studentGroup, pageable);
 
-        }else{
+        } else {
             page = userService.findStudentAll(pageable);
         }
 
@@ -89,12 +89,14 @@ public class UserController {
 
     @PostMapping("/edit")
     public String userSave(
-            @RequestParam String username,
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") Long userId
     ) throws RecordNotFoundException {
         User user = userService.getUserById(userId);
         user.setUsername(username);
+        user.setEmail(email);
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());

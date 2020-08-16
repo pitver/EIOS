@@ -12,29 +12,22 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
                     </li>
-                  <!--  <div sec:authorize="hasAuthority('ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin">admin <span class="sr-only">(current)</span></a>
-                        </li>
-                    </div>-->
+
                     <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
                         <li class="nav-item">
-                            <a class="nav-link" href="/mark">mark <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/mark">Журнал <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
                     <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
                         <li class="nav-item">
-                            <a class="nav-link" href="/work">work <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/work">Работы <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
 
 
                     <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="/user">userlist <span class="sr-only">(current)</span></a>
-                        </li>-->
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,11 +56,11 @@
                     <span sec:authorize="isAuthenticated()">
                         <span sec:authentication="name"></span>
                             <button sec:authorize="isAuthenticated()"
-                                    class="btn btn-success text-white my-2 my-sm-0">Logout</button>
+                                    class="btn btn-success text-white my-2 my-sm-0">Выход</button>
                         </span>
                 </form>
                     <li sec:authorize="!isAuthenticated()" class="nav-item">
-                        <a class="btn btn-success text-white" th:href="@{/login}">Login</a>
+                        <a class="btn btn-success text-white" th:href="@{/login}">Авторизация</a>
                     </li>
             </div>
       </nav>

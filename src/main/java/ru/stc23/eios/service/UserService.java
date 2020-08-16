@@ -29,6 +29,7 @@ public class UserService implements UserDetailsService {
     private final UserRepo<Student> studentRepository;
     private final UserRepo<Teacher> teacherRepository;
 
+
     public UserService(UserRepo<User> userRepository, UserRepo<Student> studentRepository, UserRepo<Teacher> teacherRepository) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
