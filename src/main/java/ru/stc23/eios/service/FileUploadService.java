@@ -44,7 +44,9 @@ public class FileUploadService {
         return fileUploadRepo.findAll();
     }
 
-
+    public FileBase64 find(String fileName) {
+        return fileUploadRepo.findByFilename(fileName);
+    }
     public FileUploadService(FileUploadRepo fileUploadRepo) {
         this.fileUploadRepo = fileUploadRepo;
     }

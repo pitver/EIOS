@@ -12,25 +12,12 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 
-<form method="POST" enctype="multipart/form-data" action="/upload2">
-    Файл для загрузки: <input type="file" name="file"><br/>
-    Name: <input type="text" name="name"><br /> <br /> <input type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
+<form method="POST" enctype="multipart/form-data" action="/upload">
+    Файл для загрузки: <input class="input-group" type="file" name="file"><br/>
+<!--    Наименование файла: <input type="text" name="name">-->
+    <br/> <br />
+    <input class="btn btn-warning" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
 </form>
-
-    <table class="table table-bordered">
-        <tr class="d-flex">
-            <th class="col-sm-2" scope="col">id</th>
-            <th class="col-sm-1" scope="col">name</th>
-            <th class="col-sm-1" scope="col">Загрузить</th>
-
-        </tr>
-
-        <tr class="d-flex" th:each="work: ${listOfFiles}">
-            <td class="col-sm-2" scope="col" th:each="${file.filename}"></td>
-            <td class="col-sm-1" scope="col"><div th:each="w:${file.filetype}"></div></td>
-            <td class="col-sm-1" scope="col" th:utext="${}"></td>
-        </tr>
-    </table>
 
 
 </div>

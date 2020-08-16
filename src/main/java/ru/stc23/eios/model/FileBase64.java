@@ -1,10 +1,12 @@
 package ru.stc23.eios.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "files")
 public class FileBase64 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -48,7 +50,21 @@ public class FileBase64 {
         this.filecode = filecode;
     }
 
-//    @OneToOne(optional = true)
+
+    @OneToOne (optional = true)
+    @JoinColumn(name="id", unique = false, nullable = false, updatable = false)
+    private Work work;
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+
+    //    @OneToOne(optional = true)
 //    @JoinColumn(name="login", unique = false, nullable = false, updatable = false)
 //    private User user;
 
@@ -66,5 +82,21 @@ public class FileBase64 {
 
     public void setFiletype(String filetype) {
         this.filetype = filetype;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FileBase64 that = (FileBase64) o;
+        return Objects.equals(id, that.id) &&
+                filename.equals(that.filename) &&
+                Objects.equals(filetype, that.filetype) &&
+                filecode.equals(that.filecode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, filename, filetype, filecode);
     }
 }

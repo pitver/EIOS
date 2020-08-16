@@ -1,5 +1,6 @@
 package ru.stc23.eios.controller;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.stc23.eios.exception.FileStorageException;
 import ru.stc23.eios.model.FileBase64;
 import ru.stc23.eios.model.Responce;
 import ru.stc23.eios.model.User;
@@ -26,22 +28,25 @@ public class FileUploadController2 {
     private FileUploadService fileUploadService;
 
 
-    @GetMapping("/upload2")
+    @GetMapping("/upload")
     public String provideUploadInfo(Model model) {
         return "/upload";
     }
 
-    @PostMapping("/upload2")
+    @PostMapping("/upload")
     public Responce uploadFile(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user) {
-        FileBase64 filename = fileUploadService.storeFile(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(filename.getFilename())
-                .toUriString();
+            FileBase64 file1 =  fileUploadService.getFile(file.getName());
 
-        return new Responce(filename.getFilename(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+                FileBase64 filename = fileUploadService.storeFile(file);
+                String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .path("/downloadFile/")
+                        .path(filename.getFilename())
+                        .toUriString();
+
+                return new Responce(filename.getFilename(), fileDownloadUri,
+                        file.getContentType(), file.getSize());
+
     }
 
     @PostMapping("/uploadMultipleFiles")

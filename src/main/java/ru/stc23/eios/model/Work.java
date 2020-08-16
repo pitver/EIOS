@@ -58,6 +58,18 @@ public class Work {
         return teacher !=null? teacher.getUsername():"<none>";
     }
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    private FileBase64 fileBase64;
+
+    public FileBase64 getFileBase64() {
+        return fileBase64;
+    }
+
+    public void setFileBase64(FileBase64 fileBase64) {
+        this.fileBase64 = fileBase64;
+    }
+
     public Work() {
 
     }
