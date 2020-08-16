@@ -40,17 +40,21 @@ public class EventController {
         return events;
     }
 
-    @PostMapping("/event")
-    public Event addEvent(@RequestBody Event event,
+    @PostMapping("/events")
+    public Event addEvent(@RequestParam("eventName") String eventName,
                           @AuthenticationPrincipal Student user
                           ) {
-        event.setStatus(Collections.singleton(EventStatus.PLANNED));
+        Event event =new Event();
+        event.setEventName(eventName);
+        event.setAuthor(user);
+
+       /* event.setStatus(Collections.singleton(EventStatus.PLANNED));
         event.setAuthor(user);
         event.setEventName(event.getEventName());
         event.setEventType(event.getEventType());
         event.setDescription(event.getDescription());
         event.setStartDateTime(event.getStartDateTime());
-        event.setEndDateTime(event.getEndDateTime());
+        event.setEndDateTime(event.getEndDateTime());*/
         Event created =  eventService.addEvent(event);
         return created;
     }
