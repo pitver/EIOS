@@ -62,6 +62,8 @@ public class FileBase64 {
     public void setWork(Work work) {
         this.work = work;
     }
+
+
     //    @OneToOne(optional = true)
 //    @JoinColumn(name="login", unique = false, nullable = false, updatable = false)
 //    private User user;
