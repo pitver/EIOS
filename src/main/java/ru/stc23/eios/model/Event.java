@@ -1,4 +1,6 @@
 package ru.stc23.eios.model;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -19,12 +21,14 @@ public class Event {
     private Set<EventType> eventType;
 
     @Column(name="start")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime startDateTime;
     @Column(name="end")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime endDateTime;
 
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
+    @ManyToOne(optional = false, cascade =CascadeType.MERGE)
     @JoinColumn (name ="user_id")
     private Student author;
 
@@ -60,11 +64,11 @@ public class Event {
         this.description = description;
     }
 
-    public void setAuthor(Student  author) {
-        author = author;
+    public void setAuthor(Student author) {
+        this.author = author;
     }
 
-   public void setStatus(Set<EventStatus> status) {
+    public void setStatus(Set<EventStatus> status) {
         this.status = status;
     }
 

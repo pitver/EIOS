@@ -4,6 +4,7 @@ package ru.stc23.eios.model;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import java.util.Collections;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @DiscriminatorValue("student")
 public class Student extends User {
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> studentGroup;
 
     public Student() {

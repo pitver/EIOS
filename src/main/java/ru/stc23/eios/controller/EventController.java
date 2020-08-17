@@ -1,21 +1,13 @@
 package ru.stc23.eios.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.stc23.eios.exception.BadDateFormatException;
 import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.EventService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +26,7 @@ public class EventController {
     }*/
 
     @GetMapping("/events")
-    public List<Event> events(@AuthenticationPrincipal User currentUser) {
+    public List<Event> events(@AuthenticationPrincipal User currentUser, Model model) {
         List<Event> events;
         events = eventService.eventListById(currentUser);
         return events;
@@ -42,20 +34,28 @@ public class EventController {
 
     @PostMapping("/events")
     public Event addEvent(@RequestParam("eventName") String eventName,
+                          @RequestParam("eventtype") String eventType,
+                          @RequestParam("description") String description,
+                          @RequestParam("startdateandtime") String startDateTime,
+                          @RequestParam("enddateandtime") String endDateTime,
                           @AuthenticationPrincipal Student user
-                          ) {
+    ) {
         Event event =new Event();
-        event.setEventName(eventName);
-        event.setAuthor(user);
 
-       /* event.setStatus(Collections.singleton(EventStatus.PLANNED));
+
+
+        event.setStatus(Collections.singleton(EventStatus.PLANNED));
         event.setAuthor(user);
-        event.setEventName(event.getEventName());
-        event.setEventType(event.getEventType());
-        event.setDescription(event.getDescription());
-        event.setStartDateTime(event.getStartDateTime());
-        event.setEndDateTime(event.getEndDateTime());*/
-        Event created =  eventService.addEvent(event);
+        event.setEventName(eventName);
+        if(eventType.equals("lecture")){
+            event.setEventType(Collections.singleton(EventType.LECTURE));
+        }else{
+            event.setEventType(Collections.singleton(EventType.EXAM));
+        }
+        event.setDescription(description);
+        event.setStartDateTime(LocalDateTime.parse(startDateTime));
+        event.setEndDateTime(LocalDateTime.parse(endDateTime));
+        Event created = eventService.addEvent(event);
         return created;
     }
    /* public String addEvent(
