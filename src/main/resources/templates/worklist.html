@@ -30,7 +30,8 @@
                               <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
                           </div>
                 </div>
-                    <input align="center" type="submit" class="btn btn-success" value="send"/>
+                    <input align="center" type="submit" class="btn btn-success" value="отправить"/>
+
 
                 </div>
             </form>
@@ -61,8 +62,8 @@
 
             <!--<div sec:authorize="hasAnyAuthority('ADMIN','STUDENT')">-->
                 <td class="col-sm-2" scope="col">
-                    <a class="btn btn-success" th:href="@{/workedit/{id}(id=${work.id})}">edit</a>
-                    <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}">delete</a>
+                    <a class="btn btn-success" th:href="@{/workedit/{id}(id=${work.id})}"> <i class="fa fa-edit"></i> edit</a>
+                    <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}"> <i class="fa fa-trash"></i>delete</a>
              <!--   </td>
             </div>-->
         </tr>

@@ -31,7 +31,8 @@
             <td class="col-sm" scope="col" th:utext="${teacher.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${teacher.lastName}"></td>
             <td class="col-sm" scope="col" th:utext="${teacher.patronymic}"></td>
-            <td class="col-sm" scope="col" th:utext="${teacher.specification}"></td>
+            <td class="col-sm" scope="col">
+            <div th:each="t:${teacher.specification}"><span th:utext="${t.toString()}"></span></div></td>
         </tr>
     </table>
 
