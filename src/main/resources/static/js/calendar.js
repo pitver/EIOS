@@ -1,17 +1,11 @@
 
     $(document).ready(function() {
         var form = $('#eventModal');
-        var form2 = $('#WorkModal');
-        var userRole = '#SESSION.userType#'
 
         /* режимы открытия формы */
       function formOpen(mode) {
-
          if (mode == 'addevent') {
              form.modal("show");
-         }
-         else if (mode == 'addwork'){
-             form2.modal("show");
          }
        }
 
@@ -61,9 +55,14 @@
             },
         selectable: true,
         selectHelper: true,
-            select: function(start, end) {
+        select: function(start, end) {
                 formOpen('addevent');
+                $('#calendar').fullCalendar('clientEvents');
 
+            },
+        eventClick: function(calEvent) {
+                formOpen('addevent');
             }
+
     });
 });

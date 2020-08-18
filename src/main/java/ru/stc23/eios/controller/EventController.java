@@ -9,6 +9,7 @@ import ru.stc23.eios.service.EventService;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class EventController {
@@ -18,20 +19,21 @@ public class EventController {
     public EventController(EventService eventService) {
         this.eventService = eventService;
     }
-/*
-    @GetMapping("/events")
-    public List<Event> events() {
-        return eventService.eventList();
-    }*/
+
 
     @GetMapping("/events")
     public List<Event> events(@AuthenticationPrincipal User currentUser, Model model) {
-        List<Event> events;
-        events = eventService.findEventByStudentGroup(currentUser);
+        List<Event> events=null ;
+        Set<Role> userRole = currentUser.getRoles();
+        if (userRole.toString().contains("STUDENT")){
+            events = eventService.findEventByStudentGroup(currentUser.getId());
+        }else if (userRole.toString().contains("TEACHER")) {
+            events = eventService.findEventByTeacher(currentUser);
+        }
         return events;
     }
 
-    @PostMapping("/events")
+    @PostMapping("/event")
     public Event addEvent(@RequestParam("eventName") String eventName,
                           @RequestParam("eventtype") String eventType,
                           @RequestParam("description") String description,
@@ -44,6 +46,7 @@ public class EventController {
         event.setStatus(Collections.singleton(EventStatus.PLANNED));
         event.setAuthor(user);
         event.setEventName(eventName);
+
         if(eventType.equals("lecture")){
             event.setEventType(Collections.singleton(EventType.LECTURE));
         }else{
