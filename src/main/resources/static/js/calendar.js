@@ -2,13 +2,18 @@
     $(document).ready(function() {
         var form = $('#eventModal');
         var form2 = $('#WorkModal');
+        var userRole = '#SESSION.userType#'
 
         /* режимы открытия формы */
       function formOpen(mode) {
+
          if (mode == 'addevent') {
              form.modal("show");
          }
-        }
+         else if (mode == 'addwork'){
+             form2.modal("show");
+         }
+       }
 
         $('#calendar').fullCalendar({
         header: {

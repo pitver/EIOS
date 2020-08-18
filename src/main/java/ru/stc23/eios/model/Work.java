@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -37,6 +36,10 @@ public class Work {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Mark mark;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
 
 
     @ManyToOne
