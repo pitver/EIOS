@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header-css"/>
 
 
@@ -38,13 +39,18 @@
 
     <tr th:each="st: ${student}">
         <td th:utext="${st.username}">Student</td>
-       <td th:each="date: ${dateList}"  th:id="decode" th:data-currentDate="__${monthValue}__" th:data-thing="${date}" th:data="${st.id}"
-           onclick="tdclick(event,this.getAttribute('data-currentDate'), this.getAttribute('data-thing'),this.getAttribute('data'));">
-            <div class="gradeTd"  th:each="m:${marks}"
+        <td th:each="date: ${dateList}" th:id="decode"
+            th:data-currentDate="__${monthValue}__"
+            th:data-thing="${date}"
+            th:data="${st.id}"
+            th:data-currentUser="${curentuser.roles}"
+            onclick="tdclick(event,this.getAttribute('data-currentDate'),
+            this.getAttribute('data-thing'),this.getAttribute('data'),this.getAttribute('data-currentUser'));">
+            <div class="gradeTd" th:each="m:${marks}"
                  th:if="${m.localDate.dayOfMonth==date and
                                 m.localDate.getMonthValue()==__${monthValue.getMonthValue()}__ and
                                 m.student?.id==st?.id}">
-                <span  class="grade" th:utext=" ${m.grade}"></span>
+                <span class="grade" th:utext=" ${m.grade}"></span>
             </div>
 
         </td>
@@ -61,21 +67,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <input type="text" class="grade" id="ugrade" name="grade" value="">
 
                 <input type="hidden" class="namest" id="uname" name="namest" value="">
 
-                <form th:action="@{/addmark}" class="addmark"  method="post">
+                    <form th:action="@{/addmark}" class="addmark" method="post">
+                        <input type="text" class="gradenew" id="gradenew" name="gradenew" placeholder="оценка">
+                        <input type="hidden" class="gradedata" id="gradedata" name="gradedata" value="">
+                        <input type="hidden" class="studentid" id="studentid" name="studentid" value="">
+                        <button type="submit" class="btn-success">добавить</button>
+                    </form>
+                </div>
 
-                    <input type="text"  class="gradenew" id="gradenew" name="gradenew" placeholder="grade" >
-                    <input type="hidden"  class="gradedata" id="gradedata" name="gradedata" value="">
-                    <input type="hidden"  class="studentid" id="studentid" name="studentid" value="" >
-                    <button type="submit" class="btn-success">add</button>
-                </form>
-
-
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
@@ -83,7 +87,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div th:replace="fragments/footer :: footer"/>

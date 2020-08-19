@@ -9,7 +9,7 @@
 <div class="container">
 
     <div class="starter-template">
-        <h3 class="text-center">List of teachers</h3>
+        <h3 class="text-center">Список преподавателей</h3>
     </div>
 
     <table class="table table-bordered">
@@ -31,7 +31,8 @@
             <td class="col-sm" scope="col" th:utext="${teacher.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${teacher.lastName}"></td>
             <td class="col-sm" scope="col" th:utext="${teacher.patronymic}"></td>
-            <td class="col-sm" scope="col" th:utext="${teacher.specification}"></td>
+            <td class="col-sm" scope="col">
+            <div th:each="t:${teacher.specification}"><span th:utext="${t.toString()}"></span></div></td>
         </tr>
     </table>
 

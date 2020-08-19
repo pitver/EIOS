@@ -8,22 +8,45 @@
 
 
 <div class="container col-sm-8">
+    <a class="btn btn-success m-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Добавить файл
+    </a>
+
+    <div class="collapse " id="collapseExample">
+        <div class="form-group mt-3">
+            <form method="POST" enctype="multipart/form-data" action="/upload">
+
+                <div class=" border border-success p-1 col-6">
+                    <div class="custom-file ">
+                        <label  for="inputGroupFile01">Выберите файл</label>
+                        <input type="file" class="form-control-file text-truncate" id="inputGroupFile01" name="file">
+                    </div>
+
+                    <br/> <br/>
+                    <input class="btn btn-warning" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
+                </div>
+            </form>
+        </div>
+    </div>
 
     <table class="table table-sm table-striped table-bordered align-self-md-center" m-1>
         <thead>
         <tr class="d-flex" align="center">
-            <th class="col-1" scope="col">Id</th>
+
             <th class="col-sm" scope="col">Имя файла</th>
             <th class="col-2" scope="col">Скачать</th>
         </tr>
         </thead>
         <tbody>
         <tr class="d-flex" th:each=" file : ${files}">
-            <td class="col-1" scope="col" th:utext="${file.id}"></td>
             <td class="col-sm" scope="col" th:utext="${file.filename}"></td>
             <td th:class="col-2" scope="col-3" align="center">
-                <button class="btn btn-sm btn-primary  text-white my-2 my-sm-0" type="button"  th:data-filename="${file.filename}" onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')" > скачать </button>
-             </td>
+                <button class="btn btn-sm btn-success  text-white my-2 my-sm-0" type="button"
+                        th:data-filename="${file.filename}"
+                        onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')"> скачать
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>

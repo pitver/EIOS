@@ -1,4 +1,7 @@
 package ru.stc23.eios.model;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,20 +21,25 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private Set<EventType> eventType;
 
-    @Column(name="start")
+    @Column(name = "start")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime startDateTime;
-    @Column(name="end")
+    @Column(name = "end")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime endDateTime;
 
 
-    @ManyToOne(optional = false, cascade =CascadeType.ALL)
-    @JoinColumn (name ="user_id")
-    private Student author;
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private Teacher author;
+
+    private String studentGroup;
 
     @ElementCollection(targetClass = EventStatus.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "event_state", joinColumns = @JoinColumn(name = "event_id"))
     @Enumerated(EnumType.STRING)
     private Set<EventStatus> status;
+
 
     public Event() {
     }
@@ -44,7 +52,7 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public void setEventType(Set<EventType>  eventType) {
+    public void setEventType(Set<EventType> eventType) {
         this.eventType = eventType;
     }
 
@@ -60,11 +68,11 @@ public class Event {
         this.description = description;
     }
 
-    public void setAuthor(Student  author) {
-        author = author;
+    public void setAuthor(Teacher author) {
+        this.author = author;
     }
 
-   public void setStatus(Set<EventStatus> status) {
+    public void setStatus(Set<EventStatus> status) {
         this.status = status;
     }
 
@@ -76,7 +84,7 @@ public class Event {
         return eventName;
     }
 
-    public Set<EventType>  getEventType() {
+    public Set<EventType> getEventType() {
         return eventType;
     }
 
@@ -92,11 +100,20 @@ public class Event {
         return description;
     }
 
-    public Student getAuthor() {
+    public Teacher getAuthor() {
         return author;
     }
 
     public Set<EventStatus> getStatus() {
         return status;
     }
+
+    public String getStudentGroup() {
+        return studentGroup;
+    }
+
+    public void setStudentGroup(String studentGroup) {
+        this.studentGroup = studentGroup;
+    }
+
 }

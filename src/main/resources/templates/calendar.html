@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/header :: header-css"/>
 <body>
 <div th:replace="fragments/header :: header"/>
         <div class="container">
             <div id='calendar' th:id="calendar"></div>
-            <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" >
+            <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" sec:authorize="hasAnyAuthority('ADMIN','TEACHER')">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -15,7 +16,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form th:action="@{/events}" method="post">
+                            <form th:action="@{/event}" method="post">
                                 <div class="form-group">
                                     <input type="text" name="eventName" id="eventName" class="form-control input-lg" placeholder="Название события" required="true" autofocus="true"/></div>
                                 <div class="form-group">
@@ -25,24 +26,25 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                     <input type="spec" name="spec" id="spec" class="form-control input-lg " placeholder="группа" required="true"/>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" name="description" id="description" class="form-control input-lg" placeholder="Описание события" required="true" autofocus="true"/></div>
                                 <div class="form-group">
-                                    <input type="datetime-local" name="name"  id="startdateandtime" class="form-control input-lg"  placeholder="Начало" required="true" />
+                                    <input type="datetime-local" name="startdateandtime"  id="startdateandtime" class="form-control input-lg"  placeholder="Начало" required="true" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="datetime-local" name="end" id="enddateandtime"  class="form-control input-lg"  placeholder="Конец" required="true" />
+                                    <input type="datetime-local" name="enddateandtime" id="enddateandtime"  class="form-control input-lg"  placeholder="Конец" required="true" />
                                 </div>
                                 <button type="submit" class="btn btn-secondary" >Добавить</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                             </form>
                         </div>
-                        <div class="modal-footer">
-
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        </div>
+                        <div class="modal-footer"/>
                     </div>
                 </div>
             </div>
-<          <div class="modal fade" id="WorkModal" tabindex="-1" role="dialog" >
+<          <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" sec:authorize="hasAnyAuthority('STUDENT')">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -60,6 +62,7 @@
                                     <div class="form-group">
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{work}"></textarea>
                                     </div>
+
                                     <div class="input-group mb-3">
 
                                         <input type="date" id="inputGroupSelect01" class="form-control" th:field="*{createDate}" >
@@ -67,13 +70,13 @@
                                             <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
                                         <button type="button" class="btn btn-primary">Добавить</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                                    </div>
                                 </div>
                             </form>
                         </div>
+                        <div class="modal-footer"/>
+
                     </div>
                 </div>
             </div>

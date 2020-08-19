@@ -1,14 +1,13 @@
 
     $(document).ready(function() {
         var form = $('#eventModal');
-        var form2 = $('#WorkModal');
 
         /* режимы открытия формы */
       function formOpen(mode) {
          if (mode == 'addevent') {
              form.modal("show");
          }
-        }
+       }
 
         $('#calendar').fullCalendar({
         header: {
@@ -56,9 +55,12 @@
             },
         selectable: true,
         selectHelper: true,
-            select: function(start, end) {
+        select: function(start, end) {
                 formOpen('addevent');
-
+            },
+        eventClick: function(calEvent) {
+                formOpen('addevent');
             }
+
     });
 });
