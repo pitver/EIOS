@@ -36,7 +36,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public String userList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<User> page = userService.findUserAll(pageable);
         model.addAttribute("result", page);
@@ -44,7 +44,7 @@ public class UserController {
         return "userlist";
     }
 
-    @GetMapping("/student")
+    @GetMapping("student")
     public String studentList(
             Model model,
             @PageableDefault(size = 10) Pageable pageable,
@@ -67,7 +67,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/teacher")
+    @GetMapping("teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Teacher> page = userService.findTeacherAll(pageable);
         model.addAttribute("result", page);
@@ -87,7 +87,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/edit")
+    @PostMapping("edit")
     public String userSave(
             @RequestParam("username") String username,
             @RequestParam("firstName") String firstName,

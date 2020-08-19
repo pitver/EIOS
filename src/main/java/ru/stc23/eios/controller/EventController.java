@@ -25,14 +25,14 @@ public class EventController {
         return eventService.eventList();
     }*/
 
-    @GetMapping("/events")
+    @GetMapping("events")
     public List<Event> events(@AuthenticationPrincipal User currentUser, Model model) {
         List<Event> events;
         events = eventService.eventListById(currentUser);
         return events;
     }
 
-    @PostMapping("/events")
+    @PostMapping("events")
     public Event addEvent(@RequestParam("eventName") String eventName,
                           @RequestParam("eventtype") String eventType,
                           @RequestParam("description") String description,

@@ -28,12 +28,12 @@ public class FileUploadController2 {
     private FileUploadService fileUploadService;
 
 
-    @GetMapping("/upload")
+    @GetMapping("upload")
     public String provideUploadInfo(Model model) {
-        return "/upload";
+        return "upload";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user) {
 
             FileBase64 file1 =  fileUploadService.getFile(file.getName());
@@ -46,7 +46,7 @@ public class FileUploadController2 {
 
                  new Responce(filename.getFilename(), fileDownloadUri,
                         file.getContentType(), file.getSize());
-        return"redirect:/download";
+        return"redirect:download";
     }
 
 

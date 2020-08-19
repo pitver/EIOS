@@ -33,7 +33,7 @@ public class JournalController {
     }
 
 
-    @GetMapping("/mark")
+    @GetMapping("mark")
     public String getMark(
             Model model,
             @PageableDefault(size = 10) Pageable pageable) {
@@ -55,7 +55,7 @@ public class JournalController {
     }
 
 
-    @PostMapping("/mark")
+    @PostMapping("mark")
     public String setMark(Model model,
                           @RequestParam("markDate") String markDate,
                           @PageableDefault(size = 10) Pageable pageable) {
@@ -77,7 +77,7 @@ public class JournalController {
     }
 
 
-    @PostMapping("/addmark")
+    @PostMapping("addmark")
     public String add(Model model,
                       @RequestParam("studentid") Long studentId,
                       @RequestParam("gradedata") String data,
@@ -91,7 +91,7 @@ public class JournalController {
         mark.setStudent(st);
         markService.add(mark);
 
-        return "redirect:/mark";
+        return "redirect:mark";
     }
 
     private String getNameMonthAndMonthLength(List<Integer> dateList, LocalDate localDate) {

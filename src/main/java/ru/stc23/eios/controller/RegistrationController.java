@@ -29,13 +29,13 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/register")
+    @GetMapping("register")
     public String register(Model model) {
         model.addAttribute("usrtype", UserType.values());
-        return "/register";
+        return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public String addUser(@RequestParam String usertype,
                           @RequestParam String spec,
                           @RequestParam String username,
@@ -72,6 +72,6 @@ public class RegistrationController {
         userService.addUser(userFromDb);
 
 
-        return "redirect:/user";
+        return "redirect:user";
     }
 }

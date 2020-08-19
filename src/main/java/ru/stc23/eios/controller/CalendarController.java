@@ -25,11 +25,11 @@ public class CalendarController {
         this.eventService = eventService;
     }
 
-    @GetMapping("/calendar")
+    @GetMapping("calendar")
     public String calendar(Model model,
                            @ModelAttribute("work") Work work) {
         model.addAttribute("work",work);
-        return "/calendar";
+        return "calendar";
     }
 
 
