@@ -61,32 +61,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="input-group-text bg-success text-white">оценка</label>
+
                     <input type="text" th:field="*{mark.grade}" required="true"
                            id="grade" class="form-control-sm input-lg mt-1" placeholder="оценка">
                 </div>
 
 
-                <div sec:authorize="hasAnyAuthority('USER','TEACHER')">
+                <div sec:authorize="hasAnyAuthority('TEACHER')">
                     <script>
                         document.getElementById('title').readOnly=true;
                         document.getElementById('work').readOnly=true;
                         document.getElementById('createDate').readOnly=true;
-                        document.getElementById('createDate').readOnly=true;
                         document.getElementById('comment').readOnly=false;
                         document.getElementById('commentDate').readOnly=false;
                         document.getElementById('workstate').readOnly=false;
+                        document.getElementById('grade').readOnly=false;
                     </script>
 
                 </div>
-                <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT')">
+                <div sec:authorize="hasAnyAuthority('STUDENT')">
                     <script>
                         document.getElementById('title').readOnly=false;
                         document.getElementById('work').readOnly=false;
-                        document.getElementById("createDate").readOnly=false;
+                        document.getElementById("createDate").readOnly=true;
                         document.getElementById('comment').readOnly=true;
                         document.getElementById('commentDate').readOnly=true;
                         document.getElementById('workstate').readOnly=true;
+                        document.getElementById('grade').readOnly=true;
                     </script>
                 </div>
 

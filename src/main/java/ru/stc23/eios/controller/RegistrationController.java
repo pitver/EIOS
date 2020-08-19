@@ -56,17 +56,18 @@ public class RegistrationController {
         if(usertype.equals("teacher")){
             teacher.setSpecification(Collections.singleton(spec));
             userFromDb=teacher;
+            userFromDb.setRoles(Collections.singleton(Role.TEACHER));
         }
         if(usertype.equals("student")){
             student.setStudentGroup(Collections.singleton(spec));
             userFromDb=student;
+            userFromDb.setRoles(Collections.singleton(Role.STUDENT));
         }
 
         userFromDb.setUsername(username);
         userFromDb.setPassword(password);
         userFromDb.setEmail(email);
         userFromDb.setActive(true);
-        userFromDb.setRoles(Collections.singleton(Role.USER));
         userFromDb.setPassword(passwordEncoder.encode(userFromDb.getPassword()));
         userService.addUser(userFromDb);
 

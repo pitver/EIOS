@@ -18,21 +18,14 @@
             <form th:action="@{/work}" th:object="${work}" method="post">
                 <div class="m-3">
                     <div class="form-group">
-                        <input type="text" th:field="*{title}" class="form-control input-lg" placeholder="название работы">
+                        <input type="text" th:field="*{title}" class="form-control input-lg"
+                               placeholder="название работы">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{work}"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                  th:field="*{work}"></textarea>
                     </div>
-                    <div class="input-group mb-3">
-
-                           <input type="date" id="inputGroupSelect01" class="form-control" th:field="*{createDate}" >
-                     <div class="input-group-prepend">
-                              <label class="input-group-text" for="inputGroupSelect01">дата создания</label>
-                          </div>
-                </div>
                     <input align="center" type="submit" class="btn btn-success" value="отправить"/>
-
-
                 </div>
             </form>
         </div>
@@ -54,18 +47,21 @@
 
         <tr class="d-flex" th:each="work: ${works}">
             <td class="col-sm-2" scope="col" th:utext="${work.title}"></td>
-            <td class="col-sm-1" scope="col"><div th:each="w:${work.state}"><span th:utext="${w.name()}"></span></div></td>
+            <td class="col-sm-1" scope="col">
+                <div th:each="w:${work.state}"><span th:utext="${w.name()}"></span></div>
+            </td>
             <td class="col-sm-1" scope="col" th:utext="${work.authorOfWork}"></td>
             <td class="col-sm-2" scope="col" th:utext="${work.createDate}"></td>
-            <td class="col-sm-2" scope="col" th:utext="${work?.review?.text}? ${work.review.text}:'нет'" ></td>
+            <td class="col-sm-2" scope="col" th:utext="${work?.review?.text}? ${work.review.text}:'нет'"></td>
             <td class="col-sm-2" scope="col" th:utext="${work?.review?.localDate}?${work.review.localDate}:'нет'"></td>
 
             <!--<div sec:authorize="hasAnyAuthority('ADMIN','STUDENT')">-->
-                <td class="col-sm-2" scope="col">
-                    <a class="btn btn-success" th:href="@{/workedit/{id}(id=${work.id})}"> <i class="fa fa-edit"></i> edit</a>
-                    <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}"> <i class="fa fa-trash"></i>delete</a>
-             <!--   </td>
-            </div>-->
+            <td class="col-sm-2" scope="col">
+                <a class="btn btn-success" th:href="@{/workedit/{id}(id=${work.id})}"> <i class="fa fa-edit"></i>
+                    edit</a>
+                <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}"> <i class="fa fa-trash"></i>delete</a>
+                <!--   </td>
+               </div>-->
         </tr>
     </table>
 

@@ -15,18 +15,18 @@
                         <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
                     </li>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/mark">Журнал <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/work">Работы <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Библиотека
@@ -38,7 +38,7 @@
                         </li>
                     </div>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +54,7 @@
 
 
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/calendar">Календарь<span class="sr-only">(current)</span></a>
                         </li>
