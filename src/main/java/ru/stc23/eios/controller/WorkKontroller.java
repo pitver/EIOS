@@ -43,7 +43,7 @@ public class WorkKontroller {
         Work work = new Work();
         model.addAttribute("works", works);
         model.addAttribute("work", work);
-        return "/worklist";
+        return "worklist";
     }
 
     @PostMapping("/work")
