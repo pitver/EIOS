@@ -13,10 +13,16 @@
 <div class="container">
 
 <form method="POST" enctype="multipart/form-data" action="/upload">
-    Файл для загрузки: <input class="input-group" type="file" name="file"><br/>
-<!--    Наименование файла: <input type="text" name="name">-->
+
+    <div class=" border border-success p-1 col-6">
+        <div class="custom-file ">
+            <input type="file" class="custom-file-input " id="inputGroupFile01" name="file">
+            <label class="custom-file-label" for="inputGroupFile01">Выберите файл</label>
+        </div>
+
     <br/> <br />
     <input class="btn btn-warning" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
+</div>
 </form>
 
 

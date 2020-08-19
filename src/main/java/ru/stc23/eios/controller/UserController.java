@@ -36,7 +36,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public String userList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<User> page = userService.findUserAll(pageable);
         model.addAttribute("result", page);
@@ -44,7 +44,7 @@ public class UserController {
         return "userlist";
     }
 
-    @GetMapping("/student")
+    @GetMapping("student")
     public String studentList(
             Model model,
             @PageableDefault(size = 10) Pageable pageable,
@@ -67,7 +67,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/teacher")
+    @GetMapping("teacher")
     public String teacherList(Model model, @PageableDefault(size = 10) Pageable pageable) {
         Page<Teacher> page = userService.findTeacherAll(pageable);
         model.addAttribute("result", page);
@@ -87,15 +87,21 @@ public class UserController {
 
     }
 
-    @PostMapping("/edit")
+    @PostMapping("edit")
     public String userSave(
             @RequestParam("username") String username,
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("patronymic") String patronymic,
             @RequestParam("email") String email,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") Long userId
     ) throws RecordNotFoundException {
         User user = userService.getUserById(userId);
         user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPatronymic(patronymic);
         user.setEmail(email);
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
@@ -114,6 +120,19 @@ public class UserController {
     public String userDeleteForm(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
         User userById = userService.getUserById(id);
         userService.deleteUser(userById);
+        return "redirect:/user";
+
+
+    }
+    @GetMapping(value = {"lock", "/lock/{id}"})
+    public String userSetActive(@PathVariable("id") Long id, Model model) throws RecordNotFoundException {
+        User userById = userService.getUserById(id);
+        if(userById.isActive()){
+            userById.setActive(false);
+        }else {
+            userById.setActive(true);
+        }
+        userService.addUser(userById);
         return "redirect:/user";
 
 

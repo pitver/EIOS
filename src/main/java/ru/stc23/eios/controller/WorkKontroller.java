@@ -11,6 +11,7 @@ import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.*;
 import ru.stc23.eios.service.WorkService;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class WorkKontroller {
         Work work = new Work();
         model.addAttribute("works", works);
         model.addAttribute("work", work);
-        return "/worklist";
+        return "worklist";
     }
 
     @PostMapping("/work")
@@ -54,7 +55,7 @@ public class WorkKontroller {
     ) {
 
         work.setState(Collections.singleton(WorkState.NEW));
-        work.setCreateDate(work.getCreateDate());
+        work.setCreateDate(LocalDate.now());
         work.setAuthor(user);
         work.setTitle(work.getTitle());
         work.setWork(work.getWork());
