@@ -3,6 +3,7 @@ package ru.stc23.eios.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.Mark;
 import ru.stc23.eios.model.Student;
+import ru.stc23.eios.model.User;
 import ru.stc23.eios.service.MarkService;
 import ru.stc23.eios.service.UserService;
 
@@ -36,6 +38,7 @@ public class JournalController {
     @GetMapping("mark")
     public String getMark(
             Model model,
+            @AuthenticationPrincipal User currentUser,
             @PageableDefault(size = 10) Pageable pageable) {
         Page<Student> page = userService.findStudentAll(pageable);
 
@@ -51,6 +54,7 @@ public class JournalController {
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
+        model.addAttribute("curentuser",currentUser);
         return "mark";
     }
 

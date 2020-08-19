@@ -1,4 +1,4 @@
-function tdclick(e, currentDate, dataGrade, studentId) {
+function tdclick(e, currentDate, dataGrade, studentId,currentUser) {
     /*alert(u)*/
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
@@ -9,48 +9,32 @@ function tdclick(e, currentDate, dataGrade, studentId) {
     var cells = $("td", row).eq(j);
 
 
-    if (cells[0].innerText === "") {
-        $(document).ready(function () {
-            /*   var new_window =  window.open("addmark","width=500,height=500");
-               new_window.onload = function() {
-                   /!*new_window.document.getElementById('gradedata').innerHTML = "07.08.2020";*!/
-                   new_window.document.getElementById('studentid').value = studentId;
-               }*/
+    if ((cells[0].innerText === "")&&!(currentUser.indexOf('[STUDENT]'))){
 
+    } else if((cells[0].innerText === "")){
+        $(document).ready(function () {
 
             $('#myModal').modal("show");
             $('#myModal .grade').hide();
             $('#myModal .addmark').show();
             $('#myModal .btnGrade').show();
-
             if( dataGrade >= 0 && dataGrade <= 9) {
                 num= "0" + dataGrade;
             }
             else {
                 num= "" + dataGrade;
             }
-
-
             var dateNewGrade=(currentDate.substr(0,currentDate.length-2)+num)
-
-
             $('#myModal .gradedata').val(dateNewGrade);
             $('#myModal .studentid').val(studentId);
-
         });
+    }else{$(document).ready(function () {
+        $('#myModal').modal("show");
+        $('#myModal .grade').val(cells[0].innerText).show();
+        $('#myModal .addmark').hide();
+        $('#myModal .btnGrade').hide();
 
-
-    } else {
-        $(document).ready(function () {
-            $('#myModal').modal("show");
-            $('#myModal .grade').val(cells[0].innerText).show();
-            $('#myModal .addmark').hide();
-            $('#myModal .btnGrade').hide();
-
-        });
-
-
-    }
+    });}
 
 
 }
