@@ -57,8 +57,6 @@
         selectHelper: true,
         select: function(start, end) {
                 formOpen('addevent');
-                $('#calendar').fullCalendar('clientEvents');
-
             },
         eventClick: function(calEvent) {
                 formOpen('addevent');
