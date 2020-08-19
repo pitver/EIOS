@@ -34,7 +34,7 @@ public class FileUploadController2 {
     }
 
     @PostMapping("/upload")
-    public Responce uploadFile(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user) {
+    public String uploadFile(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user) {
 
             FileBase64 file1 =  fileUploadService.getFile(file.getName());
 
@@ -44,21 +44,10 @@ public class FileUploadController2 {
                         .path(filename.getFilename())
                         .toUriString();
 
-                return new Responce(filename.getFilename(), fileDownloadUri,
+                 new Responce(filename.getFilename(), fileDownloadUri,
                         file.getContentType(), file.getSize());
-
+        return"redirect:/download";
     }
-
-    @PostMapping("/uploadMultipleFiles")
-    public List < Responce > uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @AuthenticationPrincipal User user) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file, user))
-                .collect(Collectors.toList());
-    }
-
-
-
 
 
 
