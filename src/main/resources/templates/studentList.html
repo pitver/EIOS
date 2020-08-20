@@ -41,18 +41,18 @@
             <th class="col-sm-1" scope="col">id</th>
             <th class="col-sm-1" scope="col">login</th>
             <th class="col-sm-2" scope="col">email</th>
-            <th class="col-sm" scope="col">firstname</th>
-            <th class="col-sm" scope="col">lastname</th>
-            <th class="col-sm" scope="col">patronymic</th>
-            <th class="col-sm" scope="col">group</th>
+            <th class="col-sm" scope="col">Фамилия</th>
+            <th class="col-sm" scope="col">Имя</th>
+            <th class="col-sm" scope="col">Отчество</th>
+            <th class="col-sm" scope="col">Группа</th>
         </tr>
 
         <tr class="d-flex" th:each=" student : ${result}">
             <td class="col-sm-1" scope="col" th:utext="${student.id}"></td>
             <td class="col-sm-1" scope="col" th:utext="${student.username}"></td>
             <td class="col-sm-2" scope="col" th:utext="${student.email}"></td>
-            <td class="col-sm" scope="col" th:utext="${student.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${student.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${student.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${student.patronymic}"></td>
             <td class="col-sm" scope="col">
                 <div th:each="r:${student.studentGroup}"><span th:utext="${r.toString()}"></span></div></td>

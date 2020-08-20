@@ -39,6 +39,9 @@ public class RegistrationController {
     public String addUser(@RequestParam String usertype,
                           @RequestParam String spec,
                           @RequestParam String username,
+                          @RequestParam String lastName,
+                          @RequestParam String firstName,
+                          @RequestParam String patronymic,
                           @RequestParam String email,
                           @RequestParam String password,
 
@@ -65,6 +68,9 @@ public class RegistrationController {
         }
 
         userFromDb.setUsername(username);
+        userFromDb.setUsername(lastName);
+        userFromDb.setUsername(firstName);
+        userFromDb.setUsername(patronymic);
         userFromDb.setPassword(password);
         userFromDb.setEmail(email);
         userFromDb.setActive(true);

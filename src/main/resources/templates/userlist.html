@@ -16,8 +16,8 @@
             <th class="col-sm-1" scope="col">id</th>
             <th class="col-sm-1" scope="col">Логин</th>
             <th class="col-sm-2" scope="col">email</th>
-            <th class="col-sm" scope="col">Имя</th>
             <th class="col-sm" scope="col">Фамилия</th>
+            <th class="col-sm" scope="col">Имя</th>
             <th class="col-sm" scope="col">Отчество</th>
             <th class="col-sm" scope="col">Статус</th>
             <th class="col-sm" scope="col">role</th>
@@ -29,8 +29,8 @@
             <td class="col-sm-1" scope="col" th:utext="${user.id}"></td>
             <td class="col-sm-1" scope="col" th:utext="${user.username}"></td>
             <td class="col-sm-2" scope="col" th:utext="${user.email}"></td>
-            <td class="col-sm" scope="col" th:utext="${user.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${user.lastName}"></td>
+            <td class="col-sm" scope="col" th:utext="${user.firstName}"></td>
             <td class="col-sm" scope="col" th:utext="${user.patronymic}"></td>
             <td class="col-sm" scope="col" >
                 <a class="btn btn-outline-success" th:href="@{/lock/{id}(id=${user.id})}">
