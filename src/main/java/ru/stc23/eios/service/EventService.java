@@ -25,4 +25,6 @@ public class EventService {
         return eventJpaRepository.findByDateBetween(start, end, user);
     }
     public List<Event> eventListById(User user){return eventJpaRepository.findByAuthor(user);}
+    public List<Event> findEventByStudentGroup (Long userId){return eventJpaRepository.findEventByStudentGroup(userId);}
+    public List<Event> findEventByTeacher (User user){return eventJpaRepository.findEventByTeacher(user);}
 }

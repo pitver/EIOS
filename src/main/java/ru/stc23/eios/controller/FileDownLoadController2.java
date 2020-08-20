@@ -24,7 +24,7 @@ public class FileDownLoadController2 {
     @Autowired
     private FileUploadService fileUploadService;
 
-    @GetMapping("/downloadFile/{fileName:.+}")
+    @GetMapping("downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) throws UnsupportedEncodingException {
         // Load file as Resource
         FileBase64 fileBase64 = fileUploadService.getFile(fileName);
@@ -37,7 +37,7 @@ public class FileDownLoadController2 {
                 .body(new ByteArrayResource(decoder.decode(fileBase64.getFilecode())));
     }
 
-    @GetMapping("/download")
+    @GetMapping("download")
     public String fileList(Model model) {
         model.addAttribute("files", fileUploadService.getAllFiles());
         return "files";

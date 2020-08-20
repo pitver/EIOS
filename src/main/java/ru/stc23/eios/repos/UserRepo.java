@@ -30,4 +30,6 @@ public interface UserRepo<T extends User> extends PagingAndSortingRepository<T,L
             "on s.student_id=u.id where usr_type='student'",nativeQuery = true)
     Page<T> findStudentGroup(Pageable pageable);
 
+
+
 }

@@ -15,46 +15,46 @@
                         <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
                     </li>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/mark">Журнал <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/work">Работы <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Работа с файлами
+                                Библиотека
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/upload}">Форма загрузки файла</a>
+                                <!--<a class="dropdown-item" th:href="@{/upload}">Форма загрузки файла</a>-->
                                 <a class="dropdown-item" th:href="@{/download}">Список загруженных файлов</a>
                             </div>
                         </li>
                     </div>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                панель администратора
+                                Панель администратора
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/user}">cписок пользователей</a>
-                                <a class="dropdown-item" th:href="@{/student}">список студентов</a>
-                                <a class="dropdown-item" th:href="@{/teacher}">список преподователей</a>
-                                <a class="dropdown-item" th:href="@{/register}">добавить нового пользователя</a>
+                                <a class="dropdown-item" th:href="@{/user}">Список пользователей</a>
+                                <a class="dropdown-item" th:href="@{/student}">Список студентов</a>
+                                <a class="dropdown-item" th:href="@{/teacher}">Список преподователей</a>
+                                <a class="dropdown-item" th:href="@{/register}">Добавить нового пользователя</a>
                             </div>
                     </div>
 
 
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN','USER','STUDENT','TEACHER')">
+                    <div sec:authorize="hasAnyAuthority('ADMIN','STUDENT','TEACHER')">
                         <li class="nav-item">
                             <a class="nav-link" href="/calendar">Календарь<span class="sr-only">(current)</span></a>
                         </li>

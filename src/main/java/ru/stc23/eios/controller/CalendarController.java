@@ -1,20 +1,14 @@
 package ru.stc23.eios.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.ModelAndView;
-import ru.stc23.eios.model.Event;
-import ru.stc23.eios.model.User;
+
 import ru.stc23.eios.model.Work;
-import ru.stc23.eios.repos.EventJpaRepository;
+
 import ru.stc23.eios.service.EventService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class CalendarController {
@@ -25,11 +19,11 @@ public class CalendarController {
         this.eventService = eventService;
     }
 
-    @GetMapping("/calendar")
+    @GetMapping("calendar")
     public String calendar(Model model,
                            @ModelAttribute("work") Work work) {
         model.addAttribute("work",work);
-        return "/calendar";
+        return "calendar";
     }
 
 
