@@ -56,7 +56,7 @@
                                 th:utext="${w.name()}"/>
                     </select>
                     <div class="input-group-prepend">
-                        <label class="input-group-text bg-success text-white" for="workstate">статус работы</label>
+                        <label class="input-group-text bg-success text-white" id="status" for="workstate">статус работы</label>
                     </div>
                 </div>
 
@@ -74,7 +74,8 @@
                         document.getElementById('createDate').readOnly=true;
                         document.getElementById('comment').readOnly=false;
                         document.getElementById('commentDate').readOnly=false;
-                        document.getElementById('workstate').readOnly=false;
+                        document.getElementById('workstate').hidden=false;
+                        document.getElementById('status').hidden=false;
                         document.getElementById('grade').readOnly=false;
                     </script>
 
@@ -86,7 +87,8 @@
                         document.getElementById("createDate").readOnly=true;
                         document.getElementById('comment').readOnly=true;
                         document.getElementById('commentDate').readOnly=true;
-                        document.getElementById('workstate').readOnly=true;
+                        document.getElementById('workstate').hidden=true;
+                        document.getElementById('status').hidden=true;
                         document.getElementById('grade').readOnly=true;
                     </script>
                 </div>

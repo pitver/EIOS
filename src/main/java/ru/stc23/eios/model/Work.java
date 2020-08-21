@@ -53,12 +53,12 @@ public class Work {
     public String getAuthorOfWork(){
         //после внедрения  author заменить на
         //author.getFirstName()+" "+author.getLastName()+" "+author.getPatronymic()
-        return author !=null? author.getUsername():"<none>";
+        return author !=null? author.getLastName()+" "+author.getFirstName()+" "+author.getPatronymic():"<none>";
     }
     public String getAuthorComentOfWork(){
         //после внедрения teacher заменить на
         //teacher.getFirstName()+" "+teacher.getLastName()+" "+teacher.getPatronymic()
-        return teacher !=null? teacher.getUsername():"<none>";
+        return teacher !=null? teacher.getLastName()+" "+teacher.getFirstName()+" "+teacher.getPatronymic():"<none>";
     }
 
     @OneToOne

@@ -6,7 +6,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="container col-sm-10">
     <div class="starter-template">
         <h3 class="text-center">Список пользователей</h3>
     </div>
@@ -40,7 +40,7 @@
             <td class="col-sm" scope="col"><div th:each="r:${user.roles}"><span th:utext="${r.name()}"></span></div></td>
             <td class="col-sm-2" scope="col">
                 <a class="btn btn-success" th:href="@{/edit/{id}(id=${user.id})}"><i class="fa fa-edit"></i> edit</a>
-                <a class="btn btn-success" th:href="@{/delete/{id}(id=${user.id})}"><i class="fa fa-trash"></i>delete</a>
+                <a class="btn btn-success" th:href="@{/delete/{id}(id=${user.id})}"><i class="fa fa-trash"></i> delete</a>
             </td>
         </tr>
     </table>

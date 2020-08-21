@@ -38,7 +38,7 @@
     </tr>
 
     <tr th:each="st: ${student}">
-        <td th:utext="${st.username}">Student</td>
+        <td th:utext="${st.lastName+' '+st.firstName+' '+st.patronymic}">Student</td>
         <td th:each="date: ${dateList}" th:id="decode"
             th:data-currentDate="__${monthValue}__"
             th:data-thing="${date}"

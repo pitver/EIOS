@@ -34,6 +34,7 @@ public class Mark {
     public Mark() {
     }
 
+
     public long getId() {
         return id;
     }
