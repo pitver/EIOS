@@ -14,10 +14,16 @@
             <form th:action="@{/register}" method="post">
                 <fieldset>
                     <h1>Добавить нового пользователя</h1>
-                    <div th:if="${message}"> <span th:utext="${message}"></span></div>
-                    <div th:if="${param.error}"><div class="alert alert-danger">Invalid username and password.</div></div>
-                    <div th:if="${param.logout}"><div class="alert alert-info">You have been logged out.</div></div>
-                    <div class="form-group"><input type="text" name="username" id="username" class="form-control input-lg" placeholder="логин" required="true" autofocus="true"/></div>
+                    <div th:if="${message}"><span th:utext="${message}"></span></div>
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Invalid username and password.</div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">You have been logged out.</div>
+                    </div>
+                    <div class="form-group"><input type="text" name="username" id="username"
+                                                   class="form-control input-lg" placeholder="логин" required="true"
+                                                   autofocus="true"/></div>
                     <div class="form-group">
                         <select name="usertype" id="usertype" class="form-control mb-3" onChange="Selected(this)">
                             <option value="student">студент</option>
@@ -33,14 +39,29 @@
                                 }
                             }
                         </script>
-                        <div><input type="spec" name="spec" id="spec" class="form-control input-lg " placeholder="группа" required="true"/>
+                        <div><input type="spec" name="spec" id="spec" class="form-control input-lg "
+                                    placeholder="группа" required="true"/>
                         </div>
                     </div>
 
-                    <div class="form-group"><input type="email" name="email" id="email" class="form-control input-lg" placeholder="email" required="true" autofocus="true"/></div>
+                    <div class="form-group"><input type="text" name="lastName" id="lastName"
+                                                   class="form-control input-lg" placeholder="Фамилия" required="true"
+                                                   autofocus="true"/></div>
+                    <div class="form-group"><input type="text" name="firstName" id="firstName"
+                                                   class="form-control input-lg" placeholder="Имя" required="true"
+                                                   autofocus="true"/></div>
+                    <div class="form-group"><input type="text" name="patronymic" id="patronymic"
+                                                   class="form-control input-lg" placeholder="Отчество" required="true"
+                                                   autofocus="true"/></div>
 
 
-                    <div class="form-group"><input type="password" name="password" id="password" class="form-control input-lg" placeholder="пароль" required="true"/></div>
+                    <div class="form-group"><input type="email" name="email" id="email" class="form-control input-lg"
+                                                   placeholder="email" required="true" autofocus="true"/></div>
+
+
+                    <div class="form-group"><input type="password" name="password" id="password"
+                                                   class="form-control input-lg" placeholder="пароль" required="true"/>
+                    </div>
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
