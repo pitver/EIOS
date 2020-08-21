@@ -7,29 +7,35 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container col-sm-12">
-    <a class="btn btn-success mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" sec:authorize="hasAnyAuthority('ADMIN','STUDENT')"
-       aria-controls="collapseExample">
-        Добавить работу
-    </a>
-    <div class="collapse " id="collapseExample">
-        <div class="form-group mt-3">
 
-            <form th:action="@{/work}" th:object="${work}" method="post">
-                <div class="m-3">
-                    <div class="form-group">
-                        <input type="text" th:field="*{title}" class="form-control input-lg"
-                               placeholder="название работы">
+<div class="container col-sm-10">
+    <div sec:authorize="hasAnyAuthority('STUDENT')">
+        <a class="btn btn-success mt-3" data-toggle="collapse" href="#collapseExample" role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            Добавить работу
+        </a>
+        <div class="collapse " id="collapseExample">
+            <div class="form-group mt-3">
+
+                <form th:action="@{/work}" th:object="${work}" method="post">
+                    <div class="m-3">
+                        <div class="form-group">
+                            <input type="text" th:field="*{title}" class="form-control input-lg"
+                                   placeholder="название работы">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                      th:field="*{work}"></textarea>
+                        </div>
+                        <input align="center" type="submit" class="btn btn-success" value="отправить"/>
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                  th:field="*{work}"></textarea>
-                    </div>
-                    <input align="center" type="submit" class="btn btn-success" value="отправить"/>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
+
     <div class="starter-template text-center">
         <h3>Выполненные работы</h3>
     </div>
@@ -61,7 +67,8 @@
             <td class="col-sm-2" scope="col">
                 <a class="btn btn-success" th:href="@{/workedit/{id}(id=${work.id})}"> <i class="fa fa-edit"></i>
                     edit</a>
-                <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}"> <i class="fa fa-trash"></i>delete</a>
+                <a class="btn btn-success" th:href="@{/workdelete/{id}(id=${work.id})}"> <i
+                        class="fa fa-trash"></i> delete</a>
                 <!--   </td>
                </div>-->
         </tr>

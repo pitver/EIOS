@@ -68,9 +68,9 @@ public class RegistrationController {
         }
 
         userFromDb.setUsername(username);
-        userFromDb.setUsername(lastName);
-        userFromDb.setUsername(firstName);
-        userFromDb.setUsername(patronymic);
+        userFromDb.setLastName(lastName);
+        userFromDb.setFirstName(firstName);
+        userFromDb.setPatronymic(patronymic);
         userFromDb.setPassword(password);
         userFromDb.setEmail(email);
         userFromDb.setActive(true);

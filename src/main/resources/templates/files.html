@@ -20,12 +20,11 @@
 
                 <div class=" border border-success p-1 col-6">
                     <div class="custom-file ">
-                        <label  for="inputGroupFile01">Выберите файл</label>
                         <input type="file" class="form-control-file text-truncate" id="inputGroupFile01" name="file">
                     </div>
-                    <input type="text" th:name="descr">
-                    <br/> <br/>
-                    <input class="btn btn-success" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
+                    <input type="text" class="form-control input-lg mt-1" th:name="descr" placeholder="Описание">
+                    <br/>
+                    <input class="btn btn-success" type="submit" value="Загрузить">
                 </div>
             </form>
         </div>

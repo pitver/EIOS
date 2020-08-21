@@ -70,8 +70,15 @@ public class JournalController {
     @PostMapping("mark")
     public String setMark(Model model,
                           @RequestParam("markDate") String markDate,
+                          @AuthenticationPrincipal User currentUser,
                           @PageableDefault(size = 10) Pageable pageable) {
-        Page<Student> page = userService.findStudentAll(pageable);
+        Set<Role> userRole = currentUser.getRoles();
+        Page<Student> page;
+        if (userRole.toString().contains("STUDENT")) {
+            page=userService.findByID(currentUser.getId(),pageable);
+        }else{
+            page = userService.findStudentAll(pageable);
+        }
 
         List<Integer> dateList = new ArrayList<>();
 /*************получаем название выбранного месяца на русском языке**********/
@@ -85,6 +92,7 @@ public class JournalController {
         model.addAttribute("month", monthName);
         model.addAttribute("dateList", dateList);
         model.addAttribute("student", page);
+        model.addAttribute("curentuser",currentUser);
         return "mark";
     }
 
