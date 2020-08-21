@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header-css"/>
 
 </head>
@@ -7,7 +8,7 @@
 <div th:replace="fragments/header :: header"/>
 
 
-<div class="container col-sm-8">
+<div class="container col-sm-8" sec:authorize="hasAnyAuthority('ADMIN','TEACHER')">
     <a class="btn btn-success m-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
        aria-controls="collapseExample">
         Добавить файл
