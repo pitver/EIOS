@@ -8,7 +8,7 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container col-sm-12">
-    <a class="btn btn-success mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+    <a class="btn btn-success mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" sec:authorize="hasAnyAuthority('ADMIN','STUDENT')"
        aria-controls="collapseExample">
         Добавить работу
     </a>
