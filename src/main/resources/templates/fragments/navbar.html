@@ -26,15 +26,9 @@
                         </li>
                     </div>
 
-                    <div sec:authorize="hasAnyAuthority('ADMIN')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Библиотека
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!--<a class="dropdown-item" th:href="@{/upload}">Форма загрузки файла</a>-->
-                                <a class="dropdown-item" th:href="@{/download}">Список загруженных файлов</a>
-                            </div>
+                    <div sec:authorize="hasAnyAuthority('ADMIN','TEACHER','STUDENT')">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/download}">Библиотека <span class="sr-only">(current)</span></a>
                         </li>
                     </div>
 
