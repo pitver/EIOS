@@ -77,5 +77,8 @@ public class UserService implements UserDetailsService {
     public Page<Student> findStudentGroup(Pageable pageable){
         return studentRepository.findStudentGroup(pageable);
     }
+    public Page<Student> findByID(Long id,Pageable pageable){
+        return studentRepository.findById(id,pageable);
+    }
 
 }

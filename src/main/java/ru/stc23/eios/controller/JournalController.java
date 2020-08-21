@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.stc23.eios.exception.RecordNotFoundException;
 import ru.stc23.eios.model.Mark;
+import ru.stc23.eios.model.Role;
 import ru.stc23.eios.model.Student;
 import ru.stc23.eios.model.User;
 import ru.stc23.eios.service.MarkService;
@@ -22,6 +23,7 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Controller
 public class JournalController {
@@ -40,8 +42,14 @@ public class JournalController {
             Model model,
             @AuthenticationPrincipal User currentUser,
             @PageableDefault(size = 10) Pageable pageable) {
-        Page<Student> page = userService.findStudentAll(pageable);
 
+        Set<Role> userRole = currentUser.getRoles();
+        Page<Student> page;
+        if (userRole.toString().contains("STUDENT")) {
+             page=userService.findByID(currentUser.getId(),pageable);
+        }else{
+            page = userService.findStudentAll(pageable);
+        }
         List<Integer> dateList = new ArrayList<>();
 
         /*************получаем название текущего месяца на русском языке+коллекцию заполненную днями месяца**********/

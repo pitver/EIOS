@@ -25,6 +25,7 @@ public interface UserRepo<T extends User> extends PagingAndSortingRepository<T,L
     Page<T> findAllByStudent(Pageable pageable);
 
     Page<Student> findByStudentGroup(String name, Pageable pageable);
+    Page<Student> findById(Long id, Pageable pageable);
 
     @Query(value="select * from student_student_group s LEFT JOIN usr u " +
             "on s.student_id=u.id where usr_type='student'",nativeQuery = true)
