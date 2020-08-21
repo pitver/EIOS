@@ -34,11 +34,13 @@ public class FileUploadController2 {
     }
 
     @PostMapping("upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user) {
+    public String uploadFile(@RequestParam("file") MultipartFile file,
+                             @RequestParam("descr") String descr,
+                             @AuthenticationPrincipal User user) {
 
             FileBase64 file1 =  fileUploadService.getFile(file.getName());
 
-                FileBase64 filename = fileUploadService.storeFile(file);
+                FileBase64 filename = fileUploadService.storeFile(file, descr);
                 String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                         .path("/downloadFile/")
                         .path(filename.getFilename())

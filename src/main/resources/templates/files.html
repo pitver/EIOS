@@ -22,9 +22,9 @@
                         <label  for="inputGroupFile01">Выберите файл</label>
                         <input type="file" class="form-control-file text-truncate" id="inputGroupFile01" name="file">
                     </div>
-
+                    <input type="text" th:name="descr">
                     <br/> <br/>
-                    <input class="btn btn-warning" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
+                    <input class="btn btn-success" type="submit" value="Загрузить"> Нажмите здесь чтобы загрузить файл
                 </div>
             </form>
         </div>
@@ -34,14 +34,17 @@
         <thead>
         <tr class="d-flex" align="center">
 
-            <th class="col-sm" scope="col">Имя файла</th>
-            <th class="col-2" scope="col">Скачать</th>
+            <th class="col-3" scope="col">Имя файла</th>
+            <th class="col-sm" scope="col-3">Описание</th>
+            <th class="col-3" scope="col">Скачать</th>
         </tr>
         </thead>
+
         <tbody>
         <tr class="d-flex" th:each=" file : ${files}">
-            <td class="col-sm" scope="col" th:utext="${file.filename}"></td>
-            <td th:class="col-2" scope="col-3" align="center">
+            <td class="col-3" scope="col" th:utext="${file.filename}"></td>
+            <td class="col-sm" th:utext="${file.descr}"></td>
+            <td th:class="col-3" scope="col-3" align="center">
                 <button class="btn btn-sm btn-success  text-white my-2 my-sm-0" type="button"
                         th:data-filename="${file.filename}"
                         onclick="window.location.href = '/downloadFile/'+this.getAttribute('data-filename')"> скачать

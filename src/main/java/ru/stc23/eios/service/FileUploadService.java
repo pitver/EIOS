@@ -17,7 +17,7 @@ public class FileUploadService {
     @Autowired
     private final FileUploadRepo fileUploadRepo;
 
-    public FileBase64 storeFile(MultipartFile file) {
+    public FileBase64 storeFile(MultipartFile file, String desc) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -27,7 +27,7 @@ public class FileUploadService {
 
             Base64.Encoder fileEncoder = Base64.getEncoder();
 
-            FileBase64 fileBase64 = new FileBase64(fileName, file.getContentType(), fileEncoder.encodeToString(file.getBytes()));
+            FileBase64 fileBase64 = new FileBase64(fileName, file.getContentType(), fileEncoder.encodeToString(file.getBytes()), desc);
 
             return fileUploadRepo.save(fileBase64);
 

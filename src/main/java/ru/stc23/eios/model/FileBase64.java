@@ -18,12 +18,16 @@ public class FileBase64 {
     @Column(name = "filecode", columnDefinition = "LONGTEXT")
     private String filecode;
 
+    @Column(name = "descr")
+    private String descr;
+
     public FileBase64(){    }
 
-    public FileBase64(String filename, String filetype, String filecode){
+    public FileBase64(String filename, String filetype, String filecode, String descr){
         this.filename = filename;
         this.filetype = filetype;
         this.filecode = filecode;
+        this.descr = descr;
     }
 
     public Long getId() {
@@ -51,18 +55,6 @@ public class FileBase64 {
     }
 
 
-    @OneToOne (optional = true)
-    @JoinColumn(name="id", unique = false, nullable = false, updatable = false)
-    private Work work;
-
-    public Work getWork() {
-        return work;
-    }
-
-    public void setWork(Work work) {
-        this.work = work;
-    }
-
 
     //    @OneToOne(optional = true)
 //    @JoinColumn(name="login", unique = false, nullable = false, updatable = false)
@@ -82,6 +74,14 @@ public class FileBase64 {
 
     public void setFiletype(String filetype) {
         this.filetype = filetype;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String desc) {
+        this.descr = desc;
     }
 
     @Override
