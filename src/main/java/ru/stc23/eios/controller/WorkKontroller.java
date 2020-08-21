@@ -102,7 +102,9 @@ public class WorkKontroller {
         review.setComment(work);
         work.setReview(review);
 
-
+        if (work.getMark().getGrade() != null) {
+            mark.setGrade(null);
+        }
         mark.setGrade(work.getMark().getGrade());
         mark.setLocalDate(work.getCreateDate());
         mark.setNameLesson(work.getTitle());
